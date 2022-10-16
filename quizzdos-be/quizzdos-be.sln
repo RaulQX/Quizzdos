@@ -5,6 +5,8 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "quizzdos-be", "quizzdos-be.csproj", "{5A40922D-74BF-498F-A62E-36F872CAC3E6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "quizzdos-EFCore", "..\quizzdos-EFCore\quizzdos-EFCore.csproj", "{218E3545-83B8-4877-994D-9FBBBF18F14D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{5A40922D-74BF-498F-A62E-36F872CAC3E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A40922D-74BF-498F-A62E-36F872CAC3E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A40922D-74BF-498F-A62E-36F872CAC3E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{218E3545-83B8-4877-994D-9FBBBF18F14D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{218E3545-83B8-4877-994D-9FBBBF18F14D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{218E3545-83B8-4877-994D-9FBBBF18F14D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{218E3545-83B8-4877-994D-9FBBBF18F14D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

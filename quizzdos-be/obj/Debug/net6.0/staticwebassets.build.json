@@ -1,11 +1,23 @@
 {
   "Version": 1,
-  "Hash": "jDmKCc6u1mZuSLDjySR445GzZYsABLvyDnYJ1PTUEH4=",
+  "Hash": "p71szG+ioJOp4G42aTHWZcNtRbisbUDQ8kQ2nMRYH38=",
   "Source": "quizzdos-be",
   "BasePath": "_content/quizzdos-be",
   "Mode": "Default",
   "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "D:\\School\\Year 4\\MSA\\Lab\\Project\\Quizzdos\\quizzdos-EFCore\\quizzdos-EFCore.csproj",
+      "Version": 2,
+      "Source": "quizzdos-EFCore",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier"
+    }
+  ],
   "DiscoveryPatterns": [],
   "Assets": []
 }
