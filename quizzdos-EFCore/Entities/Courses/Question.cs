@@ -15,7 +15,7 @@ namespace quizzdos_EFCore.Entities.Courses
         public Guid QuizzId { get; set; }
         [ForeignKey("QuizzId")]
         public Quizz Quizz { get; set; }
-        public Guid ImageId { get; set; }
+        public Guid? ImageId { get; set; }
         [ForeignKey("ImageId")]
         public Image? Image { get; set; }
         public double Mark { get; set; }

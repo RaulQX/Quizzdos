@@ -20,12 +20,11 @@ namespace quizzdos_EFCore.Entities.Courses
         [Column(TypeName = "nvarchar(100)")]
         public string Title { get; set; } = string.Empty;
         [Required]
-
         public double PassingGrade { get; set; }
         public double Grade { get; set; }
         public double Duration { get; set; }
         public ICollection<Question> Questions { get; set; }
-        public Guid ImageId { get; set; }
+        public Guid? ImageId { get; set; }
         [ForeignKey("ImageId")]
         public Image Image { get; set; }
         public ICollection<Tip> Tips { get; set; }
