@@ -7,7 +7,6 @@ namespace quizzdos_EFCore.Entities.BaseEntities
     {
         [Key]
         [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
     }
 }

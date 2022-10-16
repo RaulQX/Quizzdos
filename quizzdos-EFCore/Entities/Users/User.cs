@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace quizzdos_EFCore.Entities.Users
 {
     [Table("Users", Schema = "dbo")]
-    public class User : Base
+    public class User : BaseEntity
     {
         public User()
         {
@@ -12,6 +12,6 @@ namespace quizzdos_EFCore.Entities.Users
         }
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
-        public DateTime Created { get; set; } = DateTime.Now;
+        public DateTime Created { get; set; }
     }
 }

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace quizzdos_EFCore.Entities.Images
 {
-    public class Image : Base
+    public class Image : BaseEntity
     {
         [Required]
         [Column(TypeName = "nvarchar(500)")]
