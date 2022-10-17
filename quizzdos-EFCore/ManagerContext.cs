@@ -24,7 +24,7 @@ namespace gps_manager.EFCore
         public DbSet<Tip> Tips { get; set; } = null!;
         public DbSet<Image> Images { get; set; } = null!;
         public DbSet<Notification> Notifications { get; set; } = null!;
-
+        public DbSet<QuizzMate> QuizzMates { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>(x=> 
@@ -47,6 +47,16 @@ namespace gps_manager.EFCore
             {
                 x.HasOne(i => i.Image).WithMany().OnDelete(DeleteBehavior.NoAction);
             });
+            modelBuilder.Entity<Person>(q =>
+            {
+                q.HasMany(q => q.Quizzmates).WithOne(q => q.CurrentPerson);
+            });
+
+            modelBuilder.Entity<QuizzMate>(q =>
+            {
+                q.HasOne(q => q.CurrentPerson).WithMany(q => q.Quizzmates).OnDelete(DeleteBehavior.NoAction);
+            });
+            
         }
     }
 }

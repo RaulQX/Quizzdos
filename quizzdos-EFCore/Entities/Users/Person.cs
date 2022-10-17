@@ -13,7 +13,7 @@ namespace quizzdos_EFCore.Entities.Users
         public Person()
         {
             Courses = new HashSet<Course>();
-            Quizzmates = new HashSet<Person>();
+            Quizzmates = new HashSet<QuizzMate>();
             Notifications = new HashSet<Notification>();
         }
         [Required]
@@ -28,7 +28,7 @@ namespace quizzdos_EFCore.Entities.Users
         [Required]
         public PRole Role { get; set; }
         public ICollection<Course> Courses { get; set; }
-        public ICollection<Person> Quizzmates { get; set; }
+        public ICollection<QuizzMate> Quizzmates { get; set; }
         public ICollection<Notification> Notifications { get; set; }
 
         [Required]
