@@ -24,7 +24,7 @@ namespace gps_manager.EFCore
         public DbSet<Tip> Tips { get; set; } = null!;
         public DbSet<Image> Images { get; set; } = null!;
         public DbSet<Notification> Notifications { get; set; } = null!;
-        public DbSet<QuizzMate> QuizzMates { get; set; }
+        public DbSet<QuizzMate> QuizzMates { get; set; } = null!;
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>(x=> 
@@ -37,9 +37,6 @@ namespace gps_manager.EFCore
                     .IsRequired();
                 x.Property(s => s.Email)
                     .HasColumnType("nvarchar(100)")
-                    .IsRequired();
-                x.Property(s => s.Password)
-                    .HasColumnType("nvarchar(max)")
                     .IsRequired();
             });
 

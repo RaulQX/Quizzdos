@@ -9,12 +9,12 @@ namespace quizzdos_EFCore.Entities.Users
         [Required]
         public Guid CurrentPersonId { get; set; }
         [ForeignKey("PersonId")]
-        public Person CurrentPerson { get; set; }
+        public Person CurrentPerson { get; set; } = null!;
 
         [Required]
         public Guid QuizzMateId { get; set; }
         [ForeignKey("FriendId")] 
-        public Person QuizzMatePerson { get; set; }
+        public Person QuizzMatePerson { get; set; } = null!;
 
     }
 }
