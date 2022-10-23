@@ -34,6 +34,6 @@ namespace quizzdos_EFCore.Entities.Users
         [Required]
         public Guid UserId { get; set; }
         [ForeignKey("UserId")]
-        public User User { get; set; }
+        public User User { get; set; } = null!;
     }
 }

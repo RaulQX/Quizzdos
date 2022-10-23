@@ -10,8 +10,11 @@ namespace quizzdos_EFCore.Entities.Users
         {
 
         }
+        public string Username { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
+        public string PhoneNumber { get; set; } = string.Empty;
+        public byte[] PasswordSalt { get; set; } = null!;
+        public byte[] PasswordHash { get; set; } = null!;
         public DateTime Created { get; set; }
     }
 }
