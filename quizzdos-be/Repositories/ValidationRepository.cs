@@ -14,13 +14,16 @@ namespace quizzdos_be.Repositories
         Task<DataResponse<PhoneNumberValidationResponse>> CheckPhoneNumberIsValid(string phoneNumber);
         Task<ErrorResponse<string>> CheckPasswordIsValid(string password);
     }
+
     public class ValidationRepository:IValidationRepository
     {
         private readonly ManagerContext _managerContext;
+
         public ValidationRepository(ManagerContext managerContext)
         {
             _managerContext = managerContext;
         }
+        
         public Task<ExistingUserResponse> CheckUserExistsProperties(UserDTO user)
         {
             ExistingUserResponse exisitingUserResponse = new ExistingUserResponse();
