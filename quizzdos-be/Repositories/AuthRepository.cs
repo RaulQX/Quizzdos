@@ -14,6 +14,7 @@ namespace quizzdos_be.Repositories
         public void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt);
         Task<User> Login(string username, string password);
     }
+    
     public class AuthRepository: IAuthRepository
     {
         private readonly ManagerContext _managerContext;

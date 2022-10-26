@@ -7,7 +7,6 @@
         public bool EmailFormatOkay { get; set; } = true;
         public string EmailFormatMessage { get; set; } = string.Empty;
         public bool EmailExists { get; set; } = true;
-        public string EmailExistsMessage { get; set; } = string.Empty;
-        
+        public string EmailExistsMessage { get; set; } = string.Empty; 
     }
 }
