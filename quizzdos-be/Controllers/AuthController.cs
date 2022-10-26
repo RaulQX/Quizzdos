@@ -8,13 +8,14 @@ using quizzdos_EFCore.Entities.Users;
 
 namespace quizzdos_be.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
         private readonly IAuthRepository _authRepository;
         private readonly ManagerContext _managerContext;
         private readonly IValidationRepository _validationRepository;
+        
         public AuthController(IAuthRepository authRepository, ManagerContext managerContext, IValidationRepository validationRepository)
         {
             _validationRepository = validationRepository;
@@ -30,29 +31,27 @@ namespace quizzdos_be.Controllers
         public async Task<IActionResult> Register(UserDTO request)
         {
             var userExists = await _validationRepository.CheckUserExists(request);
-            if (userExists.Error == true) 
+            if (userExists.Error) 
             {
                 return BadRequest(userExists);
             }
             var IsEmailValid = await _validationRepository.CheckEmailIsValid(request.Email);
-            if (IsEmailValid.Error == true)
+            if (IsEmailValid.Error)
             {
                 return BadRequest(IsEmailValid);
             }
             var IsPasswordValid = await _validationRepository.CheckPasswordIsValid(request.Password);
-            if (IsPasswordValid.Error == true)
+            if (IsPasswordValid.Error)
             {
                 return BadRequest(IsPasswordValid);
             }    
             var IsPhoneNumberValid = await _validationRepository.CheckPhoneNumberIsValid(request.PhoneNumber);
-            if (IsPhoneNumberValid.Error == true)
+            if (IsPhoneNumberValid.Error)
             {
                 return BadRequest(IsPhoneNumberValid);
             }
               
-
-            User newUser = new User();
-            newUser = await _authRepository.Register(request);
+            User newUser = await _authRepository.Register(request);
 
             await _managerContext.Users.AddAsync(newUser);
             await _managerContext.SaveChangesAsync();

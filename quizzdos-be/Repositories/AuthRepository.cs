@@ -17,10 +17,12 @@ namespace quizzdos_be.Repositories
     public class AuthRepository: IAuthRepository
     {
         private readonly ManagerContext _managerContext;
+        
         public AuthRepository(ManagerContext managerContext)
         {
             _managerContext = managerContext;
         }
+
         public Task<User> Register(UserDTO request)
         {
             User newUser = new User();
@@ -36,6 +38,7 @@ namespace quizzdos_be.Repositories
 
             return Task.FromResult(newUser);
         }
+
         public void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             using (var hmac = new HMACSHA512())
