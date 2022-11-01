@@ -230,3 +230,14 @@ _Pvt_Extensions
 # FAKE - F# Make
 .fake/
 quizzdos-be/.vs/quizzdos-be/v17/.suo
+quizzdos-be/.vscode/launch.json
+quizzdos-be/.vscode/tasks.json
+*.cache
+quizzdos-EFCore/obj/Debug/net6.0/quizzdos-EFCore.assets.cache
+quizzdos-EFCore/obj/Debug/net6.0/quizzdos-EFCore.GeneratedMSBuildEditorConfig.editorconfig
+*.cache
+*.cache
+*.json
+*.props
+*.targets
+*.json
