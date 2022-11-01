@@ -1,38 +1,61 @@
 namespace quizzdos_be.Responses.DataResponse
 {
-    public class Response
+    abstract class Response<T, E>
+        where T : class
+        where E : class
     {
-        public enum ResponseType
-        {
-            Error,
-            Ok
+        public enum ResponseType {
+            Ok,
+            Error
         }
+        
+        public ResponseType Type { get; private set; }
+        public bool IsOk { get; private set; }
+        public bool IsError { get; private set; }
 
-        public ResponseType Type { get; set; }
-
-        public Response(ResponseType type)
-        {
+        protected Response(ResponseType type) {
             Type = type;
+            IsOk = type == ResponseType.Ok;
+            IsError = type == ResponseType.Error;
         }
+
+        public abstract T GetOk();
+        public abstract E GetError();
+
+        public abstract override string ToString();
     }
 
-    public class DataResponse<T> : Response
+    class Ok<T, E> : Response<T, E>
+        where T : class
+        where E : class
     {
-        public T? Data { get; set; }
+        public T Value { get; private set; }
 
-        public DataResponse(T? data) : base(ResponseType.Ok)
+        public Ok(T value) : base(ResponseType.Ok)
         {
-            Data = data;
+            Value = value;
         }
+
+        public override T GetOk() => Value;
+        public override E GetError() => null;
+
+        public override string ToString() => $"Ok({Value})";
     }
 
-    public class ErrorResponse : Response
+    class Error<T, E> : Response<T, E>
+        where T : class
+        where E : class
     {
-        public string? Message { get; set; }
+        public E Value { get; private set; }
 
-        public ErrorResponse(string? message) : base(ResponseType.Error)
+        public Error(E value) : base(ResponseType.Error)
         {
-            Message = message;
+            Value = value;
         }
+
+        public override T GetOk() => null;
+        public override E GetError() => Value;
+
+        public override string ToString() => $"Error({Value})";
     }
 }
