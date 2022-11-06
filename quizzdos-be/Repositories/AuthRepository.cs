@@ -1,5 +1,8 @@
-﻿using System.Security.Cryptography;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text.RegularExpressions;
+using Microsoft.IdentityModel.Tokens;
 using quizzdos_be.DataTransferObjects;
 using quizzdos_be.Responses.DataResponse;
 using quizzdos_be.Responses.EmailValidation;
@@ -13,15 +16,18 @@ namespace quizzdos_be.Repositories
         Task<User> Register(UserDTO request);
         public void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt);
         Task<User> Login(string username, string password);
+        Task<string> CreateToken(User user);
     }
     
     public class AuthRepository: IAuthRepository
     {
         private readonly ManagerContext _managerContext;
-        
-        public AuthRepository(ManagerContext managerContext)
+        private readonly IConfiguration _configuration;
+
+        public AuthRepository(ManagerContext managerContext, IConfiguration configuration)
         {
             _managerContext = managerContext;
+            _configuration = configuration;
         }
 
         public Task<User> Register(UserDTO request)
@@ -54,5 +60,26 @@ namespace quizzdos_be.Repositories
             throw new NotImplementedException();
         }
 
+        public Task<string> CreateToken(User user)
+        {
+            List<Claim> claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, user.Username),
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.MobilePhone, user.PhoneNumber)
+
+            };
+
+            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value));
+
+            var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+
+            var token = new JwtSecurityToken(claims: claims,
+                                             expires: DateTime.Now.AddDays(1),
+                                             signingCredentials: cred);
+
+            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+            return Task.FromResult(jwt);
+        }
     }
 }
