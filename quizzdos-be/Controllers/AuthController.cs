@@ -1,10 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using quizzdos_be.DataTransferObjects;
 using quizzdos_be.Repositories;
 using quizzdos_be.Responses.DataResponse;
 using quizzdos_be.Responses.EmailValidation;
 using quizzdos_be.Responses.ExistingUser;
+using quizzdos_be.ViewModels;
 using quizzdos_EFCore.Entities.Users;
+using System.Security.Claims;
+using System.Security.Cryptography;
 
 namespace quizzdos_be.Controllers
 {
@@ -15,7 +19,7 @@ namespace quizzdos_be.Controllers
         private readonly IAuthRepository _authRepository;
         private readonly ManagerContext _managerContext;
         private readonly IValidationRepository _validationRepository;
-        
+
         public AuthController(IAuthRepository authRepository, ManagerContext managerContext, IValidationRepository validationRepository)
         {
             _validationRepository = validationRepository;
@@ -31,11 +35,11 @@ namespace quizzdos_be.Controllers
         public async Task<IActionResult> Register(UserDTO request)
         {
             var userExists = await _validationRepository.CheckUserExists(request);
-            if (userExists.Error) 
+            if (userExists.Error)
             {
                 return BadRequest(userExists);
             }
-            var IsEmailValid = await _validationRepository.CheckEmailIsValid(request.Email);
+            var IsEmailValid = await _validationRepository.CheckEmailIsValid(request.Email ?? "");
             if (IsEmailValid.Error)
             {
                 return BadRequest(IsEmailValid);
@@ -44,13 +48,13 @@ namespace quizzdos_be.Controllers
             if (IsPasswordValid.Error)
             {
                 return BadRequest(IsPasswordValid);
-            }    
-            var IsPhoneNumberValid = await _validationRepository.CheckPhoneNumberIsValid(request.PhoneNumber);
+            }
+            var IsPhoneNumberValid = await _validationRepository.CheckPhoneNumberIsValid(request.PhoneNumber ?? "");
             if (IsPhoneNumberValid.Error)
             {
                 return BadRequest(IsPhoneNumberValid);
             }
-              
+
             User newUser = await _authRepository.Register(request);
 
             await _managerContext.Users.AddAsync(newUser);
@@ -58,6 +62,26 @@ namespace quizzdos_be.Controllers
 
             return Ok(newUser);
         }
-        
+        [ProducesResponseType(typeof(DataResponse<string>), 200)]
+        [ProducesResponseType(typeof(ErrorResponse<>), 400)]
+
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login(UserDTO request)
+        {
+            request.Username ??= "";
+            request.PhoneNumber ??= "";
+            request.Email ??= "";
+
+            User? user = await _managerContext.Users.Where(u => u.Username == request.Username || u.PhoneNumber == request.PhoneNumber || u.Email == request.Email).FirstOrDefaultAsync();
+            if (user == null)
+                return BadRequest(new ErrorResponse<string>() { Error = true, Message = "User not found" });
+
+            if (!await _validationRepository.VerifyPasswordHash(user, request.Password, user.PasswordHash, user.PasswordSalt))
+                return BadRequest(new ErrorResponse<string>() { Error = true, Message = "Wrong password" });
+
+            string token = await _authRepository.CreateToken(user);
+
+            return Ok(new DataResponse<string>() { Data = token } );
+        }
     }
 }
