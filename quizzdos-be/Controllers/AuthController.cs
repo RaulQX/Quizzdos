@@ -7,6 +7,9 @@ using quizzdos_be.Responses.EmailValidation;
 using quizzdos_be.Responses.ExistingUser;
 using quizzdos_be.ViewModels;
 using quizzdos_EFCore.Entities.Users;
+using System.ComponentModel.DataAnnotations;
+using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
 using System.Security.Claims;
 using System.Security.Cryptography;
 
@@ -66,22 +69,22 @@ namespace quizzdos_be.Controllers
         [ProducesResponseType(typeof(ErrorResponse<>), 400)]
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login(UserDTO request)
+        public async Task<IActionResult> Login(string? username, string? email, string? phoneNumber, [Required] string password )
         {
-            request.Username ??= "";
-            request.PhoneNumber ??= "";
-            request.Email ??= "";
+            username ??= "";
+            phoneNumber ??= "";
+            email ??= "";
 
-            User? user = await _managerContext.Users.Where(u => u.Username == request.Username || u.PhoneNumber == request.PhoneNumber || u.Email == request.Email).FirstOrDefaultAsync();
+            User? user = await _managerContext.Users.Where(u => u.Username == username || u.PhoneNumber == phoneNumber || u.Email == email).FirstOrDefaultAsync();
             if (user == null)
                 return BadRequest(new ErrorResponse<string>() { Error = true, Message = "User not found" });
 
-            if (!await _validationRepository.VerifyPasswordHash(user, request.Password, user.PasswordHash, user.PasswordSalt))
+            if (!await _validationRepository.VerifyPasswordHash(user, password, user.PasswordHash, user.PasswordSalt))
                 return BadRequest(new ErrorResponse<string>() { Error = true, Message = "Wrong password" });
 
             string token = await _authRepository.CreateToken(user);
 
-            return Ok(new DataResponse<string>() { Data = token } );
+            return Ok(new DataResponse<string>() { Data = "bearer " + token } );
         }
     }
 }
