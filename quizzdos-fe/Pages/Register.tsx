@@ -1,7 +1,7 @@
 import React from "react"
 import { Button } from "react-native"
 
-const Login = ({ navigation }: any) => {
+const Register = ({ navigation }: any) => {
 	return (
 		<Button
 			title="Welcome"
@@ -9,4 +9,4 @@ const Login = ({ navigation }: any) => {
 		/>
 	)
 }
-export default Login
+export default Register
