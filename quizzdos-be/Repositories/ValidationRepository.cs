@@ -1,9 +1,11 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 using quizzdos_be.DataTransferObjects;
 using quizzdos_be.Responses.DataResponse;
 using quizzdos_be.Responses.EmailValidation;
 using quizzdos_be.Responses.ExistingUser;
 using quizzdos_be.Responses.PhoneNumberValidation;
+using quizzdos_EFCore.Entities.Users;
 
 namespace quizzdos_be.Repositories
 {
@@ -13,6 +15,7 @@ namespace quizzdos_be.Repositories
         Task<DataResponse<EmailValidationResponse>> CheckEmailIsValid(string email);
         Task<DataResponse<PhoneNumberValidationResponse>> CheckPhoneNumberIsValid(string phoneNumber);
         Task<ErrorResponse> CheckPasswordIsValid(string password);
+        Task<bool> VerifyPasswordHash(User user, string password, byte[] passwordHash, byte[] passwordSalt);
     }
 
     public class ValidationRepository:IValidationRepository
@@ -23,7 +26,12 @@ namespace quizzdos_be.Repositories
         {
             _managerContext = managerContext;
         }
-        
+        public Task<bool> VerifyPasswordHash(User user, string password, byte[] passwordHash, byte[] passwordSalt)
+        {
+            using var hmac = new HMACSHA512(user.PasswordSalt);
+            var computeHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+            return Task.FromResult(computeHash.SequenceEqual(passwordHash));
+        }
         public Task<ExistingUserResponse> CheckUserExistsProperties(UserDTO user)
         {
             ExistingUserResponse exisitingUserResponse = new ExistingUserResponse();
