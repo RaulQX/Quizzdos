@@ -12,7 +12,7 @@ namespace quizzdos_be.Repositories
         Task<DataResponse<ExistingUserResponse>> CheckUserExists(UserDTO request);
         Task<DataResponse<EmailValidationResponse>> CheckEmailIsValid(string email);
         Task<DataResponse<PhoneNumberValidationResponse>> CheckPhoneNumberIsValid(string phoneNumber);
-        Task<ErrorResponse<string>> CheckPasswordIsValid(string password);
+        Task<ErrorResponse> CheckPasswordIsValid(string password);
     }
 
     public class ValidationRepository:IValidationRepository
@@ -54,18 +54,15 @@ namespace quizzdos_be.Repositories
             
             if (string.IsNullOrWhiteSpace(email))
             {
-                emailValidationResponse.EmailExists = false;
-                emailValidationResponse.EmailExistsMessage = "Email is required";
+                emailValidationResponse.EmailExists = new ErrorResponse("Email is empty");
             }   
             if (email.Length >= 100)
             {
-                emailValidationResponse.EmailLengthOkay = false;
-                emailValidationResponse.EmailExistsMessage = "Email is too long";
+                emailValidationResponse.EmailLength = new ErrorResponse("Email is too long");
             }
             if (!Regex.IsMatch(email, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"))
             {
-                emailValidationResponse.EmailFormatOkay = false;
-                emailValidationResponse.EmailExistsMessage = "Email is not in the correct format";
+                emailValidationResponse.EmailFormat = new ErrorResponse("Email is not valid");
             }
 
             return Task.FromResult(emailValidationResponse);
@@ -93,14 +90,12 @@ namespace quizzdos_be.Repositories
         {
             EmailValidationResponse emailValidationResponse = await ValidateEmail(email);
             
-            DataResponse<EmailValidationResponse> emailResponse = new DataResponse<EmailValidationResponse>();
-            emailResponse.Data = emailValidationResponse;
+            DataResponse<EmailValidationResponse> emailResponse = new DataResponse<EmailValidationResponse>(emailValidationResponse);
 
-            if (!emailValidationResponse.EmailLengthOkay || !emailValidationResponse.EmailFormatOkay)
+            if (emailValidationResponse.EmailLength.Error || emailValidationResponse.EmailFormat.Error)
             {
                 emailResponse.Error = true;
                 emailResponse.Message = "Email is not valid";
-
             }
 
             return emailResponse;
@@ -109,8 +104,7 @@ namespace quizzdos_be.Repositories
         {
             PhoneNumberValidationResponse phoneNumberValidationResponse = await ValidatePhoneNumber(phoneNumber);
 
-            DataResponse<PhoneNumberValidationResponse> phoneNumberResponse = new DataResponse<PhoneNumberValidationResponse>();
-            phoneNumberResponse.Data = phoneNumberValidationResponse;
+            DataResponse<PhoneNumberValidationResponse> phoneNumberResponse = new DataResponse<PhoneNumberValidationResponse>(phoneNumberValidationResponse);
 
             if (!phoneNumberValidationResponse.PhoneNumberLengthOkay || !phoneNumberValidationResponse.PhoneNumberFormatOkay)
             {
@@ -125,8 +119,7 @@ namespace quizzdos_be.Repositories
         {
             ExistingUserResponse existingUserResponse = await CheckUserExistsProperties(user);
 
-            DataResponse<ExistingUserResponse> existingUserResponseData = new DataResponse<ExistingUserResponse>();
-            existingUserResponseData.Data = existingUserResponse;
+            DataResponse<ExistingUserResponse> existingUserResponseData = new DataResponse<ExistingUserResponse>(existingUserResponse);
 
             if (existingUserResponse.UsernameExists || existingUserResponse.EmailExists || existingUserResponse.PhoneNumberExists)
             {
@@ -137,24 +130,21 @@ namespace quizzdos_be.Repositories
             return existingUserResponseData;
         }
 
-        public Task<ErrorResponse<string>> CheckPasswordIsValid(string password)
+        public Task<ErrorResponse> CheckPasswordIsValid(string password)
         {
-            ErrorResponse<string> passwordResponse = new ErrorResponse<string>();
+            ErrorResponse passwordResponse = new ErrorResponse();
 
             if (string.IsNullOrWhiteSpace(password))
             {
-                passwordResponse.Error = true;
-                passwordResponse.Message = "Password is required";
+                passwordResponse = new ErrorResponse("Password is empty");
             }
             if (password.Length < 8)
             {
-                passwordResponse.Error = true;
-                passwordResponse.Message = "Password is too short";
+                passwordResponse = new ErrorResponse("Password is too short");
             }
             if (password.Length > 100)
             {
-                passwordResponse.Error = true;
-                passwordResponse.Message = "Password is too long";
+                passwordResponse = new ErrorResponse("Password is too long");
             }
 
             return Task.FromResult(passwordResponse);

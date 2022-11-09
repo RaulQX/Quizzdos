@@ -1,12 +1,11 @@
-﻿namespace quizzdos_be.Responses.EmailValidation
+﻿using quizzdos_be.Responses.DataResponse;
+
+namespace quizzdos_be.Responses.EmailValidation
 {
     public class EmailValidationResponse
     {
-        public bool EmailLengthOkay { get; set; } = true;
-        public string EmailLengthMessage { get; set; } = string.Empty;
-        public bool EmailFormatOkay { get; set; } = true;
-        public string EmailFormatMessage { get; set; } = string.Empty;
-        public bool EmailExists { get; set; } = true;
-        public string EmailExistsMessage { get; set; } = string.Empty; 
+        public ErrorResponse EmailLength { get; set; } = new ErrorResponse();
+        public ErrorResponse EmailFormat { get; set; } = new ErrorResponse();
+		public ErrorResponse EmailExists { get; set; } = new ErrorResponse();
     }
 }
