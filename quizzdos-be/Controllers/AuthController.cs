@@ -27,7 +27,7 @@ namespace quizzdos_be.Controllers
         [ProducesResponseType(typeof(DataResponse<User>), 200)]
         [ProducesResponseType(typeof(DataResponse<ExistingUserResponse>), 400)]
         [ProducesResponseType(typeof(DataResponse<EmailValidationResponse>), 400)]
-        [ProducesResponseType(typeof(ErrorResponse<>), 400)]
+        [ProducesResponseType(typeof(ErrorResponse), 400)]
         public async Task<IActionResult> Register(UserDTO request)
         {
             var userExists = await _validationRepository.CheckUserExists(request);
@@ -56,7 +56,7 @@ namespace quizzdos_be.Controllers
             await _managerContext.Users.AddAsync(newUser);
             await _managerContext.SaveChangesAsync();
 
-            return Ok(newUser);
+            return Ok(new DataResponse<User>(newUser, "User was created successfully"));
         }
         
     }
