@@ -20,47 +20,47 @@ namespace quizzdos_be.Controllers
 
         [HttpGet("GetUser")]
         [ProducesResponseType(typeof(DataResponse<UserViewModel>), 200)]
-        [ProducesResponseType(typeof(ErrorResponse<string>), 400)]
+        [ProducesResponseType(typeof(ErrorResponse), 400)]
         public ActionResult<DataResponse<UserViewModel>> GetUser()
         {
             var user = _userRepository.GetUser();
             if (user == null)
-                return BadRequest(new ErrorResponse<string> { Error = true, Message = "Failed to get user" });
+                return BadRequest(new ErrorResponse { Error = true, Message = "Failed to get user" });
 
-            return Ok(new DataResponse<UserViewModel>(){ Data = user });
+            return Ok(new DataResponse<UserViewModel>(user));
         }
         [HttpGet("GetUsername")]
         [ProducesResponseType(typeof(DataResponse<string>), 200)]
-        [ProducesResponseType(typeof(ErrorResponse<string>), 400)]
+        [ProducesResponseType(typeof(ErrorResponse), 400)]
         public ActionResult<string> GetUsername()
         {
             var userName = _userRepository.GetUsername();
             if (userName == null)
-                return BadRequest(new ErrorResponse<string> { Error = true, Message = "Failed to get username" });
+                return BadRequest(new ErrorResponse { Error = true, Message = "Failed to get username" });
 
-            return Ok(new DataResponse<string>() { Data = userName });
+            return Ok(new DataResponse<string>(userName));
         }
         [HttpGet("GetEmail")]
         [ProducesResponseType(typeof(DataResponse<string>), 200)]
-        [ProducesResponseType(typeof(ErrorResponse<string>), 400)]
+        [ProducesResponseType(typeof(ErrorResponse), 400)]
         public ActionResult<string> GetEmail()
         {
             var email = _userRepository.GetEmail();
             if (email == null)
-                return BadRequest(new ErrorResponse<string> { Error = true, Message = "Failed to get email" });
+                return BadRequest(new ErrorResponse { Error = true, Message = "Failed to get email" });
 
-            return Ok(new DataResponse<string>() { Data = email });
+            return Ok(new DataResponse<string>(email));
         }
         [HttpGet("GetPhoneNumber")]
         [ProducesResponseType(typeof(DataResponse<string>), 200)]
-        [ProducesResponseType(typeof(ErrorResponse<string>), 400)]
+        [ProducesResponseType(typeof(ErrorResponse), 400)]
         public ActionResult<string> GetPhoneNumber()
         {
             var phoneNumber = _userRepository.GetPhoneNumber();
             if (phoneNumber == null)
-                return BadRequest(new ErrorResponse<string> { Error = true, Message = "Failed to get phone number" });
+                return BadRequest(new ErrorResponse { Error = true, Message = "Failed to get phone number" });
 
-            return Ok(new DataResponse<string>() { Data = phoneNumber });
+            return Ok(new DataResponse<string>(phoneNumber));
         }
     }
 }

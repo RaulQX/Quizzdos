@@ -66,7 +66,7 @@ namespace quizzdos_be.Controllers
             return Ok(new DataResponse<User>(newUser, "User was created successfully"));
         }
         [ProducesResponseType(typeof(DataResponse<string>), 200)]
-        [ProducesResponseType(typeof(ErrorResponse<>), 400)]
+        [ProducesResponseType(typeof(ErrorResponse), 400)]
 
         [HttpPost("Login")]
         public async Task<IActionResult> Login(string? username, string? email, string? phoneNumber, [Required] string password )
@@ -77,14 +77,14 @@ namespace quizzdos_be.Controllers
 
             User? user = await _managerContext.Users.Where(u => u.Username == username || u.PhoneNumber == phoneNumber || u.Email == email).FirstOrDefaultAsync();
             if (user == null)
-                return BadRequest(new ErrorResponse<string>() { Error = true, Message = "User not found" });
+                return BadRequest(new ErrorResponse() { Error = true, Message = "User not found" });
 
             if (!await _validationRepository.VerifyPasswordHash(user, password, user.PasswordHash, user.PasswordSalt))
-                return BadRequest(new ErrorResponse<string>() { Error = true, Message = "Wrong password" });
+                return BadRequest(new ErrorResponse() { Error = true, Message = "Wrong password" });
 
             string token = await _authRepository.CreateToken(user);
 
-            return Ok(new DataResponse<string>() { Data = "bearer " + token } );
+            return Ok(new DataResponse<string>("bearer " + token));
         }
     }
 }
