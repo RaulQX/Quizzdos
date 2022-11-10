@@ -34,7 +34,7 @@ namespace quizzdos_be.Repositories
         {
             User newUser = new User();
 
-            newUser.Username = request.Username;
+            newUser.Username = request.Username ;
             newUser.Email = request.Email;
             newUser.PhoneNumber = request.PhoneNumber;
 
