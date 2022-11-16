@@ -1,25 +1,14 @@
 import { View, Text } from "react-native"
 import { Constants } from "../Constants/Constants"
-interface LogoProps {
-	size: number
-}
-const Logo = ({ size }: LogoProps) => {
+import { s } from "react-native-wind"
+
+const Logo = () => {
 	return (
-		<View
-			style={{
-				alignItems: "center",
-				justifyContent: "center",
-				flexDirection: "row",
-			}}
-		>
-			<Text style={{ color: "white", fontSize: size }}>Quizz</Text>
-			<Text
-				style={{
-					color: Constants.blueLogo,
-					fontSize: size,
-					marginBottom: 15,
-				}}
-			>
+		<View style={s`flex flex-row`}>
+			<Text style={s`text-7xl font-medium`}>
+				Quizz
+			</Text>
+			<Text style={s`text-7xl font-black text-indigo-300`}>
 				DOS
 			</Text>
 		</View>
