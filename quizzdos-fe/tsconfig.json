@@ -3,14 +3,14 @@
   "compilerOptions": {
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": ".",
-    "paths": {
-      "@components/*": [
-        "components/*"
-      ],
-      "@screens/*": [
-        "screens/*"
-      ],
-    }
+    // "baseUrl": ".",
+    // "paths": {
+    //   "@components/*": [
+    //     "components/*"
+    //   ],
+    //   "@screens/*": [
+    //     "screens/*"
+    //   ],
+    // }
   }
 }

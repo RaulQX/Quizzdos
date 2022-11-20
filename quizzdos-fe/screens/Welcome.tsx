@@ -1,8 +1,8 @@
 import React from "react"
 import { View, Text, TouchableOpacity } from "react-native"
-import Logo from "@components/common/Logo"
 import { s } from "react-native-wind"
-import ButtonImportant from "@components/common/buttons/ButtonImportant"
+import ButtonImportant from "../components/common/buttons/ButtonImportant"
+import Logo from "./Login"
 
 const Welcome = ({ navigation }: any) => {
 	return (

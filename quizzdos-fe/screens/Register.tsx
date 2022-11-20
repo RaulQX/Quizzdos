@@ -1,8 +1,8 @@
 import React, { useState } from "react"
 import { View, Text } from "react-native"
 import { s } from "react-native-wind"
-import ButtonImportant from "@components/common/buttons/ButtonImportant"
-import FormTextInput from "@components/common/FormTextInput"
+import ButtonImportant from "../components/common/buttons/ButtonImportant"
+import FormTextInput from "../components/common/FormTextInput"
 
 const Register = ({ navigation }: any) => {
 	const [mobileNumber, setMobileNumber] = useState("")
@@ -23,7 +23,7 @@ const Register = ({ navigation }: any) => {
 	async function postReferences() {
 		console.log("aici")
 		const result = await fetch(
-			//localhost???? 
+			//localhost????
 			"http://81.181.70.235:7249/api/Auth/Register",
 			{
 				method: "POST",
@@ -70,8 +70,13 @@ const Register = ({ navigation }: any) => {
 			<View style={s`w-full`}>
 				<View style={styles.registerForm}>
 					<View style={s`flex flex-row`}>
-						<Text style={s`text-white text-4xl font-medium`}>Sign</Text>
-						<Text style={s`text-indigo-300 text-4xl font-black`}> Up</Text>
+						<Text style={s`text-white text-4xl font-medium`}>
+							Sign
+						</Text>
+						<Text style={s`text-indigo-300 text-4xl font-black`}>
+							{" "}
+							Up
+						</Text>
 					</View>
 
 					<FormTextInput
