@@ -1,7 +1,8 @@
 import React, { useState } from "react"
-import { Button, TextInput, View, Text, TouchableOpacity } from "react-native"
+import { View, Text } from "react-native"
 import { s } from "react-native-wind"
-import Logo from "../Components/Logo"
+import ButtonImportant from "@components/common/buttons/ButtonImportant"
+import FormTextInput from "@components/common/FormTextInput"
 
 const Register = ({ navigation }: any) => {
 	const [mobileNumber, setMobileNumber] = useState("")
@@ -40,6 +41,7 @@ const Register = ({ navigation }: any) => {
 		)
 			.then((result) => {
 				console.log(result)
+				navigation.navigate("Home")
 			})
 			.catch((error) => {
 				console.error(error)
@@ -65,50 +67,43 @@ const Register = ({ navigation }: any) => {
 
 	return (
 		<View style={styles.background}>
-			<View style={styles.logoPosition}>
-				<Logo />
-			</View>
 			<View style={s`w-full`}>
 				<View style={styles.registerForm}>
 					<View style={s`flex flex-row`}>
-						<Text style={s`text-white text-4xl`}>Sign</Text>
-						<Text style={s`text-indigo-300 text-4xl`}> Up</Text>
+						<Text style={s`text-white text-4xl font-medium`}>Sign</Text>
+						<Text style={s`text-indigo-300 text-4xl font-black`}> Up</Text>
 					</View>
 
-					<TextInput
-						style={styles.textInput}
+					<FormTextInput
+						value={username}
 						placeholder="Username"
-						placeholderTextColor="white"
 						onChangeText={(text) => setUsername(text)}
 					/>
-					<TextInput
-						style={styles.textInput}
+					<FormTextInput
+						value={mobileNumber}
 						placeholder="Mobile Number"
-						placeholderTextColor="white"
+						keyboardType="number-pad"
+						autoComplete="tel"
 						onChangeText={(text) => setMobileNumber(text)}
 					/>
-					<TextInput
-						style={styles.textInput}
+					<FormTextInput
+						value={email}
 						placeholder="Email"
-						placeholderTextColor="white"
+						autoComplete="email"
+						keyboardType="email-address"
 						onChangeText={(text) => setEmail(text)}
 					/>
-					<TextInput
-						style={styles.textInput}
+					<FormTextInput
+						value={password}
 						placeholder="Password"
-						placeholderTextColor="white"
 						secureTextEntry={true}
 						onChangeText={(text) => setPassword(text)}
 					/>
-					<View style={s`flex`}>
-						<TouchableOpacity
-							style={styles.registerButton}
+					<View style={s`mt-4`}>
+						<ButtonImportant
+							text="Register"
 							onPress={(e) => onSubmit(e)}
-						>
-							<Text style={s`text-2xl text-blue-800`}>
-								Register
-							</Text>
-						</TouchableOpacity>
+						/>
 					</View>
 				</View>
 			</View>
@@ -117,11 +112,9 @@ const Register = ({ navigation }: any) => {
 }
 
 const styles = {
-	textInput: s`border-b border-indigo-400 rounded-3xl p-4 mb-4 text-right text-white`,
 	background: s`h-full flex flex-col justify-center items-center bg-coolGray-700`,
-	logoPosition: s`h-1/5 flex justify-start`,
 	registerForm: s`flex flex-col border-solid border-2 border-indigo-300 mx-4 p-9 rounded-3xl`,
-	registerButton: s`flex items-center border-4 border-indigo-400 rounded-3xl p-2 bg-indigo-200`,
+	registerButton: s`flex items-center border-4 border-indigo-400 rounded-3xl p-2 bg-indigo-200 mt-8`,
 }
 
 export default Register

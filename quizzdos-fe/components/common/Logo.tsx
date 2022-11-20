@@ -1,5 +1,4 @@
 import { View, Text } from "react-native"
-import { Constants } from "../Constants/Constants"
 import { s } from "react-native-wind"
 
 const Logo = () => {
