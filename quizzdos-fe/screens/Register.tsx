@@ -4,7 +4,11 @@ import { s } from "react-native-wind"
 import ButtonImportant from "../components/common/buttons/ButtonImportant"
 import FormTextInput from "../components/common/FormTextInput"
 
-const Register = ({ navigation }: any) => {
+interface RegisterProps {
+	navigation: any
+}
+
+const Register = ({ navigation }: RegisterProps) => {
 	const [mobileNumber, setMobileNumber] = useState("")
 	const [username, setUsername] = useState("")
 	const [email, setEmail] = useState("")
@@ -108,6 +112,10 @@ const Register = ({ navigation }: any) => {
 						<ButtonImportant
 							text="Register"
 							onPress={(e) => onSubmit(e)}
+						/>
+						<ButtonImportant
+							text="welcome"
+							onPress={() => navigation.navigate("Welcome")}
 						/>
 					</View>
 				</View>
