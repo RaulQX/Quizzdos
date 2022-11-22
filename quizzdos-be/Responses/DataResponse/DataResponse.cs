@@ -7,6 +7,7 @@
         public DataResponse(T data, string message = "") : base(message)
         {
             Data = data;
+            Error = false;
         }
     }
 }
