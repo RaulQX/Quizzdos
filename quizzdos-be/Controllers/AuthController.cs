@@ -69,17 +69,17 @@ namespace quizzdos_be.Controllers
         [ProducesResponseType(typeof(ErrorResponse), 400)]
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login(string? username, string? email, string? phoneNumber, [Required] string password )
+        public async Task<IActionResult> Login([FromBody]UserDTO request)
         {
-            username ??= "";
-            phoneNumber ??= "";
-            email ??= "";
+            request.Username ??= "";
+            request.PhoneNumber ??= "";
+            request.Email ??= "";
 
-            User? user = await _managerContext.Users.Where(u => u.Username == username || u.PhoneNumber == phoneNumber || u.Email == email).FirstOrDefaultAsync();
+            User? user = await _managerContext.Users.Where(u => u.Username == request.Username || u.PhoneNumber == request.PhoneNumber || u.Email == request.Email).FirstOrDefaultAsync();
             if (user == null)
                 return BadRequest(new ErrorResponse() { Error = true, Message = "User not found" });
 
-            if (!await _validationRepository.VerifyPasswordHash(user, password, user.PasswordHash, user.PasswordSalt))
+            if (!await _validationRepository.VerifyPasswordHash(user, request.Password, user.PasswordHash, user.PasswordSalt))
                 return BadRequest(new ErrorResponse() { Error = true, Message = "Wrong password" });
 
             string token = await _authRepository.CreateToken(user);
