@@ -9,6 +9,7 @@ namespace quizzdos_be.Repositories
         public string? GetUsername();
         public string? GetEmail();
         public string? GetPhoneNumber();
+        public string? GetUserId();
         public UserViewModel? GetUser();
     }
     public class UserRepository : IUserRepository
@@ -43,6 +44,14 @@ namespace quizzdos_be.Repositories
             }
             else return null;
         }
+        public string? GetUserId()
+        {
+            if (_contextAccessor.HttpContext != null)
+            {
+                return _contextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Sid);
+            }
+            else return null;
+        }
 
         public UserViewModel? GetUser()
         {
@@ -54,6 +63,7 @@ namespace quizzdos_be.Repositories
                         Username = _contextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name),
                         Email = _contextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Email),
                         PhoneNumber = _contextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.MobilePhone),
+                        Id = new Guid(_contextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Sid))
                     };
             }
             else return null;
