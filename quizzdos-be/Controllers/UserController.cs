@@ -18,7 +18,7 @@ namespace quizzdos_be.Controllers
             _userRepository = userRepository;
         }
 
-        [HttpGet("GetUser")]
+        [HttpGet("User")]
         [ProducesResponseType(typeof(DataResponse<UserViewModel>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
         public ActionResult<DataResponse<UserViewModel>> GetUser()
@@ -29,7 +29,7 @@ namespace quizzdos_be.Controllers
 
             return Ok(new DataResponse<UserViewModel>(user));
         }
-        [HttpGet("GetUsername")]
+        [HttpGet("Username")]
         [ProducesResponseType(typeof(DataResponse<string>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
         public ActionResult<string> GetUsername()
@@ -40,7 +40,7 @@ namespace quizzdos_be.Controllers
 
             return Ok(new DataResponse<string>(userName));
         }
-        [HttpGet("GetEmail")]
+        [HttpGet("Email")]
         [ProducesResponseType(typeof(DataResponse<string>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
         public ActionResult<string> GetEmail()
@@ -51,7 +51,7 @@ namespace quizzdos_be.Controllers
 
             return Ok(new DataResponse<string>(email));
         }
-        [HttpGet("GetPhoneNumber")]
+        [HttpGet("PhoneNumber")]
         [ProducesResponseType(typeof(DataResponse<string>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
         public ActionResult<string> GetPhoneNumber()
@@ -61,6 +61,18 @@ namespace quizzdos_be.Controllers
                 return BadRequest(new ErrorResponse { Error = true, Message = "Failed to get phone number" });
 
             return Ok(new DataResponse<string>(phoneNumber));
+        }
+
+        [HttpGet("Id")]
+        [ProducesResponseType(typeof(DataResponse<string>), 200)]
+        [ProducesResponseType(typeof(ErrorResponse), 400)]
+        public ActionResult<string> GetId()
+        {
+            var userId = _userRepository.GetUserId();
+            if (userId == null)
+                return BadRequest(new ErrorResponse { Error = true, Message = "Failed to get phone number" });
+
+            return Ok(new DataResponse<string>(userId));
         }
     }
 }
