@@ -4,6 +4,7 @@ import React, { useState } from "react"
 import ButtonImportant from "../components/common/buttons/ButtonImportant"
 import FormTextInput from "../components/common/FormTextInput"
 import ErrorModal from "../components/common/ErrorModal"
+import AuthForm from "../components/auth-form/AuthForm"
 
 interface LoginProps {
 	navigation: any
@@ -16,8 +17,7 @@ const Login = ({ navigation }: LoginProps) => {
 	const [modalVisible, setModalVisible] = useState(false)
 	const [errorMessage, setErrorMessage] = useState("")
 
-	const onSubmit = (e: any) => {
-		e.preventDefault()
+	const onSubmit = async () => {
 		console.log("login", login)
 		console.log("password", password)
 		try {
@@ -56,50 +56,25 @@ const Login = ({ navigation }: LoginProps) => {
 	}
 
 	return (
-		<View
-			style={s`h-full flex flex-col justify-center items-center bg-coolGray-700`}
-		>
-			<View style={s`w-full`}>
-				<View style={s``}>
-					<View style={s`flex flex-row`}>
-						<Text style={s`text-white text-4xl font-medium`}>
-							Sign
-						</Text>
-						<Text style={s`text-indigo-300 text-4xl font-black`}>
-							{" "}
-							Up
-						</Text>
-					</View>
-					<ErrorModal
-						modalVisible={modalVisible}
-						errorMessage={errorMessage}
-						setModalVisible={() => setModalVisible(false)}
-					/>
+		<AuthForm title="Log In" buttonTitle="Log In" onSubmit={onSubmit} navigation={navigation} >
+			<ErrorModal
+				modalVisible={modalVisible}
+				errorMessage={errorMessage}
+				setModalVisible={() => setModalVisible(false)}
+			/>
 
-					<FormTextInput
-						value={login}
-						placeholder="Username / Email"
-						onChangeText={(text) => setLogin(text)}
-					/>
-					<FormTextInput
-						value={password}
-						placeholder="Password"
-						secureTextEntry={true}
-						onChangeText={(text) => setPassword(text)}
-					/>
-					<View style={s`mt-4`}>
-						<ButtonImportant
-							text="Register"
-							onPress={(e) => onSubmit(e)}
-						/>
-						<ButtonImportant
-							text="welcome"
-							onPress={() => navigation.navigate("Welcome")}
-						/>
-					</View>
-				</View>
-			</View>
-		</View>
+			<FormTextInput
+				value={login}
+				placeholder="Username / Email"
+				onChangeText={(text) => setLogin(text)}
+			/>
+			<FormTextInput
+				value={password}
+				placeholder="Password"
+				secureTextEntry={true}
+				onChangeText={(text) => setPassword(text)}
+			/>
+		</AuthForm>
 	)
 }
 export default Login

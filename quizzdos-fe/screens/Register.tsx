@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { View, Text } from "react-native"
 import { s } from "react-native-wind"
+import AuthForm from "../components/auth-form/AuthForm"
 import ButtonImportant from "../components/common/buttons/ButtonImportant"
 import FormTextInput from "../components/common/FormTextInput"
 
@@ -24,7 +25,7 @@ const Register = ({ navigation }: RegisterProps) => {
 	// 	}))
 	// }
 
-	async function postReferences() {
+	async function onSubmit() {
 		console.log("aici")
 		const result = await fetch(
 			//localhost????
@@ -64,63 +65,34 @@ const Register = ({ navigation }: RegisterProps) => {
 		// })
 	}
 
-	function onSubmit(e: any) {
-		e.preventDefault()
-		postReferences()
-	}
-
 	return (
-		<View style={styles.background}>
-			<View style={s`w-full`}>
-				<View style={styles.registerForm}>
-					<View style={s`flex flex-row`}>
-						<Text style={s`text-white text-4xl font-medium`}>
-							Sign
-						</Text>
-						<Text style={s`text-indigo-300 text-4xl font-black`}>
-							{" "}
-							Up
-						</Text>
-					</View>
-
-					<FormTextInput
-						value={username}
-						placeholder="Username"
-						onChangeText={(text) => setUsername(text)}
-					/>
-					<FormTextInput
-						value={mobileNumber}
-						placeholder="Mobile Number"
-						keyboardType="number-pad"
-						autoComplete="tel"
-						onChangeText={(text) => setMobileNumber(text)}
-					/>
-					<FormTextInput
-						value={email}
-						placeholder="Email"
-						autoComplete="email"
-						keyboardType="email-address"
-						onChangeText={(text) => setEmail(text)}
-					/>
-					<FormTextInput
-						value={password}
-						placeholder="Password"
-						secureTextEntry={true}
-						onChangeText={(text) => setPassword(text)}
-					/>
-					<View style={s`mt-4`}>
-						<ButtonImportant
-							text="Register"
-							onPress={(e) => onSubmit(e)}
-						/>
-						<ButtonImportant
-							text="welcome"
-							onPress={() => navigation.navigate("Welcome")}
-						/>
-					</View>
-				</View>
-			</View>
-		</View>
+		<AuthForm title="Register" buttonTitle="Register" onSubmit={onSubmit} navigation={navigation} >
+			<FormTextInput
+				value={username}
+				placeholder="Username"
+				onChangeText={(text) => setUsername(text)}
+			/>
+			<FormTextInput
+				value={mobileNumber}
+				placeholder="Mobile Number"
+				keyboardType="number-pad"
+				autoComplete="tel"
+				onChangeText={(text) => setMobileNumber(text)}
+			/>
+			<FormTextInput
+				value={email}
+				placeholder="Email"
+				autoComplete="email"
+				keyboardType="email-address"
+				onChangeText={(text) => setEmail(text)}
+			/>
+			<FormTextInput
+				value={password}
+				placeholder="Password"
+				secureTextEntry={true}
+				onChangeText={(text) => setPassword(text)}
+			/>
+		</AuthForm>
 	)
 }
 
