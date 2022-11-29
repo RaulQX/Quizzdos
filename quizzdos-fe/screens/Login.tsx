@@ -1,10 +1,9 @@
-import { View, Text, Modal } from "react-native"
-import { s } from "react-native-wind"
 import React, { useState } from "react"
-import ButtonImportant from "../components/common/buttons/ButtonImportant"
 import FormTextInput from "../components/common/FormTextInput"
 import ErrorModal from "../components/common/ErrorModal"
 import AuthForm from "../components/auth-form/AuthForm"
+import useUser from "../components/context/User/UserContext"
+import { ApiConstants } from "../Constants/Constants"
 
 interface LoginProps {
 	navigation: any
@@ -15,48 +14,34 @@ const Login = ({ navigation }: LoginProps) => {
 	const [password, setPassword] = useState("")
 
 	const [modalVisible, setModalVisible] = useState(false)
-	const [errorMessage, setErrorMessage] = useState("")
 
-	const onSubmit = async () => {
-		console.log("login", login)
-		console.log("password", password)
+	const { loginUser, errorMessage } = useUser()
+
+	const handleLogin = async () => {
+		console.log("handle login ", ApiConstants.login)
 		try {
-			console.log("try")
-			fetch("http://192.168.0.177:5000/api/Auth/Login", {
-				method: "POST",
-				headers: {
-					Accept: "accept: text/plain",
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					username: login,
-					password: password,
-				}),
+			let response: any = await loginUser({
+				login: login,
+				password: password,
 			})
-				.then((response) => {
-					return response.json()
-				})
-				.then((data) => {
-					console.log("Success:", data)
-					if (data.error == false) {
-						//context login bearer
-						setErrorMessage(data.message)
-						setModalVisible(true)
-					} else {
-						setErrorMessage(data.message)
-						setModalVisible(true)
-					}
-				})
-				.catch((error) => {
-					console.error("Error:", error)
-				})
+
+			if (response.error == true) {
+				setModalVisible(true)
+				return
+			}
+			navigation.navigate("Home")
 		} catch (error) {
-			console.error("Error:", error)
+			setModalVisible(true)
 		}
 	}
 
 	return (
-		<AuthForm title="Log In" buttonTitle="Log In" onSubmit={onSubmit} navigation={navigation} >
+		<AuthForm
+			title="Log In"
+			buttonTitle="Log In"
+			onSubmit={handleLogin}
+			navigation={navigation}
+		>
 			<ErrorModal
 				modalVisible={modalVisible}
 				errorMessage={errorMessage}
@@ -65,7 +50,7 @@ const Login = ({ navigation }: LoginProps) => {
 
 			<FormTextInput
 				value={login}
-				placeholder="Username / Email"
+				placeholder="Username / Email / Phone Number"
 				onChangeText={(text) => setLogin(text)}
 			/>
 			<FormTextInput
