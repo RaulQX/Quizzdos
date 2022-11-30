@@ -2,8 +2,8 @@ import React, { useState } from "react"
 import FormTextInput from "../components/common/FormTextInput"
 import ErrorModal from "../components/common/ErrorModal"
 import AuthForm from "../components/auth-form/AuthForm"
-import useUser from "../components/context/User/UserContext"
-import { ApiConstants } from "../Constants/Constants"
+import useUser from "../contexts/User/UserContext"
+import { ApiConstants } from "../constants/Constants"
 
 interface LoginProps {
 	navigation: any
