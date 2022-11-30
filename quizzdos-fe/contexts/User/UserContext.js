@@ -1,11 +1,11 @@
 import { createContext, useReducer, useContext } from "react"
-import ShopReducer, { initialState } from "./UserReducer"
-import { ApiConstants } from "../../../Constants/Constants"
+import UserReducer, { initialState } from "./UserReducer"
+import { ApiConstants } from "../../constants/Constants"
 
 const UserContext = createContext(initialState)
 
 export const UserProvider = ({ children }) => {
-	const [state, dispatch] = useReducer(ShopReducer, initialState)
+	const [state, dispatch] = useReducer(UserReducer, initialState)
 
 	const loginUser = async (loginPayload) => {
 		dispatch({ type: "LOGIN_REQUEST" })
@@ -43,6 +43,7 @@ export const UserProvider = ({ children }) => {
 				id: user.data.id,
 			}
 			dispatch({ type: "LOGIN_SUCCESS", payload: payloadConstructed })
+			
 			return { payloadConstructed, error: false }
 		}
 		dispatch({
@@ -51,9 +52,11 @@ export const UserProvider = ({ children }) => {
 		})
 		return { message: data.message, error: true }
 	}
+
 	const logoutUser = (payload) => {
 		dispatch({ type: "LOGOUT" })
 	}
+
 	const value = {
 		...state,
 		loginUser: loginUser,
