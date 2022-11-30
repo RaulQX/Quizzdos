@@ -8,6 +8,17 @@ interface HomeProps {
 }
 
 const Home = ({ navigation }: HomeProps) => {
+	const dummyData = [
+		{
+			name: "Unit 1",
+			quizzes: [
+				{
+					name: "Quiz 1",
+				}
+			]
+		}
+	]
+
 	return (
 		<NavBar navigation={navigation}>
 			<View>
