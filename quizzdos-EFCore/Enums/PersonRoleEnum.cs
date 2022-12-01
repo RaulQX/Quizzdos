@@ -3,6 +3,7 @@
     public enum PRole
     {
         Student = 0,
-        Professor = 1
+        Professor = 1,
+        Admin = 2
     }
 }

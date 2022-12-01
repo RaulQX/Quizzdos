@@ -70,7 +70,7 @@ namespace quizzdos_be.Controllers
         {
             var userId = _userRepository.GetUserId();
             if (userId == null)
-                return BadRequest(new ErrorResponse { Error = true, Message = "Failed to get phone number" });
+                return BadRequest(new ErrorResponse { Error = true, Message = "Failed to get user id" });
 
             return Ok(new DataResponse<string>(userId));
         }

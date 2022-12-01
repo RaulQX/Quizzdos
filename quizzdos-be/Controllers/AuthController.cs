@@ -20,14 +20,17 @@ namespace quizzdos_be.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IAuthRepository _authRepository;
-        private readonly ManagerContext _managerContext;
         private readonly IValidationRepository _validationRepository;
+        private readonly IPersonRepository _personRepository;
+        private readonly IUserRepository _userRepository;
 
-        public AuthController(IAuthRepository authRepository, ManagerContext managerContext, IValidationRepository validationRepository)
+        public AuthController(IAuthRepository authRepository, IValidationRepository validationRepository, 
+                            IPersonRepository personRepository, IUserRepository userRepository)
         {
-            _validationRepository = validationRepository;
             _authRepository = authRepository;
-            _managerContext = managerContext;
+            _validationRepository = validationRepository;
+            _personRepository = personRepository;
+            _userRepository = userRepository;
         }
 
         [HttpPost("Register")]
@@ -59,9 +62,9 @@ namespace quizzdos_be.Controllers
             }
 
             User newUser = await _authRepository.Register(request);
-
-            await _managerContext.Users.AddAsync(newUser);
-            await _managerContext.SaveChangesAsync();
+            
+            await _userRepository.AddUserAsync(newUser);
+            await _personRepository.AddPersonAsync(newUser);
 
             return Ok(new DataResponse<User>(newUser, "User was created successfully"));
         }
@@ -75,7 +78,7 @@ namespace quizzdos_be.Controllers
             request.PhoneNumber ??= "";
             request.Email ??= "";
 
-            User? user = await _managerContext.Users.Where(u => u.Username == request.Username || u.PhoneNumber == request.PhoneNumber || u.Email == request.Email).FirstOrDefaultAsync();
+            var user = await _userRepository.GetUserByAnyField(request.Username, request.Email, request.PhoneNumber);
             if (user == null)
                 return BadRequest(new ErrorResponse() { Error = true, Message = "User not found" });
 

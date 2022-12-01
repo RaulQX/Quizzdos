@@ -1,5 +1,7 @@
-﻿using quizzdos_be.DataTransferObjects;
+﻿using Microsoft.EntityFrameworkCore;
+using quizzdos_be.DataTransferObjects;
 using quizzdos_be.ViewModels;
+using quizzdos_EFCore.Entities.Users;
 using System.Security.Claims;
 
 namespace quizzdos_be.Repositories
@@ -11,15 +13,18 @@ namespace quizzdos_be.Repositories
         public string? GetPhoneNumber();
         public string? GetUserId();
         public UserViewModel? GetUser();
+        public Task<User> AddUserAsync(User user);
+        public Task<User?> GetUserByAnyField(string? username, string? email, string? phoneNumber);
     }
     public class UserRepository : IUserRepository
     {
         private readonly IHttpContextAccessor _contextAccessor;
-        public UserRepository(IHttpContextAccessor contextAccessor)
+        private readonly ManagerContext _context;
+        public UserRepository(IHttpContextAccessor contextAccessor, ManagerContext context)
         {
             _contextAccessor = contextAccessor;
+            _context = context;
         }
-
         public string? GetUsername()
         {
             if (_contextAccessor.HttpContext != null)
@@ -68,5 +73,18 @@ namespace quizzdos_be.Repositories
             }
             else return null;
         }
+
+        public async Task<User> AddUserAsync(User user)
+        {
+            await _context.Users.AddAsync(user);
+            await _context.SaveChangesAsync();
+            return user;
+        }
+
+        public async Task<User?> GetUserByAnyField(string? username, string? email, string? phoneNumber)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Username == username || u.Email == email || u.PhoneNumber == phoneNumber);
+        }
+
     }
 }

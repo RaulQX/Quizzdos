@@ -28,6 +28,10 @@ const Login = ({ navigation }: LoginProps) => {
 				setModalVisible(true)
 				return
 			}
+			if (response.payloadConstructed.profileSetup == false) {
+				navigation.navigate("ProfileSetup")
+				return
+			}
 			navigation.navigate("Home")
 		} catch (error) {
 			setModalVisible(true)

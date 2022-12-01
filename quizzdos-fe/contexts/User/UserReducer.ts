@@ -1,10 +1,18 @@
+import { Roles } from "../../Constants/Constants"
+
 export const initialState = {
 	token: "",
+
+	userId: "",
+	personId: "",
+	role: Roles.student,
+
 	username: "",
 	email: "",
 	phoneNumber: "",
-	id: "",
+
 	errorMessage: "",
+
 	loginUser: async (payload: any) => {
 		return Promise<void>
 	},
@@ -21,14 +29,18 @@ const UserReducer = (state: any, action: any) => {
 				errorMessage: "",
 			}
 		case "LOGIN_SUCCESS":
-			console.log("payload", payload)
 			return {
 				...state,
 				token: payload.token,
+
+				userId: payload.userId,
+				personId: payload.personId,
+				role: payload.role,
+
 				username: payload.username,
 				email: payload.email,
 				phoneNumber: payload.phoneNumber,
-				id: payload.id,
+
 				errorMessage: "",
 			}
 		case "LOGIN_FAILURE":
@@ -40,10 +52,15 @@ const UserReducer = (state: any, action: any) => {
 			return {
 				...state,
 				token: "",
+
+				userId: "",
+				personId: "",
+				role: Roles.student,
+
 				username: "",
 				email: "",
 				phoneNumber: "",
-				id: "",
+
 				errorMessage: "",
 			}
 		}
