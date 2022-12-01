@@ -3,7 +3,7 @@ import FormTextInput from "../components/common/FormTextInput"
 import ErrorModal from "../components/common/ErrorModal"
 import AuthForm from "../components/auth-form/AuthForm"
 import useUser from "../contexts/User/UserContext"
-import { ApiConstants } from "../Constants/Constants"
+import { ApiConstants, Roles } from "../Constants/Constants"
 
 interface LoginProps {
 	navigation: any
@@ -30,6 +30,10 @@ const Login = ({ navigation }: LoginProps) => {
 			}
 			if (response.payloadConstructed.profileSetup == false) {
 				navigation.navigate("ProfileSetup")
+				return
+			}
+			if (response.payloadConstructed.role == Roles.admin) {
+				navigation.navigate("AdminHome")
 				return
 			}
 			navigation.navigate("Home")
