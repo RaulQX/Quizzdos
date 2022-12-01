@@ -16,6 +16,14 @@ namespace quizzdos_EFCore.Entities.Users
             Quizzmates = new HashSet<QuizzMate>();
             Notifications = new HashSet<Notification>();
         }
+        public Person(User user)
+        {
+            Courses = new HashSet<Course>();
+            Quizzmates = new HashSet<QuizzMate>();
+            Notifications = new HashSet<Notification>();
+            this.UserId = user.Id;
+            this.User = user;
+        }
         [Required]
         [Column(TypeName = "nvarchar(100)")]
         public string FirstName { get; set; } = String.Empty;
@@ -23,10 +31,7 @@ namespace quizzdos_EFCore.Entities.Users
         [Column(TypeName = "nvarchar(100)")]
         public string LastName { get; set; } = String.Empty;
         [Required]
-        [Column(TypeName = "nvarchar(15)")]
-        public string Mobile { get; set; } = String.Empty;
-        [Required]
-        public PRole Role { get; set; }
+        public PRole Role { get; set; } = PRole.Student;
         public ICollection<Course> Courses { get; set; }
         public ICollection<QuizzMate> Quizzmates { get; set; }
         public ICollection<Notification> Notifications { get; set; }
