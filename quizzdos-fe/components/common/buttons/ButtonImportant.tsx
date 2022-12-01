@@ -10,7 +10,7 @@ interface ButtonImportantProps {
 const ButtonImportant = ({ text, onPress }: ButtonImportantProps) => {
     return (
         <TouchableHighlight
-            style={s`bg-indigo-200 flex items-center border-4 border-indigo-400 rounded-3xl py-2`}
+            style={s`bg-indigo-200 flex items-center border-2 border-indigo-400 rounded-3xl py-2`}
             underlayColor="#aaaaaa"
             onPress={onPress}
         >
