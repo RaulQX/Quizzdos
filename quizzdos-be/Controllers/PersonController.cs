@@ -28,7 +28,7 @@ namespace quizzdos_be.Controllers
             return Ok(new DataResponse<Person>(person));
         }
 
-        [HttpGet("PersonBy{personId:guid}")]
+        [HttpGet("GetPerson/{personId:Guid}")]
         [ProducesResponseType(typeof(DataResponse<Person>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
         public async Task<ActionResult<DataResponse<Person>>> GetPersonById(Guid personId)
@@ -39,7 +39,7 @@ namespace quizzdos_be.Controllers
 
             return Ok(new DataResponse<Person>(person));
         }
-        [HttpPut("UpdatePersonNameBy{personId:guid}")]
+        [HttpPut("UpdatePersonNames/{personId:Guid}")]
         [ProducesResponseType(typeof(DataResponse<Person>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
         public async Task<ActionResult<DataResponse<Person>>> UpdatePersonNameById(Guid personId, string firstName, string lastName)
@@ -50,7 +50,7 @@ namespace quizzdos_be.Controllers
 
             return Ok(new DataResponse<Person>(person));
         }
-        [HttpPut("UpdatePersonRoleBy{personId:guid}")]
+        [HttpPut("UpdatePersonRole/{personId:Guid}")]
         [ProducesResponseType(typeof(DataResponse<Person>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
         public async Task<ActionResult<DataResponse<Person>>> UpdatePersonRoleById(Guid personId, PRole role)
@@ -61,7 +61,7 @@ namespace quizzdos_be.Controllers
 
             return Ok(new DataResponse<Person>(person));
         }
-        [HttpDelete("DeletePersonBy{personId:guid}")]
+        [HttpDelete("DeletePerson/{personId:Guid}")]
         [ProducesResponseType(typeof(DataResponse<Person>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
         public async Task<ActionResult<DataResponse<Person>>> DeletePersonById(Guid personId)
