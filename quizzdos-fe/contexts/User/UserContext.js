@@ -50,17 +50,40 @@ export const UserProvider = ({ children }) => {
 				}
 			)
 			let user = await userDetails.json()
-			console.log("user", user)
+			console.log(
+				ApiConstants.baseUrl +
+					ApiConstants.controllers.person +
+					ApiConstants.endpoints.personByUserId
+			)
+			const encodedValue = encodeURIComponent(user.data.id)
+			let personDetail = await fetch(
+				`${
+					ApiConstants.baseUrl +
+					ApiConstants.controllers.person +
+					ApiConstants.endpoints.personByUserId +
+					"?userId=" +
+					encodedValue
+				}`,
+				{
+					method: "GET",
+					headers: {
+						Accept: "accept: text/plain",
+						"Content-Type": "application/json",
+					},
+				}
+			)
+			let person = await personDetail.json()
 			let payloadConstructed = {
 				token: data.data,
 				username: user.data.username,
 				email: user.data.email,
 				phoneNumber: user.data.phoneNumber,
-				id: user.data.id,
+				userId: user.data.id,
+				personId: person.data.id,
+				role: person.data.role,
+				profileSetup: person.data.firstName === "" ? false : true, //TODO change this to true when profile setup is done
 			}
-			console.log({ payloadConstructed, error: false })
 			dispatch({ type: "LOGIN_SUCCESS", payload: payloadConstructed })
-			console.log({ payloadConstructed, error: false })
 			return { payloadConstructed, error: false }
 		}
 		dispatch({
