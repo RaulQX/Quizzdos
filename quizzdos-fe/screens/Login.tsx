@@ -3,7 +3,7 @@ import FormTextInput from "../components/common/FormTextInput"
 import ErrorModal from "../components/common/ErrorModal"
 import AuthForm from "../components/auth-form/AuthForm"
 import useUser from "../contexts/User/UserContext"
-import { ApiConstants } from "../constants/Constants"
+import { ApiConstants } from "../Constants/Constants"
 
 interface LoginProps {
 	navigation: any
@@ -18,13 +18,12 @@ const Login = ({ navigation }: LoginProps) => {
 	const { loginUser, errorMessage } = useUser()
 
 	const handleLogin = async () => {
-		console.log("handle login ", ApiConstants.login)
 		try {
 			let response: any = await loginUser({
 				login: login,
 				password: password,
 			})
-
+			console.log("response ", response)
 			if (response.error == true) {
 				setModalVisible(true)
 				return

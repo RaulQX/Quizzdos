@@ -4,9 +4,14 @@ export const Constants = {
 }
 
 export const ApiConstants = {
-	baseUrl: "http://192.168.0.177:5000/api/",
-	auth: "Auth/",
-	login: "http://192.168.0.177:5000/api/Auth/Login",
-	register: "Register",
-	user: "http://192.168.0.177:5000/api/User/User",
+	baseUrl: "http://192.168.100.3:5000/api/",
+	controllers: {
+		user: "User/",
+		auth: "Auth/",
+	},
+	endpoints: {
+		login: "Login",
+		user: "User",
+		register: "Register",
+	},
 }
