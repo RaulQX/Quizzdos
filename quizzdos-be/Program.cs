@@ -44,6 +44,8 @@ builder.Services.AddDbContext<ManagerContext>(options =>
 builder.Services.AddScoped<IValidationRepository, ValidationRepository>();
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IPersonRepository, PersonRepository>();
+
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddCors(options =>
 {
