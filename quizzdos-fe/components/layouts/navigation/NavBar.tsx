@@ -1,10 +1,11 @@
 import React from "react"
-import { ScrollView, View, Text } from "react-native"
+import { ScrollView, View, Text, TouchableHighlight } from "react-native"
 import { s } from "react-native-wind"
 
 interface NavBarProps {
     children: React.ReactNode
     navigation: any
+    selected: 'Home' | 'Profile' | 'IDK' | 'Feed'
 }
 
 interface NavBarItemProps {
@@ -14,20 +15,20 @@ interface NavBarItemProps {
 }
 
 
-const NavBar = ({ children, navigation }: NavBarProps) => {
+const NavBar = ({ children, navigation, selected }: NavBarProps) => {
     const NavBarItem = ({ children, screen, selected }: NavBarItemProps) => {
         const handlePress = () => {
             navigation.navigate(screen)
         }
         
         return (
-            <View style={s`flex p-4 items-center border-2 rounded-xl ${selected ? "border-white" : "border-transparent"}`}
-                onTouchEnd={handlePress}
+            <TouchableHighlight style={s`flex p-4 items-center border-2 rounded-xl ${selected ? "border-white" : "border-transparent"}`}
+                onPress={handlePress}
             >
                 <Text style={s`text-white`}>
                     {children}
                 </Text>
-            </View>
+            </TouchableHighlight>
         )
     }
 
@@ -37,17 +38,17 @@ const NavBar = ({ children, navigation }: NavBarProps) => {
                 {children}
             </ScrollView>
             <View style={s`flex flex-row justify-around w-full py-2 border-t-2 border-white`}>
-                <NavBarItem screen='Home' selected>
-                    <Text>Home</Text>
+                <NavBarItem screen='Home' selected={selected === 'Home'}>
+                    Home
                 </NavBarItem>
-                <NavBarItem screen='Profile'>
-                    <Text>Profile</Text>
+                <NavBarItem screen='Profile' selected={selected === 'Profile'}>
+                    Profile
                 </NavBarItem>
-                <NavBarItem screen='IDK'>
-                    <Text>IDK</Text>
+                <NavBarItem screen='IDK' selected={selected === 'IDK'}>
+                    IDK
                 </NavBarItem>
-                <NavBarItem screen='Notifications'>
-                    <Text>Notifications</Text>
+                <NavBarItem screen='Feed' selected={selected === 'Feed'}>
+                    Feed
                 </NavBarItem>
             </View>
         </View>
