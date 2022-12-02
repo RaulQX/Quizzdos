@@ -11,7 +11,6 @@ namespace quizzdos_be.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize(Roles = nameof(PRole.Admin))]
     public class AdminViewController : ControllerBase
     {
         private readonly IAdminViewRepository _adminViewRepository;
@@ -42,7 +41,7 @@ namespace quizzdos_be.Controllers
 
             return Ok(new DataResponse<List<UserAdminViewViewModel>>(users));
         }
-        [HttpGet("UsersBasedOnRole")]
+        [HttpGet("GetUsersRole/{role}")]
         [ProducesResponseType(typeof(DataResponse<List<UserAdminViewViewModel>>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
         public async Task<ActionResult<DataResponse<List<UserAdminViewViewModel>>>> GetAllUsersBasedOnRole(PRole role, int page, int pageSize)
@@ -53,7 +52,7 @@ namespace quizzdos_be.Controllers
 
             return Ok(new DataResponse<List<UserAdminViewViewModel>>(users));
         }
-        [HttpGet("UsersBasedOnUsername")]
+        [HttpGet("GetUsersUsername/{username}")]
         [ProducesResponseType(typeof(DataResponse<List<UserAdminViewViewModel>>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
         public async Task<ActionResult<DataResponse<List<UserAdminViewViewModel>>>> GetUsersBasedOnUsername(string username, int page, int pageSize)
@@ -64,7 +63,7 @@ namespace quizzdos_be.Controllers
 
             return Ok(new DataResponse<List<UserAdminViewViewModel>>(users));
         }
-        [HttpGet("GetUsers/{name}")]
+        [HttpGet("GetUsersName/{name}")]
         [ProducesResponseType(typeof(DataResponse<List<UserAdminViewViewModel>>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
         public async Task<ActionResult<DataResponse<List<UserAdminViewViewModel>>>> GetUsersBasedOnName(string name, int page, int pageSize)
@@ -86,5 +85,29 @@ namespace quizzdos_be.Controllers
 
             return Ok(new DataResponse<Person>(person));
         }
+        [HttpDelete("DeletePerson/{personId:Guid}")]
+        [ProducesResponseType(typeof(DataResponse<Person>), 200)]
+        [ProducesResponseType(typeof(ErrorResponse), 400)]
+        public async Task<ActionResult<DataResponse<Person>>> DeletePerson(Guid personId)
+        {
+            var person = await _adminViewRepository.DeletePersonBasedOnId(personId);
+            if (person == null)
+                return BadRequest(new ErrorResponse { Error = true, Message = "Failed to delete person" });
+
+            return Ok(new DataResponse<Person>(person));
+        }
+
+        [HttpDelete("DeleteUser/{userId:Guid}")]
+        [ProducesResponseType(typeof(DataResponse<User>), 200)]
+        [ProducesResponseType(typeof(ErrorResponse), 400)]
+        public async Task<ActionResult<DataResponse<User>>> DeleteUser(Guid userId)
+        {
+            var user = await _adminViewRepository.DeleteUserBasedOnId(userId);
+            if (user == null)
+                return BadRequest(new ErrorResponse { Error = true, Message = "Failed to delete user" });
+
+            return Ok(new DataResponse<User>(user));
+        }
+        
     }
 }

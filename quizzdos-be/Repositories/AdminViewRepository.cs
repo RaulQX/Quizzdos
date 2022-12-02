@@ -13,6 +13,8 @@ namespace quizzdos_be.Repositories
         public Task<List<UserAdminViewViewModel>> GetUsersBasedOnName(string name, int page, int pageSize);
         public Task<UserAdminViewViewModel?> GetSingleUserBasedOnUsername(string username);
         public Task<Person?> ModifyPersonBasedOnId(Guid id, string firstName, string lastName, PRole role);
+        public Task<Person?> DeletePersonBasedOnId(Guid id);
+        public Task<User?> DeleteUserBasedOnId(Guid id);
     }
 public class AdminViewRepository: IAdminViewRepository
     {
@@ -149,6 +151,30 @@ public class AdminViewRepository: IAdminViewRepository
             await _context.SaveChangesAsync();
 
             return personToModify;
+        }
+
+        public async Task<Person?> DeletePersonBasedOnId(Guid id)
+        {
+            var  personToDelete = await _context.Persons.FirstOrDefaultAsync(p => p.Id == id);
+            if (personToDelete == null)
+            {
+                return null;
+            }
+            _context.Persons.Remove(personToDelete);
+            await _context.SaveChangesAsync();
+            return personToDelete;
+        }
+
+        public async Task<User?> DeleteUserBasedOnId(Guid id)
+        {
+            var userToDelete = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+            if (userToDelete == null)
+            {
+                return null;
+            }
+            _context.Users.Remove(userToDelete);
+            await _context.SaveChangesAsync();
+            return userToDelete;
         }
     }
 }

@@ -28,7 +28,13 @@ const AdminHome = ({ navigation }: AdminHomeProps) => {
 						s`flex flex-row flex-wrap justify-between w-full my-6`,
 					]}
 				>
-					<RoundedButton text="Users" onPress={() => {}} />
+					<RoundedButton
+						text="Users"
+						onPress={() => {
+							console.log("click")
+							navigation.navigate("AdminUsers")
+						}}
+					/>
 					<RoundedButton text="Units" onPress={() => {}} />
 					<RoundedButton text="Quizzes" onPress={() => {}} />
 					<RoundedButton text="Questions" onPress={() => {}} />
