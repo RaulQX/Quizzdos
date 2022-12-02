@@ -1,4 +1,6 @@
-﻿namespace quizzdos_EFCore.Enums
+﻿using System.ComponentModel;
+
+namespace quizzdos_EFCore.Enums
 {
     public enum PRole
     {

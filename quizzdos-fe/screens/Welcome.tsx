@@ -1,6 +1,5 @@
-import AsyncStorage from "@react-native-async-storage/async-storage"
 import React from "react"
-import { View, Text, TouchableOpacity } from "react-native"
+import { View } from "react-native"
 import { s } from "react-native-wind"
 import ButtonImportant from "../components/common/buttons/ButtonImportant"
 import Logo from "../components/common/Logo"
