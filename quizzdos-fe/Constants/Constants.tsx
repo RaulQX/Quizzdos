@@ -9,6 +9,12 @@ export const Roles = {
 	admin: 2,
 }
 
+export const Gender = {
+	notSpecified: 0,
+	male: 1,
+	female: 2,
+}
+
 export const ApiConstants = {
 	baseUrl: "http://192.168.100.3:5000/api/",
 	controllers: {
