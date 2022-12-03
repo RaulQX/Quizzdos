@@ -18,6 +18,8 @@ namespace quizzdos_be.Controllers
             _userRepository = userRepository;
         }
 
+        
+
         [HttpGet("User")]
         [ProducesResponseType(typeof(DataResponse<UserViewModel>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
@@ -29,6 +31,18 @@ namespace quizzdos_be.Controllers
 
             return Ok(new DataResponse<UserViewModel>(user));
         }
+        [HttpGet("All")]
+        [ProducesResponseType(typeof(DataResponse<List<UserViewModel>>), 200)]
+        [ProducesResponseType(typeof(ErrorResponse), 400)]
+        public async Task<ActionResult<DataResponse<List<UserViewModel>>>> GetAllUsers()
+        {
+            var users = await _userRepository.GetAllUsers();
+            if (users == null)
+                return BadRequest(new ErrorResponse { Error = true, Message = "Failed to get users" });
+
+            return Ok(new DataResponse<List<UserViewModel>>(users));
+        }
+        
         [HttpGet("Username")]
         [ProducesResponseType(typeof(DataResponse<string>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]

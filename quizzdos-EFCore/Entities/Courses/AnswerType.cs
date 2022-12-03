@@ -10,7 +10,7 @@ namespace quizzdos_EFCore.Entities.Courses
         [Required]
         public Guid QuestionId { get; set; }
         [ForeignKey("QuestionId")]
-        public Question Question { get; set; }
-        public ICollection<Answer> Answers { get; set; }
+        public Question Question { get; set; } = null!;
+        public ICollection<Answer> Answers { get; set; } = null!;
     }
 }

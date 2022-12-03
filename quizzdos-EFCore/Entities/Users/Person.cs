@@ -32,6 +32,7 @@ namespace quizzdos_EFCore.Entities.Users
         public string LastName { get; set; } = String.Empty;
         [Required]
         public PRole Role { get; set; } = PRole.Student;
+        public PGender Gender {get; set;} = PGender.NotSpecified;
         public ICollection<Course> Courses { get; set; }
         public ICollection<QuizzMate> Quizzmates { get; set; }
         public ICollection<Notification> Notifications { get; set; }

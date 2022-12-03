@@ -42,9 +42,9 @@ namespace quizzdos_be.Controllers
         [HttpPut("UpdatePersonNames/{personId:Guid}")]
         [ProducesResponseType(typeof(DataResponse<Person>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
-        public async Task<ActionResult<DataResponse<Person>>> UpdatePersonNameById(Guid personId, string firstName, string lastName)
+        public async Task<ActionResult<DataResponse<Person>>> UpdatePersonNameById(Guid personId, string firstName, string lastName, PGender gender)
         {
-            var person = await _personRepository.UpdatePersonNameByIdAsync(personId, firstName, lastName);
+            var person = await _personRepository.UpdatePersonalDetailsByIdAsync(personId, firstName, lastName, gender);
             if (person == null)
                 return BadRequest(new ErrorResponse { Error = true, Message = "Failed to update person" });
 

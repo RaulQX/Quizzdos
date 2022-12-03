@@ -1,22 +1,18 @@
-import React, { useState } from "react"
-import {
-	View,
-	Text,
-	TouchableOpacity,
-	TouchableHighlight,
-	ScrollView,
-} from "react-native"
+import React from "react"
+import { View, Text } from "react-native"
 import { s } from "react-native-wind"
 import RoundedButton from "../../components/common/buttons/RoundedButton"
-import Logo from "../../components/common/Logo"
+import useUser from "../../contexts/User/UserContext"
 
 interface AdminHomeProps {
 	navigation: any
 }
 const AdminHome = ({ navigation }: AdminHomeProps) => {
+	const user = useUser()
+
 	return (
-		<ScrollView style={styles.background}>
-			<View style={s`justify-center flex-center m-6`}>
+		<View style={styles.background}>
+			<View style={s`flex justify-around items-around w-11/12`}>
 				<View style={s`flex flex-row justify-center my-12`}>
 					<Text style={s`text-5xl text-black`}>
 						Dash<Text style={s`text-indigo-300`}>board</Text>
@@ -28,17 +24,28 @@ const AdminHome = ({ navigation }: AdminHomeProps) => {
 						s`flex flex-row flex-wrap justify-between w-full my-6`,
 					]}
 				>
-					<RoundedButton text="Users" onPress={() => {}} />
-					<RoundedButton text="Units" onPress={() => {}} />
+					<RoundedButton
+						text="Users"
+						onPress={() => {
+							console.log("click")
+							navigation.navigate("AdminUsers")
+						}}
+					/>
+					<RoundedButton
+						text="Log User Context"
+						onPress={() => {
+							console.log(user)
+						}}
+					/>
 					<RoundedButton text="Quizzes" onPress={() => {}} />
 					<RoundedButton text="Questions" onPress={() => {}} />
 				</View>
 			</View>
-		</ScrollView>
+		</View>
 	)
 }
 const styles = {
-	background: s`h-full flex flex-col bg-coolGray-700`,
+	background: s`h-full flex flex-col bg-coolGray-700 items-center `,
 }
 
 export default AdminHome

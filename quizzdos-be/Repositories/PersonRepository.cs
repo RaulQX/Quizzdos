@@ -9,7 +9,7 @@ namespace quizzdos_be.Repositories
         Task<Person?> GetPersonByIdAsync(Guid id);
         Task<Person?> GetPersonByUserIdAsync(Guid id);
         Task<Person> AddPersonAsync(User user);
-        Task<Person?> UpdatePersonNameByIdAsync(Guid personId, string firstName, string lastName);
+        Task<Person?> UpdatePersonalDetailsByIdAsync(Guid personId, string firstName, string lastName, PGender gender);
         Task<Person?> UpdatePersonRoleByIdAsync(Guid personId, PRole role);
         Task<Person?> DeletePersonByIdAsync(Guid personId);
     }
@@ -31,7 +31,7 @@ namespace quizzdos_be.Repositories
             await _context.SaveChangesAsync();
             return person;
         }
-        public async Task<Person?> UpdatePersonNameByIdAsync(Guid personId, string firstName, string LastName)
+        public async Task<Person?> UpdatePersonalDetailsByIdAsync(Guid personId, string firstName, string LastName, PGender gender)
         {
             var person = await GetPersonByIdAsync(personId);
 
@@ -39,7 +39,7 @@ namespace quizzdos_be.Repositories
             {
                 return null;
             }
-
+            person.Gender = gender;
             person.FirstName = firstName;
             person.LastName = LastName;
             await _context.SaveChangesAsync();

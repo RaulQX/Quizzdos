@@ -5,6 +5,7 @@ import AuthForm from "../components/auth-form/AuthForm"
 import FormTextInput from "../components/common/FormTextInput"
 import { ApiConstants } from "../Constants/Constants"
 import useUser from "../contexts/User/UserContext"
+import { SelectList } from "react-native-dropdown-select-list"
 
 interface HomeProps {
 	navigation: any
@@ -14,6 +15,7 @@ const handleUpdate = async (
 	personId: string,
 	firstName: string,
 	lastName: string,
+	gender: string,
 	navigation: any
 ) => {
 	try {
@@ -26,7 +28,9 @@ const handleUpdate = async (
 				"?firstName=" +
 				firstName +
 				"&lastName=" +
-				lastName,
+				lastName +
+				"&gender=" +
+				gender,
 			{
 				method: "PUT",
 				headers: {
@@ -48,32 +52,48 @@ const ProfileSetup = ({ navigation }: HomeProps) => {
 	const { username, personId } = useUser()
 	const [firstName, setFirstName] = useState("")
 	const [lastName, setLastName] = useState("")
+	const [gender, setGender] = React.useState("1")
+
+	const genders = [
+		{ key: "1", value: "Male" },
+		{ key: "2", value: "Female" },
+	]
 	return (
-		<View>
-			<AuthForm
-				title="Profile Setup"
-				buttonTitle="Finish"
-				onSubmit={() => {
-					handleUpdate(personId, firstName, lastName, navigation)
-				}}
-				navigation={navigation}
-			>
-				<Text style={s`text-left text-base text-white my-4`}>
-					Hi {username}!{"\n"}Looks like it's the first time you are
-					logging in, let's finish setting up your profile.
-				</Text>
-				<FormTextInput
-					value={firstName}
-					placeholder="First Name"
-					onChangeText={(text) => setFirstName(text)}
-				/>
-				<FormTextInput
-					value={lastName}
-					placeholder="Last Name"
-					onChangeText={(text) => setLastName(text)}
-				/>
-			</AuthForm>
-		</View>
+		<AuthForm
+			title="Profile Setup"
+			buttonTitle="Finish"
+			onSubmit={() => {
+				handleUpdate(personId, firstName, lastName, gender, navigation)
+			}}
+			navigation={navigation}
+		>
+			<Text style={s`text-left text-base text-white my-4`}>
+				Hi {username}!{"\n"}Looks like it's the first time you are
+				logging in, let's finish setting up your profile.
+			</Text>
+			<FormTextInput
+				value={firstName}
+				placeholder="First Name"
+				onChangeText={(text) => setFirstName(text)}
+			/>
+			<FormTextInput
+				value={lastName}
+				placeholder="Last Name"
+				onChangeText={(text) => setLastName(text)}
+			/>
+			<SelectList
+				onSelect={() => {}}
+				setSelected={setGender}
+				data={genders}
+				search={false}
+				defaultOption={genders[0]}
+				dropdownStyles={s`border-b-2 border-indigo-400`}
+				dropdownTextStyles={s`text-white`}
+				inputStyles={s`text-white`}
+				boxStyles={s`border-indigo-400`}
+				//arrowicon={}
+			/>
+		</AuthForm>
 	)
 }
 

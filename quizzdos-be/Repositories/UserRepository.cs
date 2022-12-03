@@ -2,6 +2,7 @@
 using quizzdos_be.DataTransferObjects;
 using quizzdos_be.ViewModels;
 using quizzdos_EFCore.Entities.Users;
+using quizzdos_EFCore.Enums;
 using System.Security.Claims;
 
 namespace quizzdos_be.Repositories
@@ -15,6 +16,9 @@ namespace quizzdos_be.Repositories
         public UserViewModel? GetUser();
         public Task<User> AddUserAsync(User user);
         public Task<User?> GetUserByAnyField(string? username, string? email, string? phoneNumber);
+        public Task<List<UserViewModel>> GetAllUsers();
+
+
     }
     public class UserRepository : IUserRepository
     {
@@ -86,5 +90,18 @@ namespace quizzdos_be.Repositories
             return await _context.Users.FirstOrDefaultAsync(u => u.Username == username || u.Email == email || u.PhoneNumber == phoneNumber);
         }
 
+        public async Task<List<UserViewModel>> GetAllUsers()
+        {
+            return await _context.Users.Select(u => new UserViewModel()
+            {
+                Id = u.Id,
+                Username = u.Username,
+                Email = u.Email,
+                PhoneNumber = u.PhoneNumber
+            }).ToListAsync();
+        }
+
+
+        
     }
 }
