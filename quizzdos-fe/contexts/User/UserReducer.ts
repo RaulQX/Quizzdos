@@ -1,16 +1,13 @@
-import { Roles } from "../../Constants/Constants"
+import { Gender, Roles } from "../../Constants/Constants"
 
 export const initialState = {
-	token: "",
-
-	userId: "",
 	personId: "",
 	role: Roles.student,
+	gender: Gender.notSpecified,
+	firstName: "",
+	lastName: "",
 
 	username: "",
-	email: "",
-	phoneNumber: "",
-
 	errorMessage: "",
 
 	loginUser: async (payload: any) => {
@@ -31,15 +28,13 @@ const UserReducer = (state: any, action: any) => {
 		case "LOGIN_SUCCESS":
 			return {
 				...state,
-				token: payload.token,
-
-				userId: payload.userId,
 				personId: payload.personId,
 				role: payload.role,
+				gender: payload.gender,
+				firstName: payload.firstName,
+				lastName: payload.lastName,
 
 				username: payload.username,
-				email: payload.email,
-				phoneNumber: payload.phoneNumber,
 
 				errorMessage: "",
 			}
@@ -51,15 +46,14 @@ const UserReducer = (state: any, action: any) => {
 		case "LOGOUT": {
 			return {
 				...state,
-				token: "",
 
-				userId: "",
 				personId: "",
 				role: Roles.student,
+				gender: Gender.notSpecified,
+				firstName: "",
+				lastName: "",
 
 				username: "",
-				email: "",
-				phoneNumber: "",
 
 				errorMessage: "",
 			}
