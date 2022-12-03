@@ -11,7 +11,7 @@ import {
 	AdminHome,
 	AdminUsers,
 	Feed
-} from "./screens/Screens"
+} from "./screens/.Screens"
 
 const Stack = createNativeStackNavigator()
 
@@ -24,6 +24,7 @@ export default function App() {
 						headerShown: false,
 					}}
 				>
+					<Stack.Screen name="Welcome" component={Welcome} />
 					<Stack.Screen name="AdminUsers" component={AdminUsers} />
 					<Stack.Screen name="AdminHome" component={AdminHome} />
 					<Stack.Screen name="Feed" component={Feed} />
@@ -33,7 +34,6 @@ export default function App() {
 					/>
 					<Stack.Screen name="Login" component={Login} />
 					<Stack.Screen name="Register" component={Register} />
-					<Stack.Screen name="Welcome" component={Welcome} />
 					<Stack.Screen name="Home" component={Home} />
 				</Stack.Navigator>
 			</NavigationContainer>

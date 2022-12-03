@@ -13,29 +13,33 @@ const Home = ({ navigation }: HomeProps) => {
 	}
 
 	return (
-		<NavBar navigation={navigation} selected='Home'>
+		<NavBar navigation={navigation} selected="Home">
 			<View style={s`flex flex-col`}>
-				{dummyData.map(({name, summary, materials, quizzes}) => (
+				{dummyData.map(({ name, summary, materials, quizzes }) => (
 					<View style={s`flex flex-col`}>
-						<View style={s`flex flex-row justify-between p-2 bg-coolGray-500`}>
+						<View
+							style={s`flex flex-row justify-between p-2 bg-coolGray-500`}
+						>
 							<View style={s`flex flex-col`}>
-								<Text style={s`font-bold`}>
-									{name}
-								</Text>
+								<Text style={s`font-bold`}>{name}</Text>
 								<View>
-									{summary}
+									<Text>{summary}</Text>
 								</View>
 							</View>
-							<View style={s`p-2 border-2 rounded-xl`}
-
-							>
-								info {/* TODO: replace with icon */}
+							<View style={s`p-2 border-2 rounded-xl`}>
+								<Text>
+									info {/* TODO: replace with icon */}
+								</Text>
 							</View>
 						</View>
 						<View style={s`flex flex-col items-center mb-2`}>
-							{quizzes.map(({name, completed}) => (
-								<View style={s`mt-2 p-4 rounded-full ${completed ? 'bg-blue-300' : 'bg-red-300'}`}>
-									{name}
+							{quizzes.map(({ name, completed }) => (
+								<View
+									style={s`mt-2 p-4 rounded-full ${
+										completed ? "bg-blue-300" : "bg-red-300"
+									}`}
+								>
+									<Text>{name}</Text>
 								</View>
 							))}
 						</View>
@@ -56,21 +60,21 @@ const dummyData = [
 		quizzes: [
 			{
 				name: "Task 1",
-				completed: true
-			}, 
+				completed: true,
+			},
 			{
 				name: "Task 2",
-				completed: true
-			}, 
+				completed: true,
+			},
 			{
 				name: "Task 3",
-				completed: true
-			}, 
+				completed: true,
+			},
 			{
 				name: "Task 4",
-				completed: true
-			}, 
-		]
+				completed: true,
+			},
+		],
 	},
 	{
 		name: "Course 2",
@@ -79,17 +83,17 @@ const dummyData = [
 		quizzes: [
 			{
 				name: "Task 1",
-				completed: true
+				completed: true,
 			},
 			{
 				name: "Task 2",
-				completed: true
+				completed: true,
 			},
 			{
 				name: "Task 3",
-				completed: true
+				completed: true,
 			},
-		]
+		],
 	},
 	{
 		name: "Course 3",
@@ -98,17 +102,17 @@ const dummyData = [
 		quizzes: [
 			{
 				name: "Task 1",
-				completed: true
+				completed: true,
 			},
 			{
 				name: "Task 2",
-				completed: false
+				completed: false,
 			},
 			{
 				name: "Task 3",
-				completed: false
+				completed: false,
 			},
-		]
+		],
 	},
 	{
 		name: "Course 4",
@@ -117,16 +121,16 @@ const dummyData = [
 		quizzes: [
 			{
 				name: "Task 1",
-				completed: false
+				completed: false,
 			},
 			{
 				name: "Task 2",
-				completed: false
+				completed: false,
 			},
 			{
 				name: "Task 3",
-				completed: false
+				completed: false,
 			},
-		]
-	}
+		],
+	},
 ]
