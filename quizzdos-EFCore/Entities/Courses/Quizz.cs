@@ -15,7 +15,7 @@ namespace quizzdos_EFCore.Entities.Courses
         [Required]
         [ForeignKey("CourseId")]
         public Guid CourseId { get; set; }
-        public Course Course { get; set; }
+        public Course Course { get; set; } = null!;
         [Required]
         [Column(TypeName = "nvarchar(100)")]
         public string Title { get; set; } = string.Empty;
@@ -26,7 +26,7 @@ namespace quizzdos_EFCore.Entities.Courses
         public ICollection<Question> Questions { get; set; }
         public Guid? ImageId { get; set; }
         [ForeignKey("ImageId")]
-        public Image Image { get; set; }
+        public Image Image { get; set; } = null!;
         public ICollection<Tip> Tips { get; set; }
     }
 }

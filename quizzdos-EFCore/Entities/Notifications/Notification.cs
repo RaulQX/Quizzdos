@@ -10,7 +10,7 @@ namespace quizzdos_EFCore.Entities.Notifications
         [Required]
         public Guid PersonId { get; set; }
         [ForeignKey("PersonId")]
-        public Person Person { get; set; }
+        public Person Person { get; set; } = null!;
         [Required]
         [Column(TypeName = "nvarchar(100)")]
         public string NotificationText { get; set; } = String.Empty;

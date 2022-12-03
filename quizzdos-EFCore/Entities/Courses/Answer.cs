@@ -10,7 +10,7 @@ namespace quizzdos_EFCore.Entities.Courses
         [Required]
         public Guid AnswerTypeId { get; set; }
         [ForeignKey("AnswerTypeId")]
-        public AnswerType AnswerType { get; set; }
+        public AnswerType AnswerType { get; set; } = null!;
         public AnswerTypeEnum Type { get; set; }
     }
 }
