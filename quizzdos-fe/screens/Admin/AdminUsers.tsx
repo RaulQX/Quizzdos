@@ -1,32 +1,69 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { View, Text, TextInput, TouchableOpacity } from "react-native"
 import { s } from "react-native-wind"
-import SearchBar from "../../components/common/buttons/SearchBar"
+import SearchBar from "../../components/common/SearchBar"
 import User from "../../components/user/User"
+import { ApiConstants } from "../../Constants/Constants"
 
 var user1 = {
+	key: "1",
 	name: "John Sins",
 	gender: "female",
 }
 
 var user2 = {
+	key: "2",
 	name: "Johanna Sins",
 	gender: "male",
 }
 
 var user3 = {
+	key: "3",
 	name: "Alexandro Alberto Iulian Universalu Si Stivan Quasaru De la mine pt univers",
 	gender: "male",
 }
 
-var userArray = [user1, user2, user3, user3]
+var userArray = [user1, user2, user3]
+
+interface AdminViewUser {
+	key: string
+	name: string
+	username: string
+	gender: number
+}
+
+const usersFetch = async (users: any, setUsers: any) => {
+	try {
+		const response = await fetch(
+			`${ApiConstants.baseUrl}${ApiConstants.controllers.adminView}${
+				ApiConstants.endpoints.getusers
+			}${"0"}/username?username=${"s"}&page=${"1"}&pageSize=6`
+		)
+		const data = await response.json()
+		var usersList: AdminViewUser[] = []
+		data.data.map((user: any) => {
+			usersList.push({
+				key: user.personId,
+				name: user.firstName + " " + user.lastName,
+				username: user.username,
+				gender: user.gender,
+			})
+		})
+		console.log(usersList)
+		setUsers(...usersList)
+		console.log(users)
+		return data
+	} catch (e) {
+		console.log(e)
+	}
+}
 
 const AdminPeople = ({ navigation }: any) => {
 	const [searchUsername, setSearchUsername] = React.useState("")
 	const [searchName, setSearchName] = React.useState("")
-	const [buttonStudentsActivated, setButtonStudentsActivated] =
-		React.useState(true)
+	const [buttonStudentsActivated, setButtonStudentsActivated] = useState(true)
 
+	const [users, setUsers] = useState([])
 	return (
 		<View
 			style={s`h-full flex flex-col justify-start items-center bg-coolGray-700`}
@@ -61,6 +98,7 @@ const AdminPeople = ({ navigation }: any) => {
 					style={s`w-1/2 flex justify-start`}
 					onPress={() => {
 						setButtonStudentsActivated(true)
+						usersFetch(users, setUsers)
 					}}
 				>
 					<View
@@ -86,6 +124,7 @@ const AdminPeople = ({ navigation }: any) => {
 					style={s`w-1/2 flex justify-end items-end`}
 					onPress={() => {
 						setButtonStudentsActivated(false)
+						setUsers([])
 					}}
 				>
 					<View
@@ -110,7 +149,7 @@ const AdminPeople = ({ navigation }: any) => {
 			<View style={s`w-full flex justify-center items-center`}>
 				<View style={s`flex flex-row w-full flex-wrap`}>
 					{userArray.map((user) => (
-						<View style={s`my-4 w-1/2 items-center`}>
+						<View style={s`my-4 w-1/2 items-center`} key={user.key}>
 							<User gender={user.gender} name={user.name} />
 						</View>
 					))}

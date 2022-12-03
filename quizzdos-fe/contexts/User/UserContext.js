@@ -50,11 +50,7 @@ export const UserProvider = ({ children }) => {
 				}
 			)
 			let user = await userDetails.json()
-			console.log(
-				ApiConstants.baseUrl +
-					ApiConstants.controllers.person +
-					ApiConstants.endpoints.personByUserId
-			)
+
 			const encodedValue = encodeURIComponent(user.data.id)
 			let personDetail = await fetch(
 				`${

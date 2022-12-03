@@ -24,15 +24,15 @@ export default function App() {
 					}}
 				>
 					<Stack.Screen name="AdminUsers" component={AdminUsers} />
-					<Stack.Screen name="Welcome" component={Welcome} />
 					<Stack.Screen name="AdminHome" component={AdminHome} />
-					<Stack.Screen name="Home" component={Home} />
-					<Stack.Screen name="Register" component={Register} />
-					<Stack.Screen name="Login" component={Login} />
 					<Stack.Screen
 						name="ProfileSetup"
 						component={ProfileSetup}
 					/>
+					<Stack.Screen name="Login" component={Login} />
+					<Stack.Screen name="Register" component={Register} />
+					<Stack.Screen name="Welcome" component={Welcome} />
+					<Stack.Screen name="Home" component={Home} />
 				</Stack.Navigator>
 			</NavigationContainer>
 		</UserProvider>

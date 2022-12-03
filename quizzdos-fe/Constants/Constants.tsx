@@ -21,10 +21,12 @@ export const ApiConstants = {
 		user: "User/",
 		auth: "Auth/",
 		person: "Person/",
+		adminView: "AdminView/",
 	},
 	endpoints: {
 		login: "Login",
 		user: "User",
+		getusers: "GetUsers/",
 		register: "Register",
 		personByUserId: "PersonByUserId",
 		updatePersonNames: "UpdatePersonNames/",
