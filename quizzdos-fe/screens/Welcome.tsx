@@ -18,14 +18,12 @@ const Welcome = ({ navigation }: any) => {
 						text="Login"
 						onPress={() => navigation.navigate("Login")}
 					/>
-					<View style={s`mt-4`}>
-						<ButtonImportant
-							text="Register"
-							onPress={() => {
-								navigation.navigate("Register")
-							}}
-						/>
-					</View>
+					<ButtonImportant
+						text="Register"
+						onPress={() => {
+							navigation.navigate("Register")
+						}}
+					/>
 				</View>
 			</View>
 		</View>

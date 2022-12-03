@@ -10,6 +10,7 @@ import {
 	Register,
 	AdminHome,
 	AdminUsers,
+	Feed
 } from "./screens/Screens"
 
 const Stack = createNativeStackNavigator()
@@ -25,6 +26,7 @@ export default function App() {
 				>
 					<Stack.Screen name="AdminUsers" component={AdminUsers} />
 					<Stack.Screen name="AdminHome" component={AdminHome} />
+					<Stack.Screen name="Feed" component={Feed} />
 					<Stack.Screen
 						name="ProfileSetup"
 						component={ProfileSetup}
