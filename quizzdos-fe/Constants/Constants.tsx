@@ -30,5 +30,6 @@ export const ApiConstants = {
 		register: "Register",
 		personByUserId: "PersonByUserId",
 		updatePersonNames: "UpdatePersonNames/",
+		usersWithPersonalData: "UsersWithPersonData",
 	},
 }
