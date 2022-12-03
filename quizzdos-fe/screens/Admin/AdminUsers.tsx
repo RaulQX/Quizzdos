@@ -1,69 +1,71 @@
 import React, { useEffect, useState } from "react"
-import { View, Text, TextInput, TouchableOpacity } from "react-native"
+import { View, Text, TextInput, TouchableOpacity, FlatList } from "react-native"
 import { s } from "react-native-wind"
+import UsersFlatList from "../../components/common/flatlists/UsersFlatlist"
 import SearchBar from "../../components/common/SearchBar"
-import User from "../../components/user/User"
 import { ApiConstants } from "../../Constants/Constants"
-
-var user1 = {
-	key: "1",
-	name: "John Sins",
-	gender: "female",
-}
-
-var user2 = {
-	key: "2",
-	name: "Johanna Sins",
-	gender: "male",
-}
-
-var user3 = {
-	key: "3",
-	name: "Alexandro Alberto Iulian Universalu Si Stivan Quasaru De la mine pt univers",
-	gender: "male",
-}
-
-var userArray = [user1, user2, user3]
 
 interface AdminViewUser {
 	key: string
 	name: string
 	username: string
 	gender: number
+	role: number
 }
 
-const usersFetch = async (users: any, setUsers: any) => {
+interface UserDataReturned {
+	firstName: string
+	lastName: string
+	personId: string
+	username: string
+	gender: number
+	role: number
+}
+
+const usersFetch = async (
+	users: any,
+	setUsers: any,
+	currentPage: number,
+	username: string,
+	role: number
+) => {
+	console.log(role)
 	try {
 		const response = await fetch(
 			`${ApiConstants.baseUrl}${ApiConstants.controllers.adminView}${
 				ApiConstants.endpoints.getusers
-			}${"0"}/username?username=${"s"}&page=${"1"}&pageSize=6`
+			}${role}/username?username=${username}&page=${currentPage.toString()}&pageSize=10`
 		)
 		const data = await response.json()
 		var usersList: AdminViewUser[] = []
-		data.data.map((user: any) => {
+		data.data.map((user: UserDataReturned) => {
 			usersList.push({
 				key: user.personId,
 				name: user.firstName + " " + user.lastName,
 				username: user.username,
 				gender: user.gender,
+				role: user.role,
 			})
 		})
-		console.log(usersList)
-		setUsers(...usersList)
-		console.log(users)
-		return data
+		setUsers([...users, ...usersList])
+		usersList = []
+		//return data
 	} catch (e) {
 		console.log(e)
 	}
 }
 
 const AdminPeople = ({ navigation }: any) => {
-	const [searchUsername, setSearchUsername] = React.useState("")
-	const [searchName, setSearchName] = React.useState("")
-	const [buttonStudentsActivated, setButtonStudentsActivated] = useState(true)
-
+	const [searchedUsername, setSearchedUsername] = React.useState("")
+	const [searchedName, setSearchedName] = React.useState("")
+	const [personRole, setPersonRole] = useState(0)
+	const [currentPage, setCurrentPage] = useState(1)
 	const [users, setUsers] = useState([])
+
+	useEffect(() => {
+		usersFetch(users, setUsers, currentPage, searchedUsername, personRole)
+	}, [searchedUsername, currentPage, personRole])
+
 	return (
 		<View
 			style={s`h-full flex flex-col justify-start items-center bg-coolGray-700`}
@@ -75,21 +77,21 @@ const AdminPeople = ({ navigation }: any) => {
 					Users<Text style={s`text-indigo-300`}> area</Text>
 				</Text>
 			</View>
-			<View style={s`flex flex-row justify-between w-11/12`}>
+			<View style={s`flex flex-row justify-center w-11/12`}>
 				<View style={s`w-1/2 flex justify-start`}>
 					<SearchBar
 						placeholder="Search username..."
 						direction="left"
-						value={searchUsername}
-						onChangeText={setSearchUsername}
+						value={searchedUsername}
+						onChangeText={setSearchedUsername}
 					/>
 				</View>
 				<View style={s`w-1/2 flex justify-end items-end`}>
 					<SearchBar
 						placeholder="Search name..."
 						direction="right"
-						value={searchName}
-						onChangeText={setSearchName}
+						value={searchedName}
+						onChangeText={setSearchedName}
 					/>
 				</View>
 			</View>
@@ -97,20 +99,19 @@ const AdminPeople = ({ navigation }: any) => {
 				<TouchableOpacity
 					style={s`w-1/2 flex justify-start`}
 					onPress={() => {
-						setButtonStudentsActivated(true)
-						usersFetch(users, setUsers)
+						setPersonRole(0)
 					}}
 				>
 					<View
 						style={
-							buttonStudentsActivated
+							personRole === 0
 								? styles.buttonActivated
 								: styles.buttonNotActivated
 						}
 					>
 						<Text
 							style={
-								buttonStudentsActivated
+								personRole === 0
 									? styles.buttonTextActivated
 									: styles.buttonTextNotActivated
 							}
@@ -123,20 +124,19 @@ const AdminPeople = ({ navigation }: any) => {
 				<TouchableOpacity
 					style={s`w-1/2 flex justify-end items-end`}
 					onPress={() => {
-						setButtonStudentsActivated(false)
-						setUsers([])
+						setPersonRole(1)
 					}}
 				>
 					<View
 						style={
-							buttonStudentsActivated
+							personRole === 0
 								? styles.buttonNotActivated
 								: styles.buttonActivated
 						}
 					>
 						<Text
 							style={
-								buttonStudentsActivated
+								personRole === 0
 									? styles.buttonTextNotActivated
 									: styles.buttonTextActivated
 							}
@@ -146,14 +146,17 @@ const AdminPeople = ({ navigation }: any) => {
 					</View>
 				</TouchableOpacity>
 			</View>
-			<View style={s`w-full flex justify-center items-center`}>
-				<View style={s`flex flex-row w-full flex-wrap`}>
-					{userArray.map((user) => (
-						<View style={s`my-4 w-1/2 items-center`} key={user.key}>
-							<User gender={user.gender} name={user.name} />
-						</View>
-					))}
-				</View>
+			<View
+				style={s`flex flex-row items-center  w-full flex-wrap w-full`}
+			>
+				<UsersFlatList
+					users={users}
+					searchedUsername={searchedUsername}
+					searchedName={searchedName}
+					personRole={personRole}
+					currentPage={currentPage}
+					setCurrentPage={setCurrentPage}
+				/>
 			</View>
 		</View>
 	)
