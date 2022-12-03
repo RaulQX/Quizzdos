@@ -12,5 +12,6 @@ namespace quizzdos_be.ViewModels
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public PRole Role { get; set; } 
+        public PGender Gender {get; set;}
     }
 }

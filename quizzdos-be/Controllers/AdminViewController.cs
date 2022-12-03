@@ -19,6 +19,7 @@ namespace quizzdos_be.Controllers
             _adminViewRepository = adminViewRepository;
         }
 
+
         [HttpGet("UsersWithPersonData")]
         [ProducesResponseType(typeof(DataResponse<List<UserAdminViewViewModel>>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
@@ -27,6 +28,19 @@ namespace quizzdos_be.Controllers
             var users = await _adminViewRepository.GetAllUsersWithPerson(page, pageSize);
             if (users == null)
                 return BadRequest(new ErrorResponse { Error = true, Message = "Failed to get all users with person data" });
+
+            return Ok(new DataResponse<List<UserAdminViewViewModel>>(users));
+        }
+
+        [HttpGet("GetUsers/{role}/username")]
+        [ProducesResponseType(typeof(DataResponse<List<UserAdminViewViewModel>>), 200)]
+        [ProducesResponseType(typeof(ErrorResponse), 400)]
+        public async Task<ActionResult<DataResponse<List<UserAdminViewViewModel>>>> GetUsersByRoleAndUsername(PRole role, string? username, int page = 1, int pageSize = 6)
+        {
+            username ??= "";
+            var users = await _adminViewRepository.GetUsersByRoleAndUsername(role, username, page, pageSize);
+            if (users == null)
+                return BadRequest(new ErrorResponse { Error = true, Message = "Failed to get users by role and username" });
 
             return Ok(new DataResponse<List<UserAdminViewViewModel>>(users));
         }
