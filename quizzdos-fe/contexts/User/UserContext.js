@@ -38,7 +38,7 @@ export const UserProvider = ({ children }) => {
 				`${
 					ApiConstants.baseUrl +
 					ApiConstants.controllers.user +
-					ApiConstants.endpoints.user
+					ApiConstants.endpoints.currentUser
 				}`,
 				{
 					method: "GET",

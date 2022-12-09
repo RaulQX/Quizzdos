@@ -18,9 +18,7 @@ namespace quizzdos_be.Controllers
             _userRepository = userRepository;
         }
 
-        
-
-        [HttpGet("User")]
+        [HttpGet("CurrentUser")]
         [ProducesResponseType(typeof(DataResponse<UserViewModel>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
         public ActionResult<DataResponse<UserViewModel>> GetUser()

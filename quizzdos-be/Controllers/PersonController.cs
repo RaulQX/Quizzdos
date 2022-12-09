@@ -16,7 +16,7 @@ namespace quizzdos_be.Controllers
         {
             _personRepository = personRepository;
         }
-        [HttpGet("PersonByUserId")]
+        [HttpGet("CurrentPersonByUserId")]
         [ProducesResponseType(typeof(DataResponse<Person>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
         public async Task<ActionResult<DataResponse<Person>>> GetPersonByUserId(Guid userId)
@@ -28,7 +28,7 @@ namespace quizzdos_be.Controllers
             return Ok(new DataResponse<Person>(person));
         }
 
-        [HttpGet("GetPerson/{personId:Guid}")]
+        [HttpGet("CurrentPerson/{personId:Guid}")]
         [ProducesResponseType(typeof(DataResponse<Person>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
         public async Task<ActionResult<DataResponse<Person>>> GetPersonById(Guid personId)

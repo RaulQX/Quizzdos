@@ -16,7 +16,7 @@ export const Gender = {
 }
 
 export const ApiConstants = {
-	baseUrl: "http://192.168.100.3:5000/api/",
+	baseUrl: "http://192.168.0.177:5000/api/",
 	controllers: {
 		user: "User/",
 		auth: "Auth/",
@@ -25,7 +25,7 @@ export const ApiConstants = {
 	},
 	endpoints: {
 		login: "Login",
-		user: "User",
+		currentUser: "CurrentUser",
 		getusers: "GetUsers/",
 		register: "Register",
 		personByUserId: "PersonByUserId",

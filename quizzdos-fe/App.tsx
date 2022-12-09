@@ -9,7 +9,7 @@ import {
 	ProfileSetup,
 	Register,
 	AdminHome,
-	AdminUsers,
+	AdminPeople,
 	Feed,
 } from "./screens/.Screens"
 
@@ -24,15 +24,15 @@ export default function App() {
 						headerShown: false,
 					}}
 				>
-					<Stack.Screen name="AdminUsers" component={AdminUsers} />
+					<Stack.Screen name="AdminPeople" component={AdminPeople} />
 					<Stack.Screen name="Welcome" component={Welcome} />
+					<Stack.Screen name="Login" component={Login} />
 					<Stack.Screen name="AdminHome" component={AdminHome} />
 					<Stack.Screen name="Feed" component={Feed} />
 					<Stack.Screen
 						name="ProfileSetup"
 						component={ProfileSetup}
 					/>
-					<Stack.Screen name="Login" component={Login} />
 					<Stack.Screen name="Register" component={Register} />
 					<Stack.Screen name="Home" component={Home} />
 				</Stack.Navigator>
