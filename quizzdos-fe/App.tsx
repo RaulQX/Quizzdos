@@ -25,8 +25,8 @@ export default function App() {
 					}}
 				>
 					<Stack.Screen name="AdminPeople" component={AdminPeople} />
-					<Stack.Screen name="Welcome" component={Welcome} />
 					<Stack.Screen name="Login" component={Login} />
+					<Stack.Screen name="Welcome" component={Welcome} />
 					<Stack.Screen name="AdminHome" component={AdminHome} />
 					<Stack.Screen name="Feed" component={Feed} />
 					<Stack.Screen

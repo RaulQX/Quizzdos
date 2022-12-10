@@ -1,4 +1,4 @@
-import { ApiConstants } from "../../Constants/Constants"
+import { ApiEndpoints } from "./../../Constants/Constants"
 
 interface AdminViewUser {
 	key: string
@@ -21,14 +21,14 @@ const usersFetch = async (
 	users: any,
 	setUsers: any,
 	currentPage: number,
-	username: string,
+	name: string,
 	requestedRole: number
 ) => {
 	try {
 		const response = await fetch(
-			`${ApiConstants.baseUrl}${ApiConstants.controllers.adminView}${
-				ApiConstants.endpoints.getusers
-			}${requestedRole}/username?username=${username}&page=${currentPage.toString()}&pageSize=7`
+			`${
+				ApiEndpoints.admin.usersByRole
+			}${requestedRole.toString()}/name?name=${name}&page=${currentPage.toString()}&pageSize=7`
 		)
 		const data = await response.json()
 		var usersList: AdminViewUser[] = []
@@ -42,8 +42,6 @@ const usersFetch = async (
 			})
 			setUsers([...users, ...usersList])
 		})
-		setUsers([...users, ...usersList])
-		usersList = []
 	} catch (e) {
 		console.log(e)
 	}

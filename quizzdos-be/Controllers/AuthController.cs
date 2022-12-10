@@ -33,7 +33,7 @@ namespace quizzdos_be.Controllers
             _userRepository = userRepository;
         }
 
-        [HttpPost("Register")]
+        [HttpPost("register")]
         [ProducesResponseType(typeof(DataResponse<User>), 200)]
         [ProducesResponseType(typeof(DataResponse<ExistingUserResponse>), 400)]
         [ProducesResponseType(typeof(DataResponse<EmailValidationResponse>), 400)]
@@ -71,7 +71,7 @@ namespace quizzdos_be.Controllers
         [ProducesResponseType(typeof(DataResponse<string>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
 
-        [HttpPost("Login")]
+        [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody]UserDTO request)
         {
             request.Username ??= "";

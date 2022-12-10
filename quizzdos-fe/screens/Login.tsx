@@ -3,7 +3,7 @@ import FormTextInput from "../components/common/FormTextInput"
 import ErrorModal from "../components/common/ErrorModal"
 import AuthForm from "../components/auth-form/AuthForm"
 import useUser from "../contexts/User/UserContext"
-import { ApiConstants, Roles } from "../Constants/Constants"
+import { Roles } from "../Constants/Constants"
 
 interface LoginProps {
 	navigation: any
