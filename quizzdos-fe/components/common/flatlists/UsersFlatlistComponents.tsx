@@ -4,6 +4,14 @@ import { s } from "react-native-wind"
 import User from "../../user/User"
 import SearchBar from "../SearchBar"
 
+interface AdminViewUser {
+	key: string
+	name: string
+	username: string
+	gender: number
+	role: number
+}
+
 const renderLoader = () => {
 	return (
 		<View style={s`h-20 flex-grow`}>
@@ -12,13 +20,6 @@ const renderLoader = () => {
 			</Text>
 		</View>
 	)
-}
-interface AdminViewUser {
-	key: string
-	name: string
-	username: string
-	gender: number
-	role: number
 }
 
 const renderUser = (user: ListRenderItemInfo<AdminViewUser>) => {
