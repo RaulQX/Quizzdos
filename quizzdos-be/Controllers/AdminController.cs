@@ -11,51 +11,59 @@ namespace quizzdos_be.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class AdminViewController : ControllerBase
+    public class AdminController : ControllerBase
     {
         private readonly IAdminViewRepository _adminViewRepository;
-        public AdminViewController(IAdminViewRepository adminViewRepository)
+        public AdminController(IAdminViewRepository adminViewRepository)
         {
             _adminViewRepository = adminViewRepository;
         }
 
 
-        [HttpGet("UsersWithPersonData")]
+        [HttpGet("users")]
         [ProducesResponseType(typeof(DataResponse<List<UserAdminViewViewModel>>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
-        public async Task<ActionResult<DataResponse<List<UserAdminViewViewModel>>>> GetAllUsersWithPerson(int page, int pageSize)
+        public async Task<ActionResult<DataResponse<List<UserAdminViewViewModel>>>> GetAllUsersWithPerson(int page, int pageSize, bool? name)
         {
-            var users = await _adminViewRepository.GetAllUsersWithPerson(page, pageSize);
-            if (users == null)
-                return BadRequest(new ErrorResponse { Error = true, Message = "Failed to get all users with person data" });
+            if (name == null)
+            {
+                var users = await _adminViewRepository.GetAllUsersWithPerson(page, pageSize);
+                if (users == null)
+                    return BadRequest(new ErrorResponse { Error = true, Message = "Failed to get all users with person data" });
+                return Ok(new DataResponse<List<UserAdminViewViewModel>>(users));
+            }
 
-            return Ok(new DataResponse<List<UserAdminViewViewModel>>(users));
-        }
+            if (name.Value)
+            {
+                var usersWithNames = await _adminViewRepository.GetAllUsersWithNamesSetUp(page, pageSize);
+                if (usersWithNames == null)
+                    return BadRequest(new ErrorResponse { Error = true, Message = "Failed to get all users with no name set up" });
 
-        [HttpGet("GetUsers/{role}/username")]
-        [ProducesResponseType(typeof(DataResponse<List<UserAdminViewViewModel>>), 200)]
-        [ProducesResponseType(typeof(ErrorResponse), 400)]
-        public async Task<ActionResult<DataResponse<List<UserAdminViewViewModel>>>> GetUsersByRoleAndUsername(PRole role, string? username, int page = 1, int pageSize = 6)
-        {
-            username ??= "";
-            var users = await _adminViewRepository.GetUsersByRoleAndUsername(role, username, page, pageSize);
-            if (users == null)
-                return BadRequest(new ErrorResponse { Error = true, Message = "Failed to get users by role and username" });
+                return Ok(new DataResponse<List<UserAdminViewViewModel>>(usersWithNames));
+            }
 
-            return Ok(new DataResponse<List<UserAdminViewViewModel>>(users));
-        }
-        [HttpGet("UsersWithNoNameSetUp")]
-        [ProducesResponseType(typeof(DataResponse<List<UserAdminViewViewModel>>), 200)]
-        [ProducesResponseType(typeof(ErrorResponse), 400)]
-        public async Task<ActionResult<DataResponse<List<UserAdminViewViewModel>>>> GetAllUsersWithNoNameSetUp(int page, int pageSize)
-        {
-            var users = await _adminViewRepository.GetAllUsersWithNoNamesSetUp(page, pageSize);
-            if (users == null)
+            var usersWithoutNames = await _adminViewRepository.GetAllUsersWithNoNamesSetUp(page, pageSize);
+            if (usersWithoutNames == null)
                 return BadRequest(new ErrorResponse { Error = true, Message = "Failed to get all users with no name set up" });
 
+            return Ok(new DataResponse<List<UserAdminViewViewModel>>(usersWithoutNames));
+
+        }
+
+        [HttpGet("users/role/{role}/name")]
+        [ProducesResponseType(typeof(DataResponse<List<UserAdminViewViewModel>>), 200)]
+        [ProducesResponseType(typeof(ErrorResponse), 400)]
+        public async Task<ActionResult<DataResponse<List<UserAdminViewViewModel>>>> GetUsersByRoleAndUsername(PRole role, string? name, int page = 1, int pageSize = 6)
+        {
+            name ??= "";
+            var users = await _adminViewRepository.GetUsersByRoleAndUsername(role, name, page, pageSize);
+            if (users == null)
+                return BadRequest(new ErrorResponse { Error = true, Message = "Failed to get users by role and name" });
+
             return Ok(new DataResponse<List<UserAdminViewViewModel>>(users));
         }
-        [HttpGet("GetUsersRole/{role}")]
+
+        [HttpGet("users/role/{role}")]
         [ProducesResponseType(typeof(DataResponse<List<UserAdminViewViewModel>>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
         public async Task<ActionResult<DataResponse<List<UserAdminViewViewModel>>>> GetAllUsersBasedOnRole(PRole role, int page, int pageSize)
@@ -66,7 +74,7 @@ namespace quizzdos_be.Controllers
 
             return Ok(new DataResponse<List<UserAdminViewViewModel>>(users));
         }
-        [HttpGet("GetUsersUsername/{username}")]
+        [HttpGet("users/username/{username}")]
         [ProducesResponseType(typeof(DataResponse<List<UserAdminViewViewModel>>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
         public async Task<ActionResult<DataResponse<List<UserAdminViewViewModel>>>> GetUsersBasedOnUsername(string username, int page, int pageSize)
@@ -77,7 +85,7 @@ namespace quizzdos_be.Controllers
 
             return Ok(new DataResponse<List<UserAdminViewViewModel>>(users));
         }
-        [HttpGet("GetUsersName/{name}")]
+        [HttpGet("users/name/{name}")]
         [ProducesResponseType(typeof(DataResponse<List<UserAdminViewViewModel>>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
         public async Task<ActionResult<DataResponse<List<UserAdminViewViewModel>>>> GetUsersBasedOnName(string name, int page, int pageSize)
@@ -88,7 +96,7 @@ namespace quizzdos_be.Controllers
 
             return Ok(new DataResponse<List<UserAdminViewViewModel>>(users));
         }
-        [HttpPut("PutPerson/{personId:Guid}")]
+        [HttpPut("person/{personId:Guid}")]
         [ProducesResponseType(typeof(DataResponse<Person>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
         public async Task<ActionResult<DataResponse<Person>>> PutPerson(Guid personId, string firstName, string lastName, PRole role)
@@ -99,7 +107,7 @@ namespace quizzdos_be.Controllers
 
             return Ok(new DataResponse<Person>(person));
         }
-        [HttpDelete("DeletePerson/{personId:Guid}")]
+        [HttpDelete("person/{personId:Guid}")]
         [ProducesResponseType(typeof(DataResponse<Person>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
         public async Task<ActionResult<DataResponse<Person>>> DeletePerson(Guid personId)
@@ -111,7 +119,7 @@ namespace quizzdos_be.Controllers
             return Ok(new DataResponse<Person>(person));
         }
 
-        [HttpDelete("DeleteUser/{userId:Guid}")]
+        [HttpDelete("user/{userId:Guid}")]
         [ProducesResponseType(typeof(DataResponse<User>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
         public async Task<ActionResult<DataResponse<User>>> DeleteUser(Guid userId)

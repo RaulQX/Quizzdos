@@ -16,7 +16,7 @@ namespace quizzdos_be.Controllers
         {
             _personRepository = personRepository;
         }
-        [HttpGet("CurrentPersonByUserId")]
+        [HttpGet("person/userid/{userId:Guid}")]
         [ProducesResponseType(typeof(DataResponse<Person>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
         public async Task<ActionResult<DataResponse<Person>>> GetPersonByUserId(Guid userId)
@@ -27,22 +27,22 @@ namespace quizzdos_be.Controllers
 
             return Ok(new DataResponse<Person>(person));
         }
-
-        [HttpGet("CurrentPerson/{personId:Guid}")]
+        [HttpGet("person/{personId:Guid}")]
         [ProducesResponseType(typeof(DataResponse<Person>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
         public async Task<ActionResult<DataResponse<Person>>> GetPersonById(Guid personId)
         {
             var person = await _personRepository.GetPersonByIdAsync(personId);
             if (person == null)
-                return BadRequest(new ErrorResponse { Error = true, Message = $"PersonId {personId} not found" });
+                return BadRequest(new ErrorResponse { Error = true, Message = $"Cannot find person based on personId: {personId}" });
 
             return Ok(new DataResponse<Person>(person));
         }
-        [HttpPut("UpdatePersonNames/{personId:Guid}")]
+
+        [HttpPut("person/{personId:Guid}")]
         [ProducesResponseType(typeof(DataResponse<Person>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
-        public async Task<ActionResult<DataResponse<Person>>> UpdatePersonNameById(Guid personId, string firstName, string lastName, PGender gender)
+        public async Task<ActionResult<DataResponse<Person>>> UpdatePersonDetailsById(Guid personId, string firstName, string lastName, PGender gender)
         {
             var person = await _personRepository.UpdatePersonalDetailsByIdAsync(personId, firstName, lastName, gender);
             if (person == null)
@@ -50,28 +50,5 @@ namespace quizzdos_be.Controllers
 
             return Ok(new DataResponse<Person>(person));
         }
-        [HttpPut("UpdatePersonRole/{personId:Guid}")]
-        [ProducesResponseType(typeof(DataResponse<Person>), 200)]
-        [ProducesResponseType(typeof(ErrorResponse), 400)]
-        public async Task<ActionResult<DataResponse<Person>>> UpdatePersonRoleById(Guid personId, PRole role)
-        {
-            var person = await _personRepository.UpdatePersonRoleByIdAsync(personId, role);
-            if (person == null)
-                return BadRequest(new ErrorResponse { Error = true, Message = "Failed to update person" });
-
-            return Ok(new DataResponse<Person>(person));
-        }
-        [HttpDelete("DeletePerson/{personId:Guid}")]
-        [ProducesResponseType(typeof(DataResponse<Person>), 200)]
-        [ProducesResponseType(typeof(ErrorResponse), 400)]
-        public async Task<ActionResult<DataResponse<Person>>> DeletePersonById(Guid personId)
-        {
-            var person = await _personRepository.DeletePersonByIdAsync(personId);
-            if (person == null)
-                return BadRequest(new ErrorResponse { Error = true, Message = "Failed to delete person" });
-
-            return Ok(new DataResponse<Person>(person));
-        }
-
     }
 }
