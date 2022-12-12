@@ -50,7 +50,7 @@ const ProfileSetup = ({ navigation }: HomeProps) => {
 	const { username, personId } = useUser()
 	const [firstName, setFirstName] = useState("")
 	const [lastName, setLastName] = useState("")
-	const [gender, setGender] = React.useState("1")
+	const [gender, setGender] = useState("1")
 
 	const genders = [
 		{ key: "1", value: "Male" },

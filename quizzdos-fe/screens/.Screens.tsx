@@ -5,15 +5,10 @@ import Register from "./Register"
 import Welcome from "./Welcome"
 import AdminHome from "./Admin/AdminHome"
 import Feed from "./Feed"
+import AdminUsers from "./Admin/AdminUsers"
+import Profile from "./Profile"
+import Quizz from "./Quizz"
+import Course from "./Course"
 import AdminPeople from "./Admin/AdminPeople"
 
-export {
-	Home,
-	Login,
-	ProfileSetup,
-	Register,
-	Welcome,
-	AdminHome,
-	Feed,
-	AdminPeople,
-}
+export { Home, Login, ProfileSetup, Register, Welcome, AdminHome, Feed, AdminUsers, AdminPeople, Profile, Quizz, Course }
