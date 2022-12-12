@@ -12,7 +12,7 @@ import {
 	Profile,
 	Register,
 	AdminHome,
-	AdminUsers,
+	AdminPeople,
 	Feed,
 	Quizz,
 } from "./screens/.Screens"

@@ -3,7 +3,7 @@ import { View, Text } from "react-native"
 import { s } from "react-native-wind"
 import AuthForm from "../components/auth-form/AuthForm"
 import FormTextInput from "../components/common/FormTextInput"
-import { ApiConstants } from "../Constants/Constants"
+import { ApiEndpoints } from "../Constants/Constants"
 import useUser from "../contexts/User/UserContext"
 import { SelectList } from "react-native-dropdown-select-list"
 
@@ -20,9 +20,7 @@ const handleUpdate = async (
 ) => {
 	try {
 		var result = await fetch(
-			ApiConstants.baseUrl +
-				ApiConstants.controllers.person +
-				ApiConstants.endpoints.updatePersonNames +
+			ApiEndpoints.people.person +
 				personId +
 				"/" +
 				"?firstName=" +

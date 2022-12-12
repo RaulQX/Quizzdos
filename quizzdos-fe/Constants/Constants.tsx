@@ -15,21 +15,28 @@ export const Gender = {
 	female: 2,
 }
 
-export const ApiConstants = {
-	baseUrl: "http://192.168.100.3:5000/api/",
-	controllers: {
-		user: "User/",
-		auth: "Auth/",
-		person: "Person/",
-		adminView: "AdminView/",
+const baseUrl = "http://192.168.0.177:5000/api/"
+
+const controllers = {
+	user: baseUrl + "user/",
+	auth: baseUrl + "auth/",
+	person: baseUrl + "person/",
+	admin: baseUrl + "admin/",
+}
+
+export const ApiEndpoints = {
+	auth: {
+		login: controllers.auth + "login",
+		register: controllers.auth + "register",
 	},
-	endpoints: {
-		login: "Login",
-		user: "User",
-		getusers: "GetUsers/",
-		register: "Register",
-		personByUserId: "PersonByUserId",
-		updatePersonNames: "UpdatePersonNames/",
-		usersWithPersonalData: "UsersWithPersonData",
+	users: {
+		currentUser: controllers.user + "current-user",
+	},
+	people: {
+		person: controllers.person + "person/",
+		personByUserId: controllers.person + "person/userId/",
+	},
+	admin: {
+		usersByRole: controllers.admin + "users/role/",
 	},
 }

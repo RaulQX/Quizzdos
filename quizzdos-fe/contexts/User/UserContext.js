@@ -1,6 +1,6 @@
 import { createContext, useReducer, useContext } from "react"
 import UserReducer, { initialState } from "./UserReducer"
-import { ApiConstants } from "../../Constants/Constants"
+import { ApiEndpoints } from "../../Constants/Constants"
 
 const UserContext = createContext(initialState)
 
@@ -23,43 +23,24 @@ export const UserProvider = ({ children }) => {
 			},
 			body: JSON.stringify(loginPayload),
 		}
-		let response = await fetch(
-			`${
-				ApiConstants.baseUrl +
-				ApiConstants.controllers.auth +
-				ApiConstants.endpoints.login
-			}`,
-			requestOptions
-		)
+		let response = await fetch(ApiEndpoints.auth.login, requestOptions)
 
 		let data = await response.json()
+		//console.log(data)
 		if (data.data) {
-			let userDetails = await fetch(
-				`${
-					ApiConstants.baseUrl +
-					ApiConstants.controllers.user +
-					ApiConstants.endpoints.user
-				}`,
-				{
-					method: "GET",
-					headers: {
-						Accept: "accept: text/plain",
-						"Content-Type": "application/json",
-						Authorization: `${data.data}`,
-					},
-				}
-			)
+			let userDetails = await fetch(`${ApiEndpoints.users.currentUser}`, {
+				method: "GET",
+				headers: {
+					Accept: "accept: text/plain",
+					"Content-Type": "application/json",
+					Authorization: `${data.data}`,
+				},
+			})
 			let user = await userDetails.json()
 
 			const encodedValue = encodeURIComponent(user.data.id)
 			let personDetail = await fetch(
-				`${
-					ApiConstants.baseUrl +
-					ApiConstants.controllers.person +
-					ApiConstants.endpoints.personByUserId +
-					"?userId=" +
-					encodedValue
-				}`,
+				`${ApiEndpoints.people.personByUserId + encodedValue}`,
 				{
 					method: "GET",
 					headers: {
