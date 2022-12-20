@@ -12,13 +12,13 @@ namespace quizzdos_EFCore.Entities.Courses
     {
         public Course ()
         {
-            Quizzes = new HashSet<Quizz>();
+            Lectures = new HashSet<Lecture>();
             Books = new HashSet<Book>();
         }
         [Required]
         public Guid PersonId { get; set; }
         [ForeignKey("PersonId")]
-        public Person Person { get; set; } = null!;
+        public Person Creator { get; set; } = null!;
         [Required]
         [Column(TypeName = "nvarchar(100)")]
         public string Title { get; set; } = string.Empty; 
@@ -28,7 +28,7 @@ namespace quizzdos_EFCore.Entities.Courses
         public Guid? ImageId { get; set; }
         [ForeignKey("ImageId")]
         public Image Image { get; set; } = null!;
-        public ICollection<Quizz> Quizzes {get; set;}
+        public ICollection<Lecture> Lectures { get; set;}
         public ICollection<Book> Books {get; set;}
     }
 }
