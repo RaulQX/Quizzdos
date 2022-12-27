@@ -79,7 +79,7 @@ const AdminPeople = ({ navigation }: any) => {
 			}
 			extraData={[students, professors]}
 			renderItem={(user) => {
-				return renderUser(user)
+				return renderUser(user, navigation)
 			}}
 			keyExtractor={(user: AdminViewUser) => user.key}
 			style={s`w-full bg-coolGray-700 flex flex-col w-full`}

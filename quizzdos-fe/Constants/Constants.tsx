@@ -15,7 +15,7 @@ export const Gender = {
 	female: 2,
 }
 
-const baseUrl = "http://192.168.0.177:5000/api/"
+const baseUrl = "http://192.168.1.9:5000/api/"
 
 const controllers = {
 	user: baseUrl + "user/",

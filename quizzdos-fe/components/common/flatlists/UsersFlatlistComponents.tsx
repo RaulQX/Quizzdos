@@ -2,6 +2,8 @@ import React from "react"
 import { View, Text, ListRenderItemInfo, Pressable } from "react-native"
 import { s } from "react-native-wind"
 import User from "../../user/User"
+import ButtonImportant from "../buttons/ButtonImportant"
+import HeaderTitle from "../Header"
 import SearchBar from "../SearchBar"
 
 interface AdminViewUser {
@@ -22,29 +24,32 @@ const renderLoader = () => {
 	)
 }
 
-const renderUser = (user: ListRenderItemInfo<AdminViewUser>) => {
-	console.log(user)
+const renderUser = (
+	user: ListRenderItemInfo<AdminViewUser>,
+	navigation: any
+) => {
+	//console.log(user)
 	return (
 		<View style={s`flex-grow my-4 items-center pb-3`} key={user.item.key}>
-			<User
-				gender={user.item.gender}
-				name={user.item.name}
-				username={user.item.username}
-			/>
+			<Pressable
+				onTouchEnd={() => {
+					navigation.navigate("Profile", {
+						personId: user.item.key,
+					})
+				}}
+			>
+				<User
+					gender={user.item.gender}
+					name={user.item.name}
+					username={user.item.username}
+				/>
+			</Pressable>
 		</View>
 	)
 }
 
 const headertext = () => {
-	return (
-		<View
-			style={s`flex flex-row justify-center mt-10 mb-4 border-b-2 border-gray-300 w-full`}
-		>
-			<Text style={s`text-5xl text-black `}>
-				Users<Text style={s`text-indigo-300`}> area</Text>
-			</Text>
-		</View>
-	)
+	return <HeaderTitle title="Users" />
 }
 
 interface searchBarViewProps {

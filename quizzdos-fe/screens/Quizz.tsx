@@ -7,11 +7,11 @@ import Pagination from "../components/common/Pagination"
 import QuestionSingle from "../components/quizz/QuestionSingle"
 
 interface QuizzProps {
-    route: RouteProp<{
-        params: {
-            quizz: {}
-        }
-    }, 'params'>
+    // route: RouteProp<{
+    //     params: {
+    //         quizz: {}
+    //     }
+    // }, 'params'>
     navigation: any
 }
 

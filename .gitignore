@@ -230,3 +230,5 @@ _Pvt_Extensions
 # FAKE - F# Make
 .fake/
 quizzdos-be/.vs/quizzdos-be/v17/.suo
+.vscode/tasks.json
+.vscode/launch.json
