@@ -7,6 +7,7 @@ import {
 	renderHeader,
 } from "../../components/common/flatlists/UsersFlatlistComponents"
 import usersFetch from "../../Api/Admin/UsersFetch"
+import NavBar from "../../components/layouts/navigation/NavBar"
 
 interface AdminViewUser {
 	key: string
@@ -65,44 +66,46 @@ const AdminPeople = ({ navigation }: any) => {
 	])
 
 	return (
-		<FlatList
-			data={
-				requestedRole === 0
-					? filteredData(students, searchedName, requestedRole) //&&
-					: // (searchedName === ""
-					  // 	? true
-					  // 	: user.name.includes(searchedName))
-					  filteredData(professors, searchedName, requestedRole) //&&
+		<NavBar navigation={navigation} selected="AdminHome">
+			<FlatList
+				data={
+					requestedRole === 0
+						? filteredData(students, searchedName, requestedRole) //&&
+						: // (searchedName === ""
+						  // 	? true
+						  // 	: user.name.includes(searchedName))
+						  filteredData(professors, searchedName, requestedRole) //&&
 
-				// 	? true
-				// 	: user.name.includes(searchedName))
-			}
-			extraData={[students, professors]}
-			renderItem={(user) => {
-				return renderUser(user, navigation)
-			}}
-			keyExtractor={(user: AdminViewUser) => user.key}
-			style={s`w-full bg-coolGray-700 flex flex-col w-full`}
-			numColumns={2}
-			columnWrapperStyle={{ justifyContent: "space-between" }}
-			onEndReached={() => {
-				requestedRole === 0
-					? setCurrentPageStudents(currentPageStudents + 1)
-					: setCurrentPageProfessors(currentPageProfessors + 1)
-			}}
-			onEndReachedThreshold={0.1}
-			ListHeaderComponent={renderHeader({
-				searchedName,
-				setSearchedName,
-				requestedRole,
-				setRequestedRole,
-				setStudents,
-				setProfessors,
-				setCurrentPageStudents,
-				setCurrentPageProfessors,
-			})}
-			ListFooterComponent={renderLoader()}
-		/>
+					// 	? true
+					// 	: user.name.includes(searchedName))
+				}
+				extraData={[students, professors]}
+				renderItem={(user) => {
+					return renderUser(user, navigation)
+				}}
+				keyExtractor={(user: AdminViewUser) => user.key}
+				style={s`w-full bg-coolGray-700 flex flex-col w-full`}
+				numColumns={2}
+				columnWrapperStyle={{ justifyContent: "space-between" }}
+				onEndReached={() => {
+					requestedRole === 0
+						? setCurrentPageStudents(currentPageStudents + 1)
+						: setCurrentPageProfessors(currentPageProfessors + 1)
+				}}
+				onEndReachedThreshold={0.1}
+				ListHeaderComponent={renderHeader({
+					searchedName,
+					setSearchedName,
+					requestedRole,
+					setRequestedRole,
+					setStudents,
+					setProfessors,
+					setCurrentPageStudents,
+					setCurrentPageProfessors,
+				})}
+				ListFooterComponent={renderLoader()}
+			/>
+		</NavBar>
 	)
 }
 

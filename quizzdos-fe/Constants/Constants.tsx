@@ -5,7 +5,7 @@ export const Constants = {
 
 export const Roles = {
 	student: 0,
-	teacher: 1,
+	professor: 1,
 	admin: 2,
 }
 
@@ -35,6 +35,7 @@ export const ApiEndpoints = {
 	people: {
 		person: controllers.person + "person/",
 		personByUserId: controllers.person + "person/userId/",
+		profileDetails: controllers.person + "person/profile-details/",
 	},
 	admin: {
 		usersByRole: controllers.admin + "users/role/",

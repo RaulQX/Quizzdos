@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using quizzdos_be.DataTransferObjects;
 using quizzdos_EFCore.Entities.Users;
 using quizzdos_EFCore.Enums;
+using System.Globalization;
 
 namespace quizzdos_be.Repositories
 {
@@ -12,6 +14,8 @@ namespace quizzdos_be.Repositories
         Task<Person?> UpdatePersonalDetailsByIdAsync(Guid personId, string firstName, string lastName, PGender gender);
         Task<Person?> UpdatePersonRoleByIdAsync(Guid personId, PRole role);
         Task<Person?> DeletePersonByIdAsync(Guid personId);
+        Task<ProfileDetailsDTO?> GetProfileDetailsByIdAsync(Guid personId);
+
     }
     public class PersonRepository: IPersonRepository
     {
@@ -75,6 +79,24 @@ namespace quizzdos_be.Repositories
         public async Task<Person?> GetPersonByUserIdAsync(Guid userId)
         {
             return await _context.Persons.FirstOrDefaultAsync(p => p.UserId == userId);
+        }
+
+        public async Task<ProfileDetailsDTO?> GetProfileDetailsByIdAsync(Guid personId)
+        {
+            var person = await GetPersonByIdAsync(personId);
+            if (person == null) { return null; }
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == person.UserId);
+            if (user == null) { return null; }
+
+            return new ProfileDetailsDTO
+            {
+                JoinedDate = user.Created.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture),
+                Username = user.Username,
+                Name = person.FirstName + " " + person.LastName,
+                Role = person.Role,
+                Gender = person.Gender,
+            };
+
         }
     }
 }
