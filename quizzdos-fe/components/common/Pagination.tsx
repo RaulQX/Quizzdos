@@ -10,14 +10,34 @@ interface PaginationProps {
 }
 
 const Pagination = ({ pages, index, setIndex }: PaginationProps) => {
+    const handleLeft = () => {
+        if (index > 0) {
+            setIndex(index - 1)
+        }
+    }
+
+    const handleRight = () => {
+        if (index < pages - 1) {
+            setIndex(index + 1)
+        }
+    }
+
     return (
-        <View style={s`flex flex-row justify-even`}>
-            <Pressable style={s`border-2 border-b-4 border-coolGray-500 rounded-xl p-2`}>
-                <LeftIcon style={s`w-12 text-white`} />
-            </Pressable>
-            <Pressable style={s`border-2 border-b-4 border-coolGray-500 rounded-xl p-2`}>
-                <RightIcon style={s`w-12 text-white`} />
-            </Pressable>
+        <View style={s`flex flex-row justify-between`}>
+            {(index != 0) ?
+                <Pressable style={s`border-2 border-b-4 border-coolGray-500 rounded-xl p-2`}
+                    onPress={handleLeft}
+                >
+                    <LeftIcon style={s`w-12 text-white`} />
+                </Pressable> :
+                <View />}
+            {(index != pages - 1) ?
+                <Pressable style={s`border-2 border-b-4 border-coolGray-500 rounded-xl p-2`}
+                    onPress={handleRight}
+                >
+                    <RightIcon style={s`w-12 text-white`} />
+                </Pressable> :
+                <View />}
         </View>
     )
 }
