@@ -10,4 +10,16 @@ import Quizz from "./Quizz"
 import Course from "./Course"
 import AdminPeople from "./Admin/AdminPeople"
 
-export { Home, Login, ProfileSetup, Register, Welcome, AdminHome, Feed, AdminPeople, Profile, Quizz, Course }
+export {
+	Home,
+	Login,
+	ProfileSetup,
+	Register,
+	Welcome,
+	AdminHome,
+	Feed,
+	AdminPeople,
+	Profile,
+	Quizz,
+	Course,
+}

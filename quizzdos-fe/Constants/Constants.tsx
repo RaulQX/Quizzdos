@@ -5,7 +5,7 @@ export const Constants = {
 
 export const Roles = {
 	student: 0,
-	teacher: 1,
+	professor: 1,
 	admin: 2,
 }
 
@@ -15,7 +15,7 @@ export const Gender = {
 	female: 2,
 }
 
-const baseUrl = "http://192.168.0.177:5000/api/"
+const baseUrl = "http://192.168.1.9:5000/api/"
 
 const controllers = {
 	user: baseUrl + "user/",
@@ -35,6 +35,7 @@ export const ApiEndpoints = {
 	people: {
 		person: controllers.person + "person/",
 		personByUserId: controllers.person + "person/userId/",
+		profileDetails: controllers.person + "person/profile-details/",
 	},
 	admin: {
 		usersByRole: controllers.admin + "users/role/",
