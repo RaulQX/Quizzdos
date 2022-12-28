@@ -4,7 +4,10 @@ import { ScrollView, View, Text, Pressable } from "react-native"
 import { s } from "react-native-wind"
 import { XIcon } from "../assets/icons/outline"
 import Pagination from "../components/common/Pagination"
+import QuestionMultiple from "../components/quizz/QuestionMultiple"
+import QuestionPhoto from "../components/quizz/QuestionPhoto"
 import QuestionSingle from "../components/quizz/QuestionSingle"
+import QuestionWrite from "../components/quizz/QuestionWrite"
 
 interface QuizzProps {
     route: RouteProp<{
@@ -27,10 +30,10 @@ const Quizz = ({ navigation }: QuizzProps) => {
                 </Pressable>
             </View>
             <ScrollView style={s`mt-2`}>
-                <QuestionSingle {...dummyDataQuizz[index]} />
+                <QuestionPhoto {...dummyDataQuizzWrite[index]} />
             </ScrollView>
             <View>
-                <Pagination pages={dummyDataQuizz.length} index={index} setIndex={setIndex} />
+                <Pagination pages={dummyDataQuizzMultiple.length} index={index} setIndex={setIndex} />
             </View>
         </View>
     )
@@ -38,7 +41,7 @@ const Quizz = ({ navigation }: QuizzProps) => {
 
 export default Quizz
 
-const dummyDataQuizz = [
+const dummyDataQuizzSingle = [
     {
         question: "What is the capital of France?",
         answers: [
@@ -48,6 +51,19 @@ const dummyDataQuizz = [
             "Rome"
         ],
         correctAnswer: 0
+    },
+    {
+        question: "How many continents are there?",
+        answers: [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"
+        ],
+        correctAnswer: 6
     },
     {
         question: "What is the capital of Germany?",
@@ -88,5 +104,41 @@ const dummyDataQuizz = [
             "Rome"
         ],
         correctAnswer: 0
+    },
+]
+
+const dummyDataQuizzMultiple = [
+    {
+        question: "What is true about React Native?",
+        answers: [
+            "It is a framework for building native apps using React",
+            "It is a framework for building web apps using React",
+            "It is a framework for building mobile apps using React",
+            "It is a framework for building desktop apps using React"
+        ],
+        correctAnswers: [0, 2]
+    },
+    {
+        question: "The following is a valid React Native component",
+        answers: [
+            "const Component = () => { return <View /> }",
+            "const Component = () => { return <View></View> }",
+            "const Component = () => { return <View><View> }",
+            "const Component = () => { return <View> }"
+        ],
+        correctAnswers: [0, 1]
+    }
+]
+
+
+const dummyDataQuizzWrite = [
+    {
+        question: "What is the capital of France?",
+        correctAnswer: "Paris"
+    },
+    {
+
+        question: "What is the capital of Germany?",
+        correctAnswer: "Berlin"
     },
 ]

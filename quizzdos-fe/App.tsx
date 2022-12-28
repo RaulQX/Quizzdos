@@ -34,7 +34,6 @@ export default function App() {
 					<Stack.Screen name="Profile" component={Profile} />
 					<Stack.Screen name="ProfileSetup" component={ProfileSetup} />
 					<Stack.Screen name="Feed" component={Feed} />
-					<Stack.Screen name="AdminUsers" component={AdminUsers} />
 					<Stack.Screen name="Welcome" component={Welcome} />
 					<Stack.Screen name="AdminHome" component={AdminHome} />
 					<Stack.Screen name="Login" component={Login} />
