@@ -33,9 +33,9 @@ export const ApiEndpoints = {
 		currentUser: controllers.user + "current-user",
 	},
 	people: {
-		person: controllers.person + "person/",
-		personByUserId: controllers.person + "person/userId/",
-		profileDetails: controllers.person + "person/profile-details/",
+		person: controllers.person,
+		personByUserId: controllers.person + "userId/",
+		profileDetails: controllers.person + "profile-details/",
 	},
 	admin: {
 		usersByRole: controllers.admin + "users/role/",
