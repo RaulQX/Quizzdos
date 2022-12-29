@@ -39,5 +39,6 @@ export const ApiEndpoints = {
 	},
 	admin: {
 		usersByRole: controllers.admin + "users/role/",
+		removePerson: controllers.admin + "person/",
 	},
 }

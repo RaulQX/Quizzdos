@@ -1,9 +1,16 @@
 import ButtonImportant from "../common/buttons/ButtonImportant"
 
-const ProfileAdminView = () => {
+interface IProfileAdminViewProps {
+	removePerson: (personId: string, navigation: any) => void
+}
+
+const ProfileAdminView = ({ removePerson }: IProfileAdminViewProps) => {
 	return (
 		<>
-			<ButtonImportant text="Remove user" onPress={() => {}} />
+			<ButtonImportant
+				text="Remove user"
+				onPress={() => removePerson("", null)}
+			/>
 			<ButtonImportant text="Modify user" onPress={() => {}} />
 		</>
 	)
