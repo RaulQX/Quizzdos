@@ -17,7 +17,7 @@ namespace quizzdos_be.Controllers
         {
             _personRepository = personRepository;
         }
-        [HttpGet("person/userid/{userId:Guid}")]
+        [HttpGet("userid/{userId:Guid}")]
         [ProducesResponseType(typeof(DataResponse<Person>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
         public async Task<ActionResult<DataResponse<Person>>> GetPersonByUserId(Guid userId)
@@ -28,7 +28,7 @@ namespace quizzdos_be.Controllers
 
             return Ok(new DataResponse<Person>(person));
         }
-        [HttpGet("person/{personId:Guid}")]
+        [HttpGet("{personId:Guid}")]
         [ProducesResponseType(typeof(DataResponse<Person>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
         public async Task<ActionResult<DataResponse<Person>>> GetPersonById(Guid personId)
@@ -40,7 +40,7 @@ namespace quizzdos_be.Controllers
             return Ok(new DataResponse<Person>(person));
         }
 
-        [HttpGet("person/profile-details/{personId:Guid}")]
+        [HttpGet("profile-details/{personId:Guid}")]
         [ProducesResponseType(typeof(DataResponse<Person>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
         public async Task<ActionResult<DataResponse<ProfileDetailsDTO>>> GetProfileDetails(Guid personId)
@@ -52,7 +52,7 @@ namespace quizzdos_be.Controllers
             return Ok(new DataResponse<ProfileDetailsDTO>(profileDetails));
         }
 
-        [HttpPut("person/{personId:Guid}")]
+        [HttpPut("{personId:Guid}")]
         [ProducesResponseType(typeof(DataResponse<Person>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
         public async Task<ActionResult<DataResponse<Person>>> UpdatePersonDetailsById(Guid personId, string firstName, string lastName, PGender gender)
