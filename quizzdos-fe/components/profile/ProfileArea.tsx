@@ -14,7 +14,8 @@ interface IProfileDetails {
 	gender: number
 	joinedDate: string
 }
-const ProfileArea = ({ personId, removePerson }: profileAreaProps) => {
+
+const ProfileArea = ({ personId, navigation, removePerson }: profileAreaProps) => {
 	let currentUser = useUser()
 
 	personId = personId === "" ? currentUser.personId : personId
@@ -58,6 +59,7 @@ const ProfileArea = ({ personId, removePerson }: profileAreaProps) => {
 
 interface profileAreaProps {
 	personId: string
+	navigation: any
 	removePerson: (personId: string, navigation: any) => void
 }
 
