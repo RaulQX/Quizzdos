@@ -1,9 +1,11 @@
 import React, { useState } from "react"
 import FormTextInput from "../components/common/FormTextInput"
-import ErrorModal from "../components/common/ErrorModal"
+import OneButtonModal from "../components/common/ErrorModal"
 import AuthForm from "../components/auth-form/AuthForm"
 import useUser from "../contexts/User/UserContext"
 import { Roles } from "../Constants/Constants"
+import { View } from "react-native"
+import { s } from "react-native-wind"
 
 interface LoginProps {
 	navigation: any
@@ -43,30 +45,36 @@ const Login = ({ navigation }: LoginProps) => {
 	}
 
 	return (
-		<AuthForm
-			title="Log In"
-			buttonTitle="Log In"
-			onSubmit={handleLogin}
-			navigation={navigation}
-		>
-			<ErrorModal
-				modalVisible={modalVisible}
-				errorMessage={errorMessage}
-				setModalVisible={() => setModalVisible(false)}
-			/>
-
-			<FormTextInput
-				value={login}
-				placeholder="Username / Email / Phone Number"
-				onChangeText={(text) => setLogin(text)}
-			/>
-			<FormTextInput
-				value={password}
-				placeholder="Password"
-				secureTextEntry={true}
-				onChangeText={(text) => setPassword(text)}
-			/>
-		</AuthForm>
+		<View style={s`h-full flex flex-col justify-center bg-coolGray-700`}>
+			<AuthForm
+				title="Log In"
+				buttonTitle="Log In"
+				onSubmit={handleLogin}
+				navigation={navigation}
+				navigateTo="Welcome"
+			>
+				<OneButtonModal
+					modalVisible={modalVisible}
+					message={errorMessage}
+					buttonAction={() => setModalVisible(false)}
+					title="Error"
+					buttonText="Ok"
+				/>
+				<View style={s`h-10`} />
+				<FormTextInput
+					value={login}
+					placeholder="Username / Email / Phone Number"
+					onChangeText={(text) => setLogin(text)}
+				/>
+				<FormTextInput
+					value={password}
+					placeholder="Password"
+					secureTextEntry={true}
+					onChangeText={(text) => setPassword(text)}
+				/>
+				<View style={s`h-10`} />
+			</AuthForm>
+		</View>
 	)
 }
 export default Login

@@ -15,6 +15,7 @@ namespace quizzdos_be.Repositories
         Task<Person?> UpdatePersonRoleByIdAsync(Guid personId, PRole role);
         Task<Person?> DeletePersonByIdAsync(Guid personId);
         Task<ProfileDetailsDTO?> GetProfileDetailsByIdAsync(Guid personId);
+        Task<UserAndPersonDataDTO?> GetUserAndPersonDataByIdAsync(Guid personId);
 
     }
     public class PersonRepository: IPersonRepository
@@ -97,6 +98,25 @@ namespace quizzdos_be.Repositories
                 Gender = person.Gender,
             };
 
+        }
+
+        public async Task<UserAndPersonDataDTO?> GetUserAndPersonDataByIdAsync(Guid personId)
+        {
+            var person = await GetPersonByIdAsync(personId);
+            if (person == null) { return null; }
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == person.UserId);
+            if (user == null) { return null; }
+
+            return new UserAndPersonDataDTO
+            {
+                Username = user.Username,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                FirstName = person.FirstName,
+                LastName = person.LastName,
+                Role = person.Role,
+                Gender = person.Gender,
+            };
         }
     }
 }

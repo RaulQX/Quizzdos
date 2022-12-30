@@ -2,14 +2,13 @@ import { View } from "react-native"
 import { s } from "react-native-wind"
 import RemoveUserFetch from "../Api/Admin/RemoveUser"
 import NavBar from "../components/layouts/navigation/NavBar"
-import { RemovePerson } from "../components/profile/ProfileActions"
+import { RemovePerson, EditUser } from "../components/profile/ProfileActions"
 import ProfileArea from "../components/profile/ProfileArea"
+
 interface ProfileProps {
 	navigation: any
 	route: any
 }
-
-
 
 const Profile = ({ navigation, route }: ProfileProps) => {
 	const requestedPersonId = route.params.personId
@@ -23,6 +22,7 @@ const Profile = ({ navigation, route }: ProfileProps) => {
 					removePerson={() =>
 						RemovePerson(requestedPersonId, navigation)
 					}
+					editUser={() => EditUser(requestedPersonId, navigation)}
 				/>
 			</View>
 		</NavBar>

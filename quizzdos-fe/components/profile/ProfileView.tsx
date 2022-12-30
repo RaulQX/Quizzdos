@@ -12,10 +12,11 @@ import {
 interface IProfileViewProps {
 	requestedPersonId: string
 	removePerson: (personId: string, navigation: any) => void
+	editUser: (personId: string, navigation: any) => void
 }
 
 
-const ProfileView = ({ requestedPersonId, removePerson }: IProfileViewProps) => {
+const ProfileView = ({ requestedPersonId, removePerson, editUser }: IProfileViewProps) => {
 	const currentUser = useUser()
 	const selfProfile =
 		currentUser.personId === requestedPersonId || requestedPersonId === ""
@@ -25,7 +26,7 @@ const ProfileView = ({ requestedPersonId, removePerson }: IProfileViewProps) => 
 
 	return (
 		<>
-			{!selfProfile && adminRole && <ProfileAdminView removePerson={removePerson}/>}
+			{!selfProfile && adminRole && <ProfileAdminView removePerson={removePerson} editUser={editUser}/>}
 			{!selfProfile && professorRole && <ProfileProfessorView />}
 			{!selfProfile && studentRole && <ProfileStudentView />}
 			{selfProfile && studentRole && <ProfileStudentSelfView />}

@@ -66,33 +66,41 @@ const Register = ({ navigation }: RegisterProps) => {
 	}
 
 	return (
-		<AuthForm title="Register" buttonTitle="Register" onSubmit={onSubmit} navigation={navigation} >
-			<FormTextInput
-				value={username}
-				placeholder="Username"
-				onChangeText={(text) => setUsername(text)}
-			/>
-			<FormTextInput
-				value={mobileNumber}
-				placeholder="Mobile Number"
-				keyboardType="number-pad"
-				autoComplete="tel"
-				onChangeText={(text) => setMobileNumber(text)}
-			/>
-			<FormTextInput
-				value={email}
-				placeholder="Email"
-				autoComplete="email"
-				keyboardType="email-address"
-				onChangeText={(text) => setEmail(text)}
-			/>
-			<FormTextInput
-				value={password}
-				placeholder="Password"
-				secureTextEntry={true}
-				onChangeText={(text) => setPassword(text)}
-			/>
-		</AuthForm>
+		<View style={s`h-full flex flex-col justify-center bg-coolGray-700`}>
+			<AuthForm
+				title="Register"
+				buttonTitle="Register"
+				onSubmit={onSubmit}
+				navigation={navigation}
+				navigateTo="Welcome"
+			>
+				<FormTextInput
+					value={username}
+					placeholder="Username"
+					onChangeText={(text) => setUsername(text)}
+				/>
+				<FormTextInput
+					value={mobileNumber}
+					placeholder="Mobile Number"
+					keyboardType="number-pad"
+					autoComplete="tel"
+					onChangeText={(text) => setMobileNumber(text)}
+				/>
+				<FormTextInput
+					value={email}
+					placeholder="Email"
+					autoComplete="email"
+					keyboardType="email-address"
+					onChangeText={(text) => setEmail(text)}
+				/>
+				<FormTextInput
+					value={password}
+					placeholder="Password"
+					secureTextEntry={true}
+					onChangeText={(text) => setPassword(text)}
+				/>
+			</AuthForm>
+		</View>
 	)
 }
 

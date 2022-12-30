@@ -15,7 +15,12 @@ interface IProfileDetails {
 	joinedDate: string
 }
 
-const ProfileArea = ({ personId, navigation, removePerson }: profileAreaProps) => {
+const ProfileArea = ({
+	personId,
+	navigation,
+	removePerson,
+	editUser,
+}: profileAreaProps) => {
 	let currentUser = useUser()
 
 	personId = personId === "" ? currentUser.personId : personId
@@ -51,6 +56,7 @@ const ProfileArea = ({ personId, navigation, removePerson }: profileAreaProps) =
 				<ProfileView
 					requestedPersonId={personId}
 					removePerson={removePerson}
+					editUser={editUser}
 				/>
 			</View>
 		</View>
@@ -61,6 +67,7 @@ interface profileAreaProps {
 	personId: string
 	navigation: any
 	removePerson: (personId: string, navigation: any) => void
+	editUser: (personId: string, navigation: any) => void
 }
 
 export default ProfileArea

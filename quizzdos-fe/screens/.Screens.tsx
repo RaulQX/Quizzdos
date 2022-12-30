@@ -9,6 +9,7 @@ import Profile from "./Profile"
 import Quizz from "./Quizz"
 import Course from "./Course"
 import AdminPeople from "./Admin/AdminPeople"
+import AdminEditUser from "./Admin/AdminEditUser"
 
 export {
 	Home,
@@ -22,4 +23,5 @@ export {
 	Profile,
 	Quizz,
 	Course,
+	AdminEditUser,
 }

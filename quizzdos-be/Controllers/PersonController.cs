@@ -39,6 +39,17 @@ namespace quizzdos_be.Controllers
 
             return Ok(new DataResponse<Person>(person));
         }
+        [HttpGet("all/{personId:Guid}")]
+        [ProducesResponseType(typeof(DataResponse<UserAndPersonDataDTO>), 200)]
+        [ProducesResponseType(typeof(ErrorResponse), 400)]
+        public async Task<ActionResult<DataResponse<UserAndPersonDataDTO>>> GetAllPersonDetailsByPersonId(Guid personId)
+        {
+            var data = await _personRepository.GetUserAndPersonDataByIdAsync(personId);
+            if (data == null)
+                return BadRequest(new ErrorResponse { Error = true, Message = $"Cannot find person based on personId: {personId}" });
+
+            return Ok(new DataResponse<UserAndPersonDataDTO>(data));
+        }
 
         [HttpGet("profile-details/{personId:Guid}")]
         [ProducesResponseType(typeof(DataResponse<Person>), 200)]

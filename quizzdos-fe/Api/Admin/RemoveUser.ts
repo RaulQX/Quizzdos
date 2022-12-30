@@ -3,7 +3,7 @@ import { ApiEndpoints } from "../../Constants/Constants"
 const RemoveUserFetch = async (personId: string) => {
 	try {
 		const response = await fetch(
-			`${ApiEndpoints.admin.removePerson}${personId}`,
+			`${ApiEndpoints.admin.person}${personId}`,
 			{
 				method: "DELETE",
 			}

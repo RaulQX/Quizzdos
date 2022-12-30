@@ -6,9 +6,13 @@ import ChooseOneModal from "../common/modals/ChooseOneModal"
 
 interface IProfileAdminViewProps {
 	removePerson: (personId: string, navigation: any) => void
+	editUser: (personId: string, navigation: any) => void
 }
 
-const ProfileAdminView = ({ removePerson }: IProfileAdminViewProps) => {
+const ProfileAdminView = ({
+	removePerson,
+	editUser,
+}: IProfileAdminViewProps) => {
 	const [modalVisible, setModalVisible] = useState(false)
 	return (
 		<>
@@ -24,7 +28,12 @@ const ProfileAdminView = ({ removePerson }: IProfileAdminViewProps) => {
 				text="Remove user"
 				onPress={() => setModalVisible(true)}
 			/>
-			<ButtonImportant text="Modify user" onPress={() => {}} />
+			<ButtonImportant
+				text="Modify user"
+				onPress={() => {
+					editUser("", null)
+				}}
+			/>
 		</>
 	)
 }
