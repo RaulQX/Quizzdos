@@ -13,7 +13,7 @@ namespace quizzdos_be.Repositories
         public Task<List<UserAdminViewViewModel>> GetUsersBasedOnUsername(string username, int page, int pageSize);
         public Task<List<UserAdminViewViewModel>> GetUsersBasedOnName(string name, int page, int pageSize);
         public Task<List<UserAdminViewViewModel>> GetUsersByRoleAndUsername(PRole role, string username, int page, int pageSize);
-        public Task<Person?> ModifyPersonBasedOnId(Guid id, string firstName, string lastName, PRole role);
+        public Task<Person?> ModifyPersonBasedOnId(Guid id, string firstName, string lastName, PRole role, PGender gender, string username, string email, string phoneNumber);
         public Task<Person?> DeletePersonBasedOnId(Guid id);
         public Task<User?> DeleteUserBasedOnId(Guid id);
     }
@@ -161,10 +161,16 @@ public class AdminViewRepository: IAdminViewRepository
             return await user.FirstOrDefaultAsync();
         }
 
-        public async Task<Person?> ModifyPersonBasedOnId(Guid id, string firstName, string lastName, PRole role)
+        public async Task<Person?> ModifyPersonBasedOnId(Guid id, string firstName, string lastName, PRole role, PGender gender, string username, string email, string phoneNumber)
         {
             var personToModify = await _context.Persons.FirstOrDefaultAsync(p => p.Id == id);
             if (personToModify == null)
+            {
+                return null;
+            }
+            var userToModify = await _context.Users.FirstOrDefaultAsync(u => u.Id == personToModify.UserId);
+            
+            if (userToModify == null)
             {
                 return null;
             }
@@ -172,6 +178,11 @@ public class AdminViewRepository: IAdminViewRepository
             personToModify.FirstName = firstName;
             personToModify.LastName = lastName;
             personToModify.Role = role;
+            personToModify.Gender = gender;
+
+            userToModify.Username = username;
+            userToModify.Email = email;
+            userToModify.PhoneNumber = phoneNumber;
 
             await _context.SaveChangesAsync();
 
@@ -224,6 +235,7 @@ public class AdminViewRepository: IAdminViewRepository
                             FirstName = p.FirstName,
                             LastName = p.LastName,
                             Role = p.Role,
+                            Gender = p.Gender
                         };
             return await users.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
         }

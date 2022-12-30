@@ -9,4 +9,8 @@ const RemovePerson = (personId: string, navigation: any) => {
 	navigation.navigate("AdminHome")
 }
 
-export { RemovePerson }
+const EditUser = (personId: string, navigation: any) => {
+	navigation.navigate("AdminEditUser", { personId })
+}
+
+export { RemovePerson, EditUser }

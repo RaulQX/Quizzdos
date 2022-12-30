@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import { View } from "react-native"
 import { SelectList } from "react-native-dropdown-select-list"
 import { s } from "react-native-wind"
+import { putUserData } from "../../Api/Admin/EditPerson"
+import { getUserData } from "../../Api/Admin/UserData"
 import AuthForm from "../../components/auth-form/AuthForm"
 import FormTextInput from "../../components/common/FormTextInput"
 import HeaderTitle from "../../components/common/Header"
@@ -11,59 +13,95 @@ import { KeyValueGenders, KeyValueRoles } from "../../Constants/Constants"
 const AdminEditUser = ({ navigation, route }: IAdminEditUserProps) => {
 	const requestedPersonId = route.params.personId
 
+	const [username, setUsername] = useState("")
+
 	const [firstName, setFirstName] = useState("")
 	const [lastName, setLastName] = useState("")
 	const [email, setEmail] = useState("")
 	const [mobileNumber, setMobileNumber] = useState("")
 
-	const [gender, setGender] = useState("1")
-	const [role, setRole] = useState("0")
-	//useeffect to get current user based on personId fetch
+	const [gender, setGender] = useState("")
+	const [role, setRole] = useState("")
 
-	useEffect(() => {}, [requestedPersonId])
-
+	useEffect(() => {
+		const usersResponse = getUserData(requestedPersonId)
+		usersResponse.then((response) => {
+			if (response.error) {
+				console.log(response.error)
+			} else {
+				setFirstName(response.firstName)
+				setLastName(response.lastName)
+				setUsername(response.username)
+				setEmail(response.email)
+				setMobileNumber(response.phoneNumber)
+				setGender(response.gender)
+				setRole(response.role)
+			}
+		})
+	}, [requestedPersonId])
 	return (
 		<NavBar navigation={navigation} selected="Profile">
 			<View style={s`flex flex-col justify-center py-1 px-2`}>
 				<HeaderTitle title="Edit user" />
 				<AuthForm
-					title="User username"
+					title={"Editing " + username}
 					buttonTitle="Edit"
-					onSubmit={() => {}}
+					onSubmit={() => {
+						putUserData(requestedPersonId, {
+							firstName,
+							lastName,
+							role: parseInt(role),
+							gender: parseInt(gender),
+							username,
+							email,
+							phoneNumber: mobileNumber,
+						})
+						navigation.navigate("AdminHome")
+					}}
 					navigation={navigation}
 					navigateTo="AdminPeople"
 				>
 					<FormTextInput
-						value=""
+						value={firstName}
 						placeholder="First Name"
-						onChangeText={() => {}}
+						onChangeText={(text) => {
+							setFirstName(text)
+						}}
 					/>
 					<FormTextInput
-						value=""
+						value={lastName}
 						placeholder="Last Name"
-						onChangeText={() => {}}
+						onChangeText={(text) => {
+							setLastName(text)
+						}}
 					/>
 					<FormTextInput
-						value=""
+						value={username}
 						placeholder="Username"
-						onChangeText={() => {}}
+						onChangeText={(text) => {
+							setUsername(text)
+						}}
 					/>
 					<FormTextInput
-						value=""
+						value={email}
 						placeholder="Email"
-						onChangeText={() => {}}
+						onChangeText={(text) => {
+							setEmail(text)
+						}}
 					/>
 					<FormTextInput
-						value=""
+						value={mobileNumber}
 						placeholder="Mobile Number"
-						onChangeText={() => {}}
+						onChangeText={(text) => {
+							setMobileNumber(text)
+						}}
 					/>
 					<SelectList
 						onSelect={() => {}}
 						setSelected={setGender}
 						data={KeyValueGenders}
 						search={false}
-						defaultOption={KeyValueGenders[0]}
+						defaultOption={KeyValueGenders[parseInt(gender) - 1]}
 						dropdownStyles={s`border-b-2 border-indigo-400`}
 						dropdownTextStyles={s`text-white`}
 						inputStyles={s`text-white`}
@@ -75,7 +113,7 @@ const AdminEditUser = ({ navigation, route }: IAdminEditUserProps) => {
 						setSelected={setRole}
 						data={KeyValueRoles}
 						search={false}
-						defaultOption={KeyValueRoles[0]}
+						defaultOption={KeyValueRoles[parseInt(role)]}
 						dropdownStyles={s`border-b-2 border-indigo-400`}
 						dropdownTextStyles={s`text-white`}
 						inputStyles={s`text-white`}

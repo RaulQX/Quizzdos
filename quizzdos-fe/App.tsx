@@ -28,18 +28,22 @@ export default function App() {
 						headerShown: false,
 					}}
 				>
+					<Stack.Screen name="Login" component={Login} />
 					<Stack.Screen
 						name="Admin User"
 						component={AdminEditUser}
 						initialParams={{ personId: "" }}
 					/>
-					<Stack.Screen name="Login" component={Login} />
 					<Stack.Screen
 						name="Profile"
 						component={Profile}
 						initialParams={{ personId: "" }}
 					/>
 					<Stack.Screen name="AdminPeople" component={AdminPeople} />
+					<Stack.Screen
+						name="AdminEditUser"
+						component={AdminEditUser}
+					/>
 					<Stack.Screen name="Quizz" component={Quizz} />
 
 					<Stack.Screen name="Course" component={Course} />

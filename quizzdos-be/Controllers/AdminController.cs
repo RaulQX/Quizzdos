@@ -1,6 +1,7 @@
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using quizzdos_be.DataTransferObjects;
 using quizzdos_be.Repositories;
 using quizzdos_be.Responses.DataResponse;
 using quizzdos_be.ViewModels;
@@ -99,9 +100,10 @@ namespace quizzdos_be.Controllers
         [HttpPut("person/{personId:Guid}")]
         [ProducesResponseType(typeof(DataResponse<Person>), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 400)]
-        public async Task<ActionResult<DataResponse<Person>>> PutPerson(Guid personId, string firstName, string lastName, PRole role)
+        public async Task<ActionResult<DataResponse<Person>>> PutPerson(Guid personId, [FromBody] UserAndPersonDataDTO data)
         {
-            var person = await _adminViewRepository.ModifyPersonBasedOnId(personId, firstName, lastName, role);
+            var person = await _adminViewRepository.ModifyPersonBasedOnId(personId, data.FirstName??"", data.LastName ?? "", data.Role, 
+                data.Gender, data.Username ?? "", data.Email ?? "", data.PhoneNumber ?? "");
             if (person == null)
                 return BadRequest(new ErrorResponse { Error = true, Message = "Failed to update person" });
 

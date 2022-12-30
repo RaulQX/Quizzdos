@@ -10,6 +10,7 @@ interface UserProps {
 }
 
 const User = (props: UserProps) => {
+	console.log(props.gender)
 	var avatar = props.gender === 1 ? malePerson : femalePerson
 
 	return (

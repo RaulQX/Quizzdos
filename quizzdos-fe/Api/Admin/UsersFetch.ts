@@ -32,6 +32,7 @@ const usersFetch = async (
 		)
 		const data = await response.json()
 		var usersList: AdminViewUser[] = []
+		console.log(data)
 		data.data.map((user: UserDataReturned) => {
 			usersList.push({
 				key: user.personId,
