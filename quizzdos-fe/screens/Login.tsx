@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import FormTextInput from "../components/common/FormTextInput"
-import ErrorModal from "../components/common/ErrorModal"
+import OneButtonModal from "../components/common/ErrorModal"
 import AuthForm from "../components/auth-form/AuthForm"
 import useUser from "../contexts/User/UserContext"
 import { Roles } from "../Constants/Constants"
@@ -53,10 +53,12 @@ const Login = ({ navigation }: LoginProps) => {
 				navigation={navigation}
 				navigateTo="Welcome"
 			>
-				<ErrorModal
+				<OneButtonModal
 					modalVisible={modalVisible}
-					errorMessage={errorMessage}
-					setModalVisible={() => setModalVisible(false)}
+					message={errorMessage}
+					buttonAction={() => setModalVisible(false)}
+					title="Error"
+					buttonText="Ok"
 				/>
 				<View style={s`h-10`} />
 				<FormTextInput

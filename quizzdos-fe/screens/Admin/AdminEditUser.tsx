@@ -5,6 +5,7 @@ import { s } from "react-native-wind"
 import { putUserData } from "../../Api/Admin/EditPerson"
 import { getUserData } from "../../Api/Admin/UserData"
 import AuthForm from "../../components/auth-form/AuthForm"
+import OneButtonModal from "../../components/common/ErrorModal"
 import FormTextInput from "../../components/common/FormTextInput"
 import HeaderTitle from "../../components/common/Header"
 import NavBar from "../../components/layouts/navigation/NavBar"
@@ -12,6 +13,8 @@ import { KeyValueGenders, KeyValueRoles } from "../../Constants/Constants"
 
 const AdminEditUser = ({ navigation, route }: IAdminEditUserProps) => {
 	const requestedPersonId = route.params.personId
+
+	const [modalVisible, setModalVisible] = useState(false)
 
 	const [username, setUsername] = useState("")
 
@@ -56,11 +59,21 @@ const AdminEditUser = ({ navigation, route }: IAdminEditUserProps) => {
 							email,
 							phoneNumber: mobileNumber,
 						})
-						navigation.navigate("AdminHome")
+						setModalVisible(true)
 					}}
 					navigation={navigation}
 					navigateTo="AdminPeople"
 				>
+					<OneButtonModal
+						message={"User " + username + " edited with success!"}
+						buttonText="Ok"
+						buttonAction={() => {
+							setModalVisible(false)
+							navigation.navigate("AdminHome")
+						}}
+						title="Success!"
+						modalVisible={modalVisible}
+					/>
 					<FormTextInput
 						value={firstName}
 						placeholder="First Name"
