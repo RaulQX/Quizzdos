@@ -9,6 +9,7 @@ interface RegisterProps {
 	buttonTitle: string
 	onSubmit: () => void
 	navigation: any
+	navigateTo: string
 }
 
 const AuthForm = ({
@@ -17,6 +18,7 @@ const AuthForm = ({
 	buttonTitle,
 	onSubmit,
 	navigation,
+	navigateTo,
 }: RegisterProps) => {
 	const splitTitle = title.split(" ")
 	function onPress(e: GestureResponderEvent) {
@@ -29,10 +31,10 @@ const AuthForm = ({
 			<View style={s`w-full`}>
 				<View style={styles.registerForm}>
 					<View style={s`flex flex-row`}>
-						<Text style={s`text-white text-4xl font-medium`}>
+						<Text style={s`text-white text-3xl font-medium`}>
 							{splitTitle[0]}
 						</Text>
-						<Text style={s`text-indigo-300 text-4xl font-black`}>
+						<Text style={s`text-indigo-300 text-3xl font-black`}>
 							{" "}
 							{splitTitle[1]}
 						</Text>
@@ -44,7 +46,7 @@ const AuthForm = ({
 						<ButtonImportant text={buttonTitle} onPress={onPress} />
 						<ButtonImportant
 							text="Back"
-							onPress={() => navigation.navigate("Welcome")}
+							onPress={() => navigation.navigate(navigateTo)}
 						/>
 					</View>
 				</View>
@@ -54,10 +56,10 @@ const AuthForm = ({
 }
 
 const styles = {
-	background: s`h-full flex flex-col justify-center items-center bg-coolGray-700`,
-	registerForm: s`flex flex-col border-solid border-2 border-indigo-300 mx-4 p-9 rounded-3xl`,
+	background: s`flex flex-col justify-center items-center bg-coolGray-700`,
+	registerForm: s`flex flex-col border-solid border-2 border-indigo-300 mx-4 px-9 py-4 rounded-3xl`,
 	registerButton: s`flex items-center border-4 border-indigo-400 rounded-3xl p-2 bg-indigo-200 mt-8`,
-	buttonArea: s`flex flex-col justify-evenly h-40`,
+	buttonArea: s`flex flex-col justify-evenly `,
 }
 
 export default AuthForm

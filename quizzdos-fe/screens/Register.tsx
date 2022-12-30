@@ -66,7 +66,13 @@ const Register = ({ navigation }: RegisterProps) => {
 	}
 
 	return (
-		<AuthForm title="Register" buttonTitle="Register" onSubmit={onSubmit} navigation={navigation} >
+		<AuthForm
+			title="Register"
+			buttonTitle="Register"
+			onSubmit={onSubmit}
+			navigation={navigation}
+			navigateTo="Welcome"
+		>
 			<FormTextInput
 				value={username}
 				placeholder="Username"

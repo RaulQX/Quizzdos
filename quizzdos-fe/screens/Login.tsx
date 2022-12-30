@@ -48,6 +48,7 @@ const Login = ({ navigation }: LoginProps) => {
 			buttonTitle="Log In"
 			onSubmit={handleLogin}
 			navigation={navigation}
+			navigateTo="Welcome"
 		>
 			<ErrorModal
 				modalVisible={modalVisible}

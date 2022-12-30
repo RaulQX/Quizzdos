@@ -15,6 +15,16 @@ export const Gender = {
 	female: 2,
 }
 
+export const KeyValueGenders = [
+	{ key: "1", value: "Male" },
+	{ key: "2", value: "Female" },
+]
+export const KeyValueRoles = [
+	{ key: "0", value: "Student" },
+	{ key: "1", value: "Professor" },
+	{ key: "2", value: "Admin" },
+]
+
 const baseUrl = "http://192.168.1.9:5000/api/"
 
 const controllers = {
@@ -36,6 +46,7 @@ export const ApiEndpoints = {
 		person: controllers.person,
 		personByUserId: controllers.person + "userId/",
 		profileDetails: controllers.person + "profile-details/",
+		personAll: controllers.person + "all/",
 	},
 	admin: {
 		usersByRole: controllers.admin + "users/role/",

@@ -181,11 +181,18 @@ public class AdminViewRepository: IAdminViewRepository
         public async Task<Person?> DeletePersonBasedOnId(Guid id)
         {
             var  personToDelete = await _context.Persons.FirstOrDefaultAsync(p => p.Id == id);
+
             if (personToDelete == null)
             {
                 return null;
             }
+            var userToDelete = await _context.Users.FirstOrDefaultAsync(u => u.Id == personToDelete.UserId);
+            if (userToDelete == null)
+            {
+                return null;
+            }
             _context.Persons.Remove(personToDelete);
+            _context.Users.Remove(userToDelete);
             await _context.SaveChangesAsync();
             return personToDelete;
         }

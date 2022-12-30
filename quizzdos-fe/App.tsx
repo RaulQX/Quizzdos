@@ -14,6 +14,7 @@ import {
 	AdminPeople,
 	Feed,
 	Quizz,
+	AdminEditUser,
 } from "./screens/.Screens"
 
 const Stack = createNativeStackNavigator()
@@ -27,6 +28,11 @@ export default function App() {
 						headerShown: false,
 					}}
 				>
+					<Stack.Screen
+						name="Admin User"
+						component={AdminEditUser}
+						initialParams={{ personId: "" }}
+					/>
 					<Stack.Screen name="Login" component={Login} />
 					<Stack.Screen
 						name="Profile"
