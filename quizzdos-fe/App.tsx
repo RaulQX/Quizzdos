@@ -28,6 +28,8 @@ export default function App() {
 						headerShown: false,
 					}}
 				>
+					<Stack.Screen name="Course" component={Course} />
+					<Stack.Screen name="Home" component={Home} />
 					<Stack.Screen name="Login" component={Login} />
 					<Stack.Screen
 						name="Admin User"
@@ -46,8 +48,6 @@ export default function App() {
 					/>
 					<Stack.Screen name="Quizz" component={Quizz} />
 
-					<Stack.Screen name="Course" component={Course} />
-					<Stack.Screen name="Home" component={Home} />
 					<Stack.Screen
 						name="ProfileSetup"
 						component={ProfileSetup}
