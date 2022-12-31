@@ -57,41 +57,50 @@ const ProfileSetup = ({ navigation }: HomeProps) => {
 		{ key: "2", value: "Female" },
 	]
 	return (
-		<AuthForm
-			title="Profile Setup"
-			buttonTitle="Finish"
-			onSubmit={() => {
-				handleUpdate(personId, firstName, lastName, gender, navigation)
-			}}
-			navigation={navigation}
-		>
-			<Text style={s`text-left text-base text-white my-4`}>
-				Hi {username}!{"\n"}Looks like it's the first time you are
-				logging in, let's finish setting up your profile.
-			</Text>
-			<FormTextInput
-				value={firstName}
-				placeholder="First Name"
-				onChangeText={(text) => setFirstName(text)}
-			/>
-			<FormTextInput
-				value={lastName}
-				placeholder="Last Name"
-				onChangeText={(text) => setLastName(text)}
-			/>
-			<SelectList
-				onSelect={() => {}}
-				setSelected={setGender}
-				data={genders}
-				search={false}
-				defaultOption={genders[0]}
-				dropdownStyles={s`border-b-2 border-indigo-400`}
-				dropdownTextStyles={s`text-white`}
-				inputStyles={s`text-white`}
-				boxStyles={s`border-indigo-400`}
-				//arrowicon={}
-			/>
-		</AuthForm>
+		<View style={s`h-full flex flex-col justify-center bg-coolGray-700`}>
+			<AuthForm
+				title="Profile Setup"
+				buttonTitle="Finish"
+				onSubmit={() => {
+					handleUpdate(
+						personId,
+						firstName,
+						lastName,
+						gender,
+						navigation
+					)
+				}}
+				navigation={navigation}
+				navigateTo="Welcome"
+			>
+				<Text style={s`text-left text-base text-white my-4`}>
+					Hi {username}!{"\n"}Looks like it's the first time you are
+					logging in, let's finish setting up your profile.
+				</Text>
+				<FormTextInput
+					value={firstName}
+					placeholder="First Name"
+					onChangeText={(text) => setFirstName(text)}
+				/>
+				<FormTextInput
+					value={lastName}
+					placeholder="Last Name"
+					onChangeText={(text) => setLastName(text)}
+				/>
+				<SelectList
+					onSelect={() => {}}
+					setSelected={setGender}
+					data={genders}
+					search={false}
+					defaultOption={genders[0]}
+					dropdownStyles={s`border-b-2 border-indigo-400`}
+					dropdownTextStyles={s`text-white`}
+					inputStyles={s`text-white`}
+					boxStyles={s`border-indigo-400`}
+					//arrowicon={}
+				/>
+			</AuthForm>
+		</View>
 	)
 }
 

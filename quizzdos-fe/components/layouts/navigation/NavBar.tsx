@@ -43,16 +43,16 @@ const NavBar = ({ children, navigation, selected }: NavBarProps) => {
 				style={s`flex flex-row justify-around w-full py-2 border-t-2 border-white`}
 			>
 				<NavBarItem screen={home} selected={selected === home}>
-					<HomeIcon style={s`w-6 text-white`} />
+					<HomeIcon style={s`w-6 h-6 text-white`} />
 				</NavBarItem>
 				<NavBarItem screen="Profile" selected={selected === "Profile"}>
-					<UserIcon style={s`w-6 text-white`} />
+					<UserIcon style={s`w-6 h-6 text-white`} />
 				</NavBarItem>
 				<NavBarItem screen="IDK" selected={selected === "IDK"}>
 					IDK
 				</NavBarItem>
 				<NavBarItem screen="Feed" selected={selected === "Feed"}>
-					<BellIcon style={s`w-6 text-white`} />
+					<BellIcon style={s`w-6 h-6 text-white`} />
 				</NavBarItem>
 			</View>
 		</View>
