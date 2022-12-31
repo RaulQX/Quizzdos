@@ -23,12 +23,7 @@ const filteredData = (
 	requestedRole: number
 ) => {
 	return data.filter((user: AdminViewUser) => {
-		return (
-			(searchedName === ""
-				? true
-				: user.username.includes(searchedName)) &&
-			user.role === requestedRole
-		)
+		return user.role === requestedRole
 	})
 }
 
