@@ -17,6 +17,7 @@ import {
 	AdminEditUser,
 	ProfessorHome,
 	StudentHome,
+	CreateCourse,
 } from "./screens/.Screens"
 
 const Stack = createNativeStackNavigator()
@@ -31,6 +32,10 @@ export default function App() {
 					}}
 				>
 					<Stack.Screen name="Login" component={Login} />
+					<Stack.Screen
+						name="Create Course"
+						component={CreateCourse}
+					/>
 					<Stack.Screen name="StudentHome" component={StudentHome} />
 					<Stack.Screen
 						name="ProfessorHome"

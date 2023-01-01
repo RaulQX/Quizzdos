@@ -28,7 +28,7 @@ const Home = ({ navigation, isProfessor }: HomeProps) => {
 						<View style={s`w-3/4`}>
 							<ButtonImportant
 								onPress={() =>
-									navigation.navigate("CreateCourse")
+									navigation.navigate("Create Course")
 								}
 								text={"Add Course"}
 							/>

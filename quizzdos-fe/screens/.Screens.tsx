@@ -12,6 +12,7 @@ import AdminPeople from "./Admin/AdminPeople"
 import AdminEditUser from "./Admin/AdminEditUser"
 import ProfessorHome from "./Professor/ProfessorHome"
 import StudentHome from "./Student/StudentHome"
+import CreateCourse from "./Professor/ProfessorCreateCourse"
 
 export {
 	Home,
@@ -28,4 +29,5 @@ export {
 	AdminEditUser,
 	ProfessorHome,
 	StudentHome,
+	CreateCourse,
 }
