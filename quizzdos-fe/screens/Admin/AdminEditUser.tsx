@@ -44,8 +44,8 @@ const AdminEditUser = ({ navigation, route }: IAdminEditUserProps) => {
 	}, [requestedPersonId])
 	return (
 		<NavBar navigation={navigation} selected="Profile">
-			<HeaderTitle title="Edit user" />
 			<View style={s`flex flex-col justify-center py-1 px-2`}>
+				<HeaderTitle title="Edit user" />
 				<AuthForm
 					title={"Editing " + username}
 					buttonTitle="Edit"

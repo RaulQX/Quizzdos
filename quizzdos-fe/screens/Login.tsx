@@ -38,11 +38,7 @@ const Login = ({ navigation }: LoginProps) => {
 				navigation.navigate("AdminHome")
 				return
 			}
-			if (response.payloadConstructed.role == Roles.professor) {
-				navigation.navigate("ProfessorHome")
-				return
-			}
-			navigation.navigate("StudentHome")
+			navigation.navigate("Home")
 		} catch (error) {
 			setModalVisible(true)
 		}
