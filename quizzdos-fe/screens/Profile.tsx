@@ -1,6 +1,7 @@
 import { View } from "react-native"
 import { s } from "react-native-wind"
 import RemoveUserFetch from "../Api/Admin/RemoveUser"
+import HeaderTitle from "../components/common/Header"
 import NavBar from "../components/layouts/navigation/NavBar"
 import { RemovePerson, EditUser } from "../components/profile/ProfileActions"
 import ProfileArea from "../components/profile/ProfileArea"
@@ -15,7 +16,8 @@ const Profile = ({ navigation, route }: ProfileProps) => {
 
 	return (
 		<NavBar navigation={navigation} selected="Profile">
-			<View style={s`flex flex-row justify-center py-1 px-2`}>
+			<View style={s`flex items-center`}>
+				<HeaderTitle title="Profile" />
 				<ProfileArea
 					personId={requestedPersonId}
 					navigation={navigation}
