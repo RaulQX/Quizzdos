@@ -27,7 +27,7 @@ const AuthForm = ({
 	}
 
 	return (
-		<View style={styles.background}>
+		<View style={[styles.background]}>
 			<View style={s`w-full`}>
 				<View style={styles.registerForm}>
 					<View style={s`flex flex-row`}>
@@ -57,7 +57,10 @@ const AuthForm = ({
 
 const styles = {
 	background: s`flex flex-col justify-center items-center bg-coolGray-700`,
-	registerForm: s`flex flex-col border-solid border-2 border-indigo-300 mx-4 px-9 py-4 rounded-3xl`,
+	registerForm: [
+		s`flex flex-col border-solid border-2 border-indigo-300 mx-4 px-9 py-4 rounded-3xl`,
+		{ boxShadow: "5px 3px 2px 2px rgba(0,0,0,0.25)" },
+	],
 	registerButton: s`flex items-center border-4 border-indigo-400 rounded-3xl p-2 bg-indigo-200 mt-8`,
 	buttonArea: s`flex flex-col justify-evenly `,
 }
