@@ -10,6 +10,9 @@ import Quizz from "./Quizz"
 import Course from "./Course"
 import AdminPeople from "./Admin/AdminPeople"
 import AdminEditUser from "./Admin/AdminEditUser"
+import ProfessorHome from "./Professor/ProfessorHome"
+import StudentHome from "./Student/StudentHome"
+import CreateCourse from "./Professor/ProfessorCreateCourse"
 
 export {
 	Home,
@@ -24,4 +27,7 @@ export {
 	Quizz,
 	Course,
 	AdminEditUser,
+	ProfessorHome,
+	StudentHome,
+	CreateCourse,
 }

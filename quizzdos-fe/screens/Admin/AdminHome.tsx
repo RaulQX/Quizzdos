@@ -2,6 +2,7 @@ import React from "react"
 import { View, Text } from "react-native"
 import { s } from "react-native-wind"
 import RoundedButton from "../../components/common/buttons/RoundedButton"
+import HeaderTitle from "../../components/common/Header"
 import NavBar from "../../components/layouts/navigation/NavBar"
 import useUser from "../../contexts/User/UserContext"
 
@@ -13,14 +14,9 @@ const AdminHome = ({ navigation }: AdminHomeProps) => {
 
 	return (
 		<NavBar navigation={navigation} selected="AdminHome">
+			<HeaderTitle title="Dash Board" />
 			<View style={styles.background}>
 				<View style={s`flex justify-around items-around w-11/12`}>
-					<View style={s`flex flex-row justify-center my-12`}>
-						<Text style={s`text-5xl text-black`}>
-							Dash<Text style={s`text-indigo-300`}>board</Text>
-						</Text>
-					</View>
-
 					<View
 						style={[
 							s`flex flex-row flex-wrap justify-between w-full my-6`,
@@ -39,7 +35,7 @@ const AdminHome = ({ navigation }: AdminHomeProps) => {
 								console.log(user)
 							}}
 						/>
-						<RoundedButton text="Quizzes" onPress={() => {}} />
+						<RoundedButton text="Statistics" onPress={() => {}} />
 						<RoundedButton text="Questions" onPress={() => {}} />
 					</View>
 				</View>

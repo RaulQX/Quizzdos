@@ -49,6 +49,7 @@ const ProfileArea = ({
 					username={profileDetails.username}
 					gender={profileDetails.gender}
 					joinedDate={profileDetails.joinedDate}
+					role={profileDetails.role}
 				/>
 			</View>
 			<View style={[s`flex-col justify-center my-12 w-1/2`]}>

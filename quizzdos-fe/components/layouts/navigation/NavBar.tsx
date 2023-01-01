@@ -8,7 +8,14 @@ import useUser from "../../../contexts/User/UserContext"
 interface NavBarProps {
 	children: React.ReactNode
 	navigation: any
-	selected: "Home" | "Profile" | "IDK" | "Feed" | "AdminHome"
+	selected:
+		| "Home"
+		| "Profile"
+		| "IDK"
+		| "Feed"
+		| "AdminHome"
+		| "ProfessorHome"
+		| "StudentHome"
 }
 
 interface NavBarItemProps {
@@ -35,7 +42,12 @@ const NavBar = ({ children, navigation, selected }: NavBarProps) => {
 		)
 	}
 	const currentUser = useUser()
-	const home = currentUser.role === Roles.admin ? "AdminHome" : "Home"
+	const home =
+		currentUser.role === Roles.admin
+			? "AdminHome"
+			: currentUser.role === Roles.professor
+			? "ProfessorHome"
+			: "StudentHome"
 	return (
 		<View style={s`bg-coolGray-700 h-full flex flex-col justify-between`}>
 			{children}
