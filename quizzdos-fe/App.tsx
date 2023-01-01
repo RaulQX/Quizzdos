@@ -15,6 +15,8 @@ import {
 	Feed,
 	Quizz,
 	AdminEditUser,
+	ProfessorHome,
+	StudentHome,
 } from "./screens/.Screens"
 
 const Stack = createNativeStackNavigator()
@@ -28,17 +30,23 @@ export default function App() {
 						headerShown: false,
 					}}
 				>
-					<Stack.Screen name="Course" component={Course} />
-					<Stack.Screen name="Login" component={Login} />
+					<Stack.Screen name="StudentHome" component={StudentHome} />
 					<Stack.Screen
-						name="Profile"
-						component={Profile}
-						initialParams={{ personId: "" }}
+						name="ProfessorHome"
+						component={ProfessorHome}
 					/>
-					<Stack.Screen name="Home" component={Home} />
+					<Stack.Screen name="Login" component={Login} />
+
 					<Stack.Screen
 						name="Admin User"
 						component={AdminEditUser}
+						initialParams={{ personId: "" }}
+					/>
+
+					<Stack.Screen name="Course" component={Course} />
+					<Stack.Screen
+						name="Profile"
+						component={Profile}
 						initialParams={{ personId: "" }}
 					/>
 

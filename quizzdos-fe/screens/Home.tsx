@@ -3,24 +3,40 @@ import { TouchableOpacity } from "react-native"
 import { ScrollView, Text, View } from "react-native"
 import { ProgressChart } from "react-native-chart-kit"
 import { s } from "react-native-wind"
+import ButtonImportant from "../components/common/buttons/ButtonImportant"
 import HeaderTitle from "../components/common/Header"
 import NavBar from "../components/layouts/navigation/NavBar"
 
 interface HomeProps {
 	navigation: any
+	isProfessor: boolean
 }
 
-const Home = ({ navigation }: HomeProps) => {
+const Home = ({ navigation, isProfessor }: HomeProps) => {
 	const onCoursePress = (id: number) => {
 		navigation.navigate("Course", {
 			course: dummyDataLectures.find((lecture) => lecture.id === id),
 		})
 	}
 
+	const home = isProfessor ? "ProfessorHome" : "StudentHome"
+
 	return (
-		<NavBar navigation={navigation} selected="Home">
-			<HeaderTitle title="Courses"/>
+		<NavBar navigation={navigation} selected={home}>
+			<HeaderTitle title="Courses" />
 			<ScrollView style={s`flex flex-col px-4`}>
+				{isProfessor && (
+					<View style={s`flex items-center w-full mb-4`}>
+						<View style={s`w-3/4`}>
+							<ButtonImportant
+								onPress={() =>
+									navigation.navigate("CreateCourse")
+								}
+								text={"Add Course"}
+							/>
+						</View>
+					</View>
+				)}
 				{dummyData.map(
 					({ id, name, summary, completed, total }, key) => (
 						<TouchableOpacity
