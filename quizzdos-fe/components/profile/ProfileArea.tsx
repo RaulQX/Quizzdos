@@ -42,9 +42,8 @@ const ProfileArea = ({
 	}, [personId])
 
 	return (
-		<View style={s`flex w-11/12 h-full items-center justify-start`}>
+		<View style={s`flex w-11/12 items-center`}>
 			<View style={s`flex w-full`}>
-				<HeaderTitle title="Profile" />
 				<ProfileDetails
 					name={profileDetails.name}
 					username={profileDetails.username}

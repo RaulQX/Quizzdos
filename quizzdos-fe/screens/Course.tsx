@@ -10,6 +10,7 @@ import {
 	PencilIcon,
 	XIcon,
 } from "../assets/icons/outline"
+import HeaderTitle from "../components/common/Header"
 import NavBar from "../components/layouts/navigation/NavBar"
 
 interface CourseProps {
@@ -43,18 +44,8 @@ const Course = ({ navigation }: CourseProps) => {
 
 	return (
 		<NavBar navigation={navigation} selected="Home">
-			<View
-				style={s`flex flex-row justify-between align-center bg-coolGray-500 border-b-2 border-coolGray-700 py-1 px-2`}
-			>
-				<TouchableOpacity onPress={() => navigation.goBack()}>
-					<XIcon style={s`w-6 text-white`} />
-				</TouchableOpacity>
-				<Text style={s`text-white font-bold uppercase`}>
-					{dummyDataLectures.name}
-				</Text>
-				<XIcon style={s`w-6 text-transparent`} />
-			</View>
 			<ScrollView style={s`flex flex-col`}>
+				<HeaderTitle title={dummyDataLectures.name} />
 				{dummyDataLectures.lectures.map(
 					({ name, summary, materials, quizzes }, key) => {
 						const percentage =
@@ -81,7 +72,10 @@ const Course = ({ navigation }: CourseProps) => {
 												<Text
 													style={s`text-white text-xs font-bold`}
 												>
-													{percentage}% COMPLETE
+													{percentage % 1 != 0
+														? percentage.toFixed(2)
+														: percentage}
+													% COMPLETE
 												</Text>
 											</View>
 										</View>
@@ -113,8 +107,10 @@ const Course = ({ navigation }: CourseProps) => {
 											return (
 												<View
 													style={[
-														s`mt-2 p-5 rounded-full border-b-4 border-white`,
+														s`mt-2 p-5 rounded-full`,
 														{
+															boxShadow:
+																"3px 3px 15px rgba(0,0,0,.5)",
 															backgroundColor:
 																"#C7D2FE",
 															marginLeft: margin,

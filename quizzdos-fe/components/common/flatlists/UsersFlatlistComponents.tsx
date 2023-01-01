@@ -30,7 +30,7 @@ const renderUser = (
 ) => {
 	//console.log(user)
 	return (
-		<View style={s`flex-grow my-4 items-center pb-3`} key={user.item.key}>
+		<View style={s`flex-grow my-4 items-center pb-3 w-1/2`} key={user.item.key}>
 			<Pressable
 				onTouchEnd={() => {
 					navigation.navigate("Profile", {
