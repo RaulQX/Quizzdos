@@ -5,7 +5,6 @@ import React from "react"
 import { UserProvider } from "./contexts/User/UserContext"
 import {
 	Welcome,
-	Home,
 	Login,
 	ProfileSetup,
 	Profile,
@@ -18,6 +17,8 @@ import {
 	ProfessorHome,
 	StudentHome,
 	CreateCourse,
+	CreateQuizz,
+	CustomizeQuizz,
 } from "./screens/.Screens"
 
 const Stack = createNativeStackNavigator()
@@ -31,6 +32,11 @@ export default function App() {
 						headerShown: false,
 					}}
 				>
+					<Stack.Screen
+						name="Customize Quizz"
+						component={CustomizeQuizz}
+					/>
+					<Stack.Screen name="Create Quizz" component={CreateQuizz} />
 					<Stack.Screen name="Login" component={Login} />
 					<Stack.Screen
 						name="Create Course"
