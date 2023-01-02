@@ -13,6 +13,7 @@ import AdminEditUser from "./Admin/AdminEditUser"
 import ProfessorHome from "./Professor/ProfessorHome"
 import StudentHome from "./Student/StudentHome"
 import CreateCourse from "./Professor/ProfessorCreateCourse"
+import CreateQuizz from "./Professor/ProfessorCreateQuizz"
 
 export {
 	Home,
@@ -30,4 +31,5 @@ export {
 	ProfessorHome,
 	StudentHome,
 	CreateCourse,
+	CreateQuizz
 }

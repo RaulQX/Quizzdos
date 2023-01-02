@@ -18,6 +18,7 @@ import {
 	ProfessorHome,
 	StudentHome,
 	CreateCourse,
+	CreateQuizz,
 } from "./screens/.Screens"
 
 const Stack = createNativeStackNavigator()
@@ -31,6 +32,7 @@ export default function App() {
 						headerShown: false,
 					}}
 				>
+					<Stack.Screen name="Create Quizz" component={CreateQuizz} />
 					<Stack.Screen name="Login" component={Login} />
 					<Stack.Screen
 						name="Create Course"
