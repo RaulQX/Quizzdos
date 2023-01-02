@@ -21,7 +21,7 @@ const Home = ({ navigation, isProfessor }: HomeProps) => {
 	const home = isProfessor ? "ProfessorHome" : "StudentHome"
 	return (
 		<NavBar navigation={navigation} selected={home}>
-			<HeaderTitle title="Courses" />
+			<HeaderTitle title="Home" />
 			<ScrollView style={s`flex flex-col px-4`}>
 				{isProfessor && (
 					<View style={s`flex items-center w-full mb-4`}>
