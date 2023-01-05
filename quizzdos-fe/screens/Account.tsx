@@ -38,7 +38,13 @@ const Account = ({ navigation }: AccountProps) => {
 						)}
 						{professorRole && <ProfileProfessorSelfView />}
 						{adminRole && <ProfileAdminSelfView />}
-						<ButtonImportant text="Logout" onPress={() => {}} />
+						<ButtonImportant
+							text="Logout"
+							onPress={() => {
+								user.logoutUser()
+								navigation.navigate("Welcome")
+							}}
+						/>
 					</View>
 				</View>
 			</View>
