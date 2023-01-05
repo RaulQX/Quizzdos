@@ -15,6 +15,8 @@ import StudentHome from "./Student/StudentHome"
 import CreateCourse from "./Professor/ProfessorCreateCourse"
 import CreateQuizz from "./Professor/ProfessorCreateQuizz"
 import CustomizeQuizz from "./Professor/ProfessorCustomizeQuizz"
+import StudentStatistics from "./Student/StudentStatistics"
+import Account from "./Account"
 
 export {
 	Home,
@@ -34,4 +36,6 @@ export {
 	CreateCourse,
 	CreateQuizz,
 	CustomizeQuizz,
+	StudentStatistics,
+	Account
 }
