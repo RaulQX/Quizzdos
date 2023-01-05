@@ -15,7 +15,7 @@ const Profile = ({ navigation, route }: ProfileProps) => {
 	const requestedPersonId = route.params.personId
 
 	return (
-		<NavBar navigation={navigation} selected="Profile">
+		<NavBar navigation={navigation} selected="People">
 			<View style={s`flex items-center`}>
 				<HeaderTitle title="Profile" />
 				<ProfileArea

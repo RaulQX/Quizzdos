@@ -26,7 +26,7 @@ const AdminHome = ({ navigation }: AdminHomeProps) => {
 							text="Users"
 							onPress={() => {
 								console.log("click")
-								navigation.navigate("AdminPeople")
+								navigation.navigate("People")
 							}}
 						/>
 						<RoundedButton

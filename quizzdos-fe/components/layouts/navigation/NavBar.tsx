@@ -15,7 +15,7 @@ interface NavBarProps {
 	navigation: any
 	selected:
 		| "Home"
-		| "Profile"
+		| "People"
 		| "Account"
 		| "Feed"
 		| "AdminHome"
@@ -62,7 +62,7 @@ const NavBar = ({ children, navigation, selected }: NavBarProps) => {
 				<NavBarItem screen={home} selected={selected === home}>
 					<HomeIcon style={s`w-6 h-6 text-white`} />
 				</NavBarItem>
-				<NavBarItem screen="Profile" selected={selected === "Profile"}>
+				<NavBarItem screen="People" selected={selected === "People"}>
 					<UserIcon style={s`w-6 h-6 text-white`} />
 				</NavBarItem>
 

@@ -5,9 +5,10 @@ import {
 	renderUser,
 	renderLoader,
 	renderHeader,
-} from "../../components/common/flatlists/UsersFlatlistComponents"
-import usersFetch from "../../Api/Admin/UsersFetch"
-import NavBar from "../../components/layouts/navigation/NavBar"
+} from "../components/common/flatlists/UsersFlatlistComponents"
+import usersFetch from "../Api/Admin/UsersFetch"
+import NavBar from "../components/layouts/navigation/NavBar"
+import useUser from "../contexts/User/UserContext"
 
 interface AdminViewUser {
 	key: string
@@ -19,15 +20,16 @@ interface AdminViewUser {
 
 const filteredData = (
 	data: AdminViewUser[],
-	searchedName: string,
-	requestedRole: number
+	requestedRole: number,
+	username: string
 ) => {
 	return data.filter((user: AdminViewUser) => {
-		return user.role === requestedRole
+		return user.role === requestedRole && user.username !== username
 	})
 }
 
-const AdminPeople = ({ navigation }: any) => {
+const People = ({ navigation }: any) => {
+	const currentUser = useUser()
 	const [searchedName, setSearchedName] = React.useState("")
 	const [requestedRole, setRequestedRole] = useState(0)
 
@@ -61,18 +63,20 @@ const AdminPeople = ({ navigation }: any) => {
 	])
 
 	return (
-		<NavBar navigation={navigation} selected="AdminHome">
+		<NavBar navigation={navigation} selected="People">
 			<FlatList
 				data={
 					requestedRole === 0
-						? filteredData(students, searchedName, requestedRole) //&&
-						: // (searchedName === ""
-						  // 	? true
-						  // 	: user.name.includes(searchedName))
-						  filteredData(professors, searchedName, requestedRole) //&&
-
-					// 	? true
-					// 	: user.name.includes(searchedName))
+						? filteredData(
+								students,
+								requestedRole,
+								currentUser.username
+						  )
+						: filteredData(
+								professors,
+								requestedRole,
+								currentUser.username
+						  )
 				}
 				extraData={[students, professors]}
 				renderItem={(user) => {
@@ -104,4 +108,4 @@ const AdminPeople = ({ navigation }: any) => {
 	)
 }
 
-export default AdminPeople
+export default People
