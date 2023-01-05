@@ -1,12 +1,21 @@
 import ButtonImportant from "../common/buttons/ButtonImportant"
 
-const ProfileStudentSelfView = () => {
+interface ProfileStudentSelfViewProps {
+	navigation: any
+}
+
+const ProfileStudentSelfView = ({
+	navigation,
+}: ProfileStudentSelfViewProps) => {
 	return (
 		<>
 			<ButtonImportant text="Past quizzes" onPress={() => {}} />
-			<ButtonImportant text="Statistics" onPress={() => {}} />
-			<ButtonImportant text="Quizz-mates" onPress={() => {}} />
-			<ButtonImportant text="Tips" onPress={() => {}} />
+			<ButtonImportant
+				text="Statistics"
+				onPress={() => {
+					navigation.navigate("Student Statistics")
+				}}
+			/>
 		</>
 	)
 }

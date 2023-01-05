@@ -8,6 +8,7 @@ export const initialState = {
 	lastName: "",
 
 	username: "",
+	joinedDate: "",
 	errorMessage: "",
 
 	loginUser: async (payload: any) => {
@@ -33,7 +34,7 @@ const UserReducer = (state: any, action: any) => {
 				gender: payload.gender,
 				firstName: payload.firstName,
 				lastName: payload.lastName,
-
+				joinedDate: payload.joinedDate,
 				username: payload.username,
 
 				errorMessage: "",
@@ -54,7 +55,7 @@ const UserReducer = (state: any, action: any) => {
 				lastName: "",
 
 				username: "",
-
+				joinedDate: "",
 				errorMessage: "",
 			}
 		}

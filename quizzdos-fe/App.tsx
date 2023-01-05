@@ -19,6 +19,8 @@ import {
 	CreateCourse,
 	CreateQuizz,
 	CustomizeQuizz,
+	StudentStatistics,
+	Account,
 } from "./screens/.Screens"
 
 const Stack = createNativeStackNavigator()
@@ -32,12 +34,17 @@ export default function App() {
 						headerShown: false,
 					}}
 				>
+					<Stack.Screen name="Login" component={Login} />
+					<Stack.Screen name="Account" component={Account} />
+					<Stack.Screen
+						name="Student Statistics"
+						component={StudentStatistics}
+					/>
 					<Stack.Screen
 						name="Customize Quizz"
 						component={CustomizeQuizz}
 					/>
 					<Stack.Screen name="Create Quizz" component={CreateQuizz} />
-					<Stack.Screen name="Login" component={Login} />
 					<Stack.Screen
 						name="Create Course"
 						component={CreateCourse}
