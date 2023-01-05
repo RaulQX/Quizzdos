@@ -57,6 +57,7 @@ const ProfileArea = ({
 					requestedPersonId={personId}
 					removePerson={removePerson}
 					editUser={editUser}
+					navigation={navigation}
 				/>
 			</View>
 		</View>

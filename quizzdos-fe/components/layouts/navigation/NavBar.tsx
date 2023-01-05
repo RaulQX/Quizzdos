@@ -1,7 +1,12 @@
 import React from "react"
 import { ScrollView, View, Text, TouchableHighlight } from "react-native"
 import { s } from "react-native-wind"
-import { BellIcon, HomeIcon, UserIcon } from "../../../assets/icons/outline"
+import {
+	BellIcon,
+	GearIcon,
+	HomeIcon,
+	UserIcon,
+} from "../../../assets/icons/outline"
 import { Roles } from "../../../Constants/Constants"
 import useUser from "../../../contexts/User/UserContext"
 
@@ -11,7 +16,7 @@ interface NavBarProps {
 	selected:
 		| "Home"
 		| "Profile"
-		| "IDK"
+		| "Account"
 		| "Feed"
 		| "AdminHome"
 		| "ProfessorHome"
@@ -60,11 +65,12 @@ const NavBar = ({ children, navigation, selected }: NavBarProps) => {
 				<NavBarItem screen="Profile" selected={selected === "Profile"}>
 					<UserIcon style={s`w-6 h-6 text-white`} />
 				</NavBarItem>
-				<NavBarItem screen="IDK" selected={selected === "IDK"}>
-					IDK
-				</NavBarItem>
+
 				<NavBarItem screen="Feed" selected={selected === "Feed"}>
 					<BellIcon style={s`w-6 h-6 text-white`} />
+				</NavBarItem>
+				<NavBarItem screen="Account" selected={selected === "Account"}>
+					<GearIcon style={s`w-6 h-6 text-white`} />
 				</NavBarItem>
 			</View>
 		</View>

@@ -26,7 +26,7 @@ export const UserProvider = ({ children }) => {
 		let response = await fetch(ApiEndpoints.auth.login, requestOptions)
 
 		let data = await response.json()
-		//console.log(data)
+		console.log(data)
 		if (data.data) {
 			let userDetails = await fetch(`${ApiEndpoints.users.currentUser}`, {
 				method: "GET",
@@ -57,6 +57,7 @@ export const UserProvider = ({ children }) => {
 				gender: person.data.gender,
 				firstName: person.data.firstName,
 				lastName: person.data.lastName,
+				joinedDate: user.data.joinedDate,
 				profileSetup: person.data.firstName === "" ? false : true,
 			}
 			dispatch({ type: "LOGIN_SUCCESS", payload: payloadConstructed })
