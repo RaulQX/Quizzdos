@@ -73,7 +73,7 @@ namespace quizzdos_be.Repositories
                         Email = _contextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Email),
                         PhoneNumber = _contextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.MobilePhone),
                         Id = new Guid(_contextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Sid)),
-                        JoinedDate = DateTime.Parse(_contextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.DateOfBirth)).ToString("dd/mm/yyyy")
+                        JoinedDate = DateTime.Parse(_contextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.DateOfBirth)).ToString("dd/MM/yyyy")
                     };
             }
             else return null;
