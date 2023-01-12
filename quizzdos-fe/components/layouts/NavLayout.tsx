@@ -1,3 +1,4 @@
+import { StatusBar } from "expo-status-bar"
 import React from "react"
 import { ScrollView, View, Text, TouchableHighlight } from "react-native"
 import { s } from "react-native-wind"
@@ -49,24 +50,29 @@ const NavLayout = ({ children, navigation, selected }: NavLayoutProps) => {
 				: "StudentHome"
 
 	return (
-		<View style={s`bg-coolGray-700 h-full flex flex-col justify-between`}>
-			{children}
-			<View
-				style={s`flex flex-row justify-around w-full py-2 border-t-2 border-white`}
-			>
-				<NavLayoutItem screen={home} selected={selected === home}>
-					<HomeIcon style={s`w-6 h-6 text-white`} />
-				</NavLayoutItem>
-				<NavLayoutItem screen="People" selected={selected === "People"}>
-					<UserIcon style={s`w-6 h-6 text-white`} />
-				</NavLayoutItem>
+		<View style={s`bg-gray-900 h-full pb-4 pt-11`}>
+			<StatusBar
+				style="light"
+			/>
+			<View style={s`h-full flex flex-col justify-between`}>
+				{children}
+				<View
+					style={s`flex flex-row justify-around w-full py-2 border-t-2 border-white`}
+				>
+					<NavLayoutItem screen={home} selected={selected === home}>
+						<HomeIcon style={s`w-6 h-6 text-white`} />
+					</NavLayoutItem>
+					<NavLayoutItem screen="People" selected={selected === "People"}>
+						<UserIcon style={s`w-6 h-6 text-white`} />
+					</NavLayoutItem>
 
-				<NavLayoutItem screen="Feed" selected={selected === "Feed"}>
-					<BellIcon style={s`w-6 h-6 text-white`} />
-				</NavLayoutItem>
-				<NavLayoutItem screen="Account" selected={selected === "Account"}>
-					<GearIcon style={s`w-6 h-6 text-white`} />
-				</NavLayoutItem>
+					<NavLayoutItem screen="Feed" selected={selected === "Feed"}>
+						<BellIcon style={s`w-6 h-6 text-white`} />
+					</NavLayoutItem>
+					<NavLayoutItem screen="Account" selected={selected === "Account"}>
+						<GearIcon style={s`w-6 h-6 text-white`} />
+					</NavLayoutItem>
+				</View>
 			</View>
 		</View>
 	)

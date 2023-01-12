@@ -2,7 +2,12 @@ import { BlurView } from "expo-blur"
 import { View, Text } from "react-native"
 import { s } from "react-native-wind"
 
-const HeaderTitle = ({ title }: headerProps) => {
+interface headerProps {
+	title: string
+	onExit?: () => void
+}
+
+const HeaderTitle = ({ title, onExit }: headerProps) => {
 	const [firstWord, secondWord] = title.split(" ")
 
 	return (
@@ -13,13 +18,9 @@ const HeaderTitle = ({ title }: headerProps) => {
 				{firstWord}
 			</Text>
 			<Text style={s`text-2xl text-indigo-300 font-bold`}>
-				{secondWord}
+				{" "}{secondWord}
 			</Text>
 		</BlurView>
 	)
-}
-
-interface headerProps {
-	title: string
 }
 export default HeaderTitle

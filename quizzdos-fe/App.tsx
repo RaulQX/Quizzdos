@@ -34,15 +34,19 @@ export default function App() {
 						headerShown: false,
 					}}
 				>
-					<Stack.Screen name="Account" component={Account} />
 					<Stack.Screen
-						name="Student Statistics"
-						component={StudentStatistics}
+						name="Create Course"
+						component={CreateCourse}
 					/>
 					<Stack.Screen
 						name="Create Quizz"
 						component={CreateQuizz}
 					/>
+					<Stack.Screen
+						name="Student Statistics"
+						component={StudentStatistics}
+					/>
+					<Stack.Screen name="Account" component={Account} />
 					<Stack.Screen
 						name="Course"
 						component={Course}
@@ -51,10 +55,6 @@ export default function App() {
 					<Stack.Screen
 						name="Customize Quizz"
 						component={CustomizeQuizz}
-					/>
-					<Stack.Screen
-						name="Create Course"
-						component={CreateCourse}
 					/>
 					<Stack.Screen
 						name="Login"
