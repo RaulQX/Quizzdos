@@ -1,10 +1,10 @@
-import { ApiEndpoints } from "../../Constants/Constants"
+import { ApiEndpoints } from "../../constants/Constants"
 
 interface User {
-    username: string
-    password: string
-    email: string
-    phoneNumber: string
+	username: string
+	password: string
+	email: string
+	phoneNumber: string
 }
 
 

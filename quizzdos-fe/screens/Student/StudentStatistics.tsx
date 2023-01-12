@@ -2,7 +2,7 @@ import { Dimensions, View, Text, ScrollView } from "react-native"
 import HeaderTitle from "../../components/common/Header"
 import NavBar from "../../components/layouts/navigation/NavBar"
 import { s } from "react-native-wind"
-import { Colors } from "../../Constants/Constants"
+import { Colors } from "../../constants/Constants"
 import GradeChart, {
 	SubjectStatistics,
 } from "../../components/grade-chart/GradeChart"
