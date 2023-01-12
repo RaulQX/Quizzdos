@@ -9,7 +9,7 @@ import {
 	ProfileStudentSelfView,
 } from "../components/profile/.ProfileViews"
 import ProfileDetails from "../components/profile/ProfileDetails"
-import { Roles } from "../Constants/Constants"
+import { Roles } from "../constants/Constants"
 import useUser from "../contexts/User/UserContext"
 
 const Account = ({ navigation }: AccountProps) => {

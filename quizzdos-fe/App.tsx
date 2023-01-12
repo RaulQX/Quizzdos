@@ -34,7 +34,6 @@ export default function App() {
 						headerShown: false,
 					}}
 				>
-					<Stack.Screen name="Login" component={Login} />
 					<Stack.Screen name="Account" component={Account} />
 					<Stack.Screen
 						name="Student Statistics"
@@ -53,7 +52,6 @@ export default function App() {
 						name="Customize Quizz"
 						component={CustomizeQuizz}
 					/>
-					<Stack.Screen name="Create Quizz" component={CreateQuizz} />
 					<Stack.Screen
 						name="Create Course"
 						component={CreateCourse}
