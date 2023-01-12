@@ -1,8 +1,12 @@
 import React, { useState } from "react"
 import { View, Text } from "react-native"
 import { s } from "react-native-wind"
+import { RegisterUserFetch } from "../Api/Admin/RegisterUser"
 import AuthForm from "../components/auth-form/AuthForm"
+import ButtonImportant from "../components/common/buttons/ButtonImportant"
+import OneButtonModal from "../components/common/ErrorModal"
 import FormTextInput from "../components/common/FormTextInput"
+import { ApiEndpoints } from "../constants/Constants"
 
 interface RegisterProps {
 	navigation: any
@@ -13,63 +17,48 @@ const Register = ({ navigation }: RegisterProps) => {
 	const [username, setUsername] = useState("")
 	const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
-
-	// function processResponse(response: any) {
-	// 	console.log("intro aici")
-	// 	const statusCode = response.status
-	// 	const data = response.json()
-	// 	return Promise.all([statusCode, data]).then((res) => ({
-	// 		statusCode: res[0],
-	// 		data: res[1],
-	// 	}))
-	// }
+	const [showModal, setShowModal] = useState(false)
+	const [modalMessage, setModalMessage] = useState("")
+	const [modalTitle, setModalTitle] = useState("")
 
 	async function onSubmit() {
-		console.log("aici")
-		const result = await fetch(
-			//localhost????
-			"http://81.181.70.235:7249/api/Auth/Register",
-			{
-				method: "POST",
-				headers: {
-					Accept: "accept: text/plain",
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					username: username,
-					email: email,
-					phoneNumber: mobileNumber,
-					password: password,
-				}),
-			}
-		)
-			.then((result) => {
-				console.log(result)
-				navigation.navigate("Home")
-			})
-			.catch((error) => {
-				console.error(error)
-			})
-		// .then((response) => processResponse(response))
-		// .then((res) => {
-		// 	console.log("intro aici")
-
-		// 	const { statusCode, data } = res
-		// 	console.log("statusCode", statusCode)
-		// 	console.log("data", data)
-		// })
-		// .catch((error) => {
-		// 	console.error(error)
-		// 	return { name: "network error", description: "" }
-		// })
+		const data = await RegisterUserFetch({
+			username,
+			email,
+			phoneNumber: mobileNumber,
+			password,
+		})
+		if (data.error) {
+			setModalMessage(data.message)
+			setModalTitle("Error")
+			setShowModal(true)
+			return
+		}
+		setModalMessage("User registered successfully")
+		setModalTitle("Success")
+		setShowModal(true)
 	}
 
 	return (
 		<View style={s`h-full flex flex-col justify-center bg-coolGray-700`}>
+			<OneButtonModal
+				modalVisible={showModal}
+				message={modalMessage}
+				buttonAction={() => {
+					setShowModal(false)
+					{
+						modalTitle == "Success"
+							? navigation.navigate("Login")
+							: null
+					}
+				}}
+				title={modalTitle}
+				buttonText="Ok"
+			/>
 			<AuthForm
 				title="Register"
 				buttonTitle="Register"
-				onSubmit={onSubmit}
+				onSubmit={() => onSubmit()}
 				navigation={navigation}
 				navigateTo="Welcome"
 			>

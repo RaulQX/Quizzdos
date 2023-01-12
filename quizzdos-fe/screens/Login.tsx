@@ -25,6 +25,8 @@ const Login = ({ navigation }: LoginProps) => {
 				login: login,
 				password: password,
 			})
+			setLogin("")
+			setPassword("")
 			console.log("response ", response)
 			if (response.error == true) {
 				setModalVisible(true)

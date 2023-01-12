@@ -10,7 +10,6 @@ import {
 	Profile,
 	Register,
 	AdminHome,
-	AdminPeople,
 	Feed,
 	Quizz,
 	AdminEditUser,
@@ -19,6 +18,9 @@ import {
 	CreateCourse,
 	CreateQuizz,
 	CustomizeQuizz,
+	StudentStatistics,
+	Account,
+	People,
 } from "./screens/.Screens"
 
 const Stack = createNativeStackNavigator()
@@ -32,6 +34,12 @@ export default function App() {
 						headerShown: false,
 					}}
 				>
+					<Stack.Screen name="Login" component={Login} />
+					<Stack.Screen name="Account" component={Account} />
+					<Stack.Screen
+						name="Student Statistics"
+						component={StudentStatistics}
+					/>
 					<Stack.Screen
 						name="Create Quizz"
 						component={CreateQuizz}
@@ -45,6 +53,7 @@ export default function App() {
 						name="Customize Quizz"
 						component={CustomizeQuizz}
 					/>
+					<Stack.Screen name="Create Quizz" component={CreateQuizz} />
 					<Stack.Screen
 						name="Create Course"
 						component={CreateCourse}
@@ -71,10 +80,8 @@ export default function App() {
 						component={AdminEditUser}
 						initialParams={{ personId: "" }}
 					/>
-					<Stack.Screen
-						name="AdminPeople"
-						component={AdminPeople}
-					/>
+
+					<Stack.Screen name="People" component={People} />
 					<Stack.Screen
 						name="AdminEditUser"
 						component={AdminEditUser}
@@ -103,9 +110,9 @@ export default function App() {
 						name="Register"
 						component={Register}
 					/>
-				</Stack.Navigator>
-			</NavigationContainer>
-		</UserProvider>
+				</Stack.Navigator >
+			</NavigationContainer >
+		</UserProvider >
 	)
 }
 

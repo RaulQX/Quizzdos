@@ -8,13 +8,15 @@ import Feed from "./Feed"
 import Profile from "./Profile"
 import Quizz from "./Quizz"
 import Course from "./Course"
-import AdminPeople from "./Admin/AdminPeople"
+import People from "./People"
 import AdminEditUser from "./Admin/AdminEditUser"
 import ProfessorHome from "./Professor/ProfessorHome"
 import StudentHome from "./Student/StudentHome"
 import CreateCourse from "./Professor/ProfessorCreateCourse"
 import CreateQuizz from "./Professor/ProfessorCreateQuizz"
 import CustomizeQuizz from "./Professor/ProfessorCustomizeQuizz"
+import StudentStatistics from "./Student/StudentStatistics"
+import Account from "./Account"
 
 export {
 	Home,
@@ -24,7 +26,7 @@ export {
 	Welcome,
 	AdminHome,
 	Feed,
-	AdminPeople,
+	People,
 	Profile,
 	Quizz,
 	Course,
@@ -34,4 +36,6 @@ export {
 	CreateCourse,
 	CreateQuizz,
 	CustomizeQuizz,
+	StudentStatistics,
+	Account,
 }

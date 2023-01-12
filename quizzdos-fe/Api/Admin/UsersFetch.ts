@@ -27,7 +27,7 @@ const usersFetch = async (
 	try {
 		const response = await fetch(
 			`${ApiEndpoints.admin.usersByRole
-			}${requestedRole.toString()}/name?name=${name}&page=${currentPage.toString()}&pageSize=7`
+			}${requestedRole.toString()}/name?name=${name}&page=${currentPage.toString()}&pageSize=10`
 		)
 		const data = await response.json()
 		var usersList: AdminViewUser[] = []
