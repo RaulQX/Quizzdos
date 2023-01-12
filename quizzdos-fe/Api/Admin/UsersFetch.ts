@@ -1,4 +1,4 @@
-import { ApiEndpoints } from "./../../Constants/Constants"
+import { ApiEndpoints } from "./../../constants/Constants"
 
 interface AdminViewUser {
 	key: string
@@ -26,8 +26,7 @@ const usersFetch = async (
 ) => {
 	try {
 		const response = await fetch(
-			`${
-				ApiEndpoints.admin.usersByRole
+			`${ApiEndpoints.admin.usersByRole
 			}${requestedRole.toString()}/name?name=${name}&page=${currentPage.toString()}&pageSize=7`
 		)
 		const data = await response.json()

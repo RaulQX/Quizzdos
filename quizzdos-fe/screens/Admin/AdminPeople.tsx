@@ -7,7 +7,7 @@ import {
 	renderHeader,
 } from "../../components/common/flatlists/UsersFlatlistComponents"
 import usersFetch from "../../Api/Admin/UsersFetch"
-import NavBar from "../../components/layouts/navigation/NavBar"
+import NavBar from "../../components/layouts/NavLayout"
 
 interface AdminViewUser {
 	key: string
@@ -40,19 +40,19 @@ const AdminPeople = ({ navigation }: any) => {
 	useEffect(() => {
 		requestedRole === 0
 			? usersFetch(
-					students,
-					setStudents,
-					currentPageStudents,
-					searchedName,
-					requestedRole
-			  )
+				students,
+				setStudents,
+				currentPageStudents,
+				searchedName,
+				requestedRole
+			)
 			: usersFetch(
-					professors,
-					setProfessors,
-					currentPageProfessors,
-					searchedName,
-					requestedRole
-			  )
+				professors,
+				setProfessors,
+				currentPageProfessors,
+				searchedName,
+				requestedRole
+			)
 	}, [
 		searchedName,
 		currentPageStudents,
@@ -67,9 +67,9 @@ const AdminPeople = ({ navigation }: any) => {
 					requestedRole === 0
 						? filteredData(students, searchedName, requestedRole) //&&
 						: // (searchedName === ""
-						  // 	? true
-						  // 	: user.name.includes(searchedName))
-						  filteredData(professors, searchedName, requestedRole) //&&
+						// 	? true
+						// 	: user.name.includes(searchedName))
+						filteredData(professors, searchedName, requestedRole) //&&
 
 					// 	? true
 					// 	: user.name.includes(searchedName))

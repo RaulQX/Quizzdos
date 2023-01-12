@@ -5,7 +5,7 @@ import { ProgressChart } from "react-native-chart-kit"
 import { s } from "react-native-wind"
 import ButtonImportant from "../components/common/buttons/ButtonImportant"
 import HeaderTitle from "../components/common/Header"
-import NavBar from "../components/layouts/navigation/NavBar"
+import NavBar from "../components/layouts/NavLayout"
 
 interface HomeProps {
 	navigation: any

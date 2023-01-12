@@ -5,7 +5,7 @@ import ButtonImportant from "../../components/common/buttons/ButtonImportant"
 import FormTextInput from "../../components/common/FormTextInput"
 import HeaderTitle from "../../components/common/Header"
 import Pagination from "../../components/common/Pagination"
-import NavBar from "../../components/layouts/navigation/NavBar"
+import NavBar from "../../components/layouts/NavLayout"
 
 const CustomizeQuizz = ({ navigation, route }: ICustomizeQuizzProps) => {
 	// const {quizzId, quizzName, duration} = route.params
@@ -35,7 +35,7 @@ const CustomizeQuizz = ({ navigation, route }: ICustomizeQuizzProps) => {
 							<ButtonImportant
 								size="small"
 								text="Save"
-								onPress={() => {}}
+								onPress={() => { }}
 							/>
 							<ButtonImportant
 								size="small"
@@ -71,7 +71,7 @@ const CustomizeQuizz = ({ navigation, route }: ICustomizeQuizzProps) => {
 					</View>
 				</View>
 			</ScrollView>
-			<Pagination pages={9} index={1} setIndex={() => {}} />
+			<Pagination pages={9} index={1} setIndex={() => { }} />
 		</NavBar>
 	)
 }

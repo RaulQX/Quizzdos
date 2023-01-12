@@ -1,6 +1,6 @@
 import { Text, View } from "react-native"
 import { s } from "react-native-wind"
-import { Roles } from "../../Constants/Constants"
+import { Roles } from "../../constants/Constants"
 import User from "../user/User"
 
 const ProfileDetails = ({
@@ -14,8 +14,8 @@ const ProfileDetails = ({
 		role === Roles.student
 			? "Student"
 			: role === Roles.professor
-			? "Professor"
-			: "Admin"
+				? "Professor"
+				: "Admin"
 	return (
 		<View style={s`flex w-full justify-between mx-4 p-5 flex-row`}>
 			<User gender={gender} name={name} username={username} />

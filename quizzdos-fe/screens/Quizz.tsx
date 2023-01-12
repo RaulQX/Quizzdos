@@ -4,10 +4,7 @@ import { ScrollView, View, Text, Pressable } from "react-native"
 import { s } from "react-native-wind"
 import { XIcon } from "../assets/icons/outline"
 import Pagination from "../components/common/Pagination"
-import QuestionMultiple from "../components/quizz/QuestionMultiple"
 import QuestionPhoto from "../components/quizz/QuestionPhoto"
-import QuestionSingle from "../components/quizz/QuestionSingle"
-import QuestionWrite from "../components/quizz/QuestionWrite"
 
 interface QuizzProps {
     // route: RouteProp<{

@@ -33,21 +33,34 @@ export default function App() {
 					}}
 				>
 					<Stack.Screen
+						name="Create Quizz"
+						component={CreateQuizz}
+					/>
+					<Stack.Screen
+						name="Course"
+						component={Course}
+						initialParams={{ course: initialCourseParams }}
+					/>
+					<Stack.Screen
 						name="Customize Quizz"
 						component={CustomizeQuizz}
 					/>
-					<Stack.Screen name="Create Quizz" component={CreateQuizz} />
-					<Stack.Screen name="Login" component={Login} />
 					<Stack.Screen
 						name="Create Course"
 						component={CreateCourse}
 					/>
-					<Stack.Screen name="StudentHome" component={StudentHome} />
+					<Stack.Screen
+						name="Login"
+						component={Login}
+					/>
+					<Stack.Screen
+						name="StudentHome"
+						component={StudentHome}
+					/>
 					<Stack.Screen
 						name="ProfessorHome"
 						component={ProfessorHome}
 					/>
-					<Stack.Screen name="Course" component={Course} />
 					<Stack.Screen
 						name="Profile"
 						component={Profile}
@@ -58,24 +71,130 @@ export default function App() {
 						component={AdminEditUser}
 						initialParams={{ personId: "" }}
 					/>
-
-					<Stack.Screen name="AdminPeople" component={AdminPeople} />
+					<Stack.Screen
+						name="AdminPeople"
+						component={AdminPeople}
+					/>
 					<Stack.Screen
 						name="AdminEditUser"
 						component={AdminEditUser}
 					/>
-					<Stack.Screen name="Quizz" component={Quizz} />
-
+					<Stack.Screen
+						name="Quizz"
+						component={Quizz}
+					/>
 					<Stack.Screen
 						name="ProfileSetup"
 						component={ProfileSetup}
 					/>
-					<Stack.Screen name="Feed" component={Feed} />
-					<Stack.Screen name="Welcome" component={Welcome} />
-					<Stack.Screen name="AdminHome" component={AdminHome} />
-					<Stack.Screen name="Register" component={Register} />
+					<Stack.Screen
+						name="Feed"
+						component={Feed}
+					/>
+					<Stack.Screen
+						name="Welcome"
+						component={Welcome}
+					/>
+					<Stack.Screen
+						name="AdminHome"
+						component={AdminHome}
+					/>
+					<Stack.Screen
+						name="Register"
+						component={Register}
+					/>
 				</Stack.Navigator>
 			</NavigationContainer>
 		</UserProvider>
 	)
+}
+
+
+
+const initialCourseParams = {
+	id: 1,
+	name: "MSA",
+	sections: [
+		{
+			name: "Course 1",
+			summary: "Introuction",
+			materials: "http://course-1",
+			quizzes: [
+				{
+					type: "task",
+					name: "Task 1",
+					completed: true,
+				},
+				{
+					type: "task",
+					name: "Task 2",
+					completed: true,
+				},
+				{
+					type: "task",
+					name: "Task 3",
+					completed: true,
+				},
+				{
+					type: "task",
+					name: "Task 4",
+					completed: true,
+				},
+				{
+					type: "task",
+					name: "Task 5",
+					completed: true,
+				},
+				{
+					type: "task",
+					name: "Task 6",
+					completed: true,
+				},
+			],
+		},
+		{
+			name: "Course 2",
+			summary: "Introduction to Android OS",
+			materials: "http://course-2",
+			quizzes: [
+				{
+					type: "task",
+					name: "Task 1",
+					completed: true,
+				},
+				{
+					type: "task",
+					name: "Task 2",
+					completed: true,
+				},
+				{
+					type: "quiz",
+					name: "Task 3",
+					completed: true,
+				},
+			],
+		},
+		{
+			name: "Course 3",
+			summary: "Android Application Components",
+			materials: "http://course-3",
+			quizzes: [
+				{
+					type: "task",
+					name: "Task 1",
+					completed: true,
+				},
+				{
+					type: "task",
+					name: "Task 2",
+					completed: false,
+				},
+				{
+					type: "exam",
+					name: "Task 3",
+					completed: false,
+				},
+			],
+		},
+	],
 }

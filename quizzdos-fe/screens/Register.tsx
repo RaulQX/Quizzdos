@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import { View, Text } from "react-native"
 import { s } from "react-native-wind"
 import AuthForm from "../components/auth-form/AuthForm"
-import ButtonImportant from "../components/common/buttons/ButtonImportant"
 import FormTextInput from "../components/common/FormTextInput"
 
 interface RegisterProps {

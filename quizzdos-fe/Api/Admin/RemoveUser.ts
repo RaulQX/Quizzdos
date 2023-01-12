@@ -1,4 +1,4 @@
-import { ApiEndpoints } from "../../Constants/Constants"
+import { ApiEndpoints } from "../../constants/Constants"
 
 const RemoveUserFetch = async (personId: string) => {
 	try {

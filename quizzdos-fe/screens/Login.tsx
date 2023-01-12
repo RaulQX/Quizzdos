@@ -3,7 +3,7 @@ import FormTextInput from "../components/common/FormTextInput"
 import OneButtonModal from "../components/common/ErrorModal"
 import AuthForm from "../components/auth-form/AuthForm"
 import useUser from "../contexts/User/UserContext"
-import { Roles } from "../Constants/Constants"
+import { Roles } from "../constants/Constants"
 import { View } from "react-native"
 import { s } from "react-native-wind"
 

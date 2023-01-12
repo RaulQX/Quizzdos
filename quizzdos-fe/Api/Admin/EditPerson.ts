@@ -1,4 +1,4 @@
-import { ApiEndpoints } from "../../Constants/Constants"
+import { ApiEndpoints } from "../../constants/Constants"
 
 interface PersonData {
 	username: string

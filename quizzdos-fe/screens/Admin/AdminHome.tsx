@@ -3,7 +3,7 @@ import { View, Text } from "react-native"
 import { s } from "react-native-wind"
 import RoundedButton from "../../components/common/buttons/RoundedButton"
 import HeaderTitle from "../../components/common/Header"
-import NavBar from "../../components/layouts/navigation/NavBar"
+import NavBar from "../../components/layouts/NavLayout"
 import useUser from "../../contexts/User/UserContext"
 
 interface AdminHomeProps {
@@ -35,8 +35,8 @@ const AdminHome = ({ navigation }: AdminHomeProps) => {
 								console.log(user)
 							}}
 						/>
-						<RoundedButton text="Statistics" onPress={() => {}} />
-						<RoundedButton text="Questions" onPress={() => {}} />
+						<RoundedButton text="Statistics" onPress={() => { }} />
+						<RoundedButton text="Questions" onPress={() => { }} />
 					</View>
 				</View>
 			</View>

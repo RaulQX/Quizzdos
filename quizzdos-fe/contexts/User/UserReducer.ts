@@ -1,4 +1,4 @@
-import { Gender, Roles } from "../../Constants/Constants"
+import { Gender, Roles } from "../../constants/Constants"
 
 export const initialState = {
 	personId: "",
@@ -13,7 +13,7 @@ export const initialState = {
 	loginUser: async (payload: any) => {
 		return Promise<void>
 	},
-	logoutUser: () => {},
+	logoutUser: () => { },
 }
 
 const UserReducer = (state: any, action: any) => {
