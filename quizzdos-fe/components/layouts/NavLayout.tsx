@@ -1,7 +1,7 @@
 import React from "react"
 import { ScrollView, View, Text, TouchableHighlight } from "react-native"
 import { s } from "react-native-wind"
-import { BellIcon, HomeIcon, UserIcon } from "../../assets/icons/outline"
+import { BellIcon, GearIcon, HomeIcon, UserIcon } from "../../assets/icons/outline"
 import { Roles } from "../../constants/Constants"
 import useUser from "../../contexts/User/UserContext"
 
@@ -10,8 +10,8 @@ interface NavLayoutProps {
 	navigation: any
 	selected:
 	| "Home"
-	| "Profile"
-	| "IDK"
+	| "People"
+	| "Account"
 	| "Feed"
 	| "AdminHome"
 	| "ProfessorHome"
@@ -57,14 +57,15 @@ const NavLayout = ({ children, navigation, selected }: NavLayoutProps) => {
 				<NavLayoutItem screen={home} selected={selected === home}>
 					<HomeIcon style={s`w-6 h-6 text-white`} />
 				</NavLayoutItem>
-				<NavLayoutItem screen="Profile" selected={selected === "Profile"}>
+				<NavLayoutItem screen="People" selected={selected === "People"}>
 					<UserIcon style={s`w-6 h-6 text-white`} />
 				</NavLayoutItem>
-				<NavLayoutItem screen="IDK" selected={selected === "IDK"}>
-					IDK
-				</NavLayoutItem>
+
 				<NavLayoutItem screen="Feed" selected={selected === "Feed"}>
 					<BellIcon style={s`w-6 h-6 text-white`} />
+				</NavLayoutItem>
+				<NavLayoutItem screen="Account" selected={selected === "Account"}>
+					<GearIcon style={s`w-6 h-6 text-white`} />
 				</NavLayoutItem>
 			</View>
 		</View>
