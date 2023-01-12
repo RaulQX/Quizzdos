@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "quizzdos-fe",
-    "slug": "quizzdos-fe",
+    "slug": "quizdos",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -28,6 +28,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "abd54fa1-8708-406b-a53a-e77c4befd5d8"
+      }
+    },
+    "owner": "thotu"
   }
 }

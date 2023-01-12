@@ -6,7 +6,7 @@ import AuthForm from "../components/auth-form/AuthForm"
 import ButtonImportant from "../components/common/buttons/ButtonImportant"
 import OneButtonModal from "../components/common/ErrorModal"
 import FormTextInput from "../components/common/FormTextInput"
-import { ApiEndpoints } from "../Constants/Constants"
+import { ApiEndpoints } from "../constants/Constants"
 
 interface RegisterProps {
 	navigation: any

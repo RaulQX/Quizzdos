@@ -1,4 +1,4 @@
-import { Roles } from "../../Constants/Constants"
+import { Roles } from "../../constants/Constants"
 import useUser from "../../contexts/User/UserContext"
 import {
 	ProfileAdminSelfView,
@@ -31,15 +31,10 @@ const ProfileView = ({
 
 	return (
 		<>
-			{!selfProfile && adminRole && (
-				<ProfileAdminView
-					removePerson={removePerson}
-					editUser={editUser}
-				/>
-			)}
+			{!selfProfile && adminRole && <ProfileAdminView removePerson={removePerson} editUser={editUser} />}
 			{!selfProfile && professorRole && <ProfileProfessorView />}
 			{!selfProfile && studentRole && <ProfileStudentView />}
-			
+
 		</>
 	)
 }

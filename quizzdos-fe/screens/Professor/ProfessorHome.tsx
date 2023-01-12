@@ -1,5 +1,5 @@
 import HeaderTitle from "../../components/common/Header"
-import NavBar from "../../components/layouts/navigation/NavBar"
+import NavBar from "../../components/layouts/NavLayout"
 import { Home } from "../.Screens"
 
 const ProfessorHome = ({ navigation }: IProfessorHomeProps) => {

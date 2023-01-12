@@ -1,8 +1,7 @@
 import { View } from "react-native"
 import { s } from "react-native-wind"
-import RemoveUserFetch from "../Api/Admin/RemoveUser"
 import HeaderTitle from "../components/common/Header"
-import NavBar from "../components/layouts/navigation/NavBar"
+import NavBar from "../components/layouts/NavLayout"
 import { RemovePerson, EditUser } from "../components/profile/ProfileActions"
 import ProfileArea from "../components/profile/ProfileArea"
 

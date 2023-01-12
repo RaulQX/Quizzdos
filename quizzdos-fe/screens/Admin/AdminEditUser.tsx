@@ -8,8 +8,8 @@ import AuthForm from "../../components/auth-form/AuthForm"
 import OneButtonModal from "../../components/common/ErrorModal"
 import FormTextInput from "../../components/common/FormTextInput"
 import HeaderTitle from "../../components/common/Header"
-import NavBar from "../../components/layouts/navigation/NavBar"
-import { KeyValueGenders, KeyValueRoles } from "../../Constants/Constants"
+import NavBar from "../../components/layouts/NavLayout"
+import { KeyValueGenders, KeyValueRoles } from "../../constants/Constants"
 
 const AdminEditUser = ({ navigation, route }: IAdminEditUserProps) => {
 	const requestedPersonId = route.params.personId
@@ -110,7 +110,7 @@ const AdminEditUser = ({ navigation, route }: IAdminEditUserProps) => {
 						}}
 					/>
 					<SelectList
-						onSelect={() => {}}
+						onSelect={() => { }}
 						setSelected={setGender}
 						data={KeyValueGenders}
 						search={false}
@@ -119,10 +119,10 @@ const AdminEditUser = ({ navigation, route }: IAdminEditUserProps) => {
 						dropdownTextStyles={s`text-white`}
 						inputStyles={s`text-white`}
 						boxStyles={s`border-indigo-400`}
-						//arrowicon={}
+					//arrowicon={}
 					/>
 					<SelectList
-						onSelect={() => {}}
+						onSelect={() => { }}
 						setSelected={setRole}
 						data={KeyValueRoles}
 						search={false}
@@ -131,7 +131,7 @@ const AdminEditUser = ({ navigation, route }: IAdminEditUserProps) => {
 						dropdownTextStyles={s`text-white`}
 						inputStyles={s`text-white`}
 						boxStyles={s`border-indigo-400 mt-4`}
-						//arrowicon={}
+					//arrowicon={}
 					/>
 				</AuthForm>
 			</View>

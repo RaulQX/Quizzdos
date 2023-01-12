@@ -1,47 +1,249 @@
-import { useState } from "react"
-import { View } from "react-native"
+import { createRef, useState } from "react"
+import { Pressable, ScrollView, Text, TextInput, View } from "react-native"
 import { s } from "react-native-wind"
-import AuthForm from "../../components/auth-form/AuthForm"
-import FormTextInput from "../../components/common/FormTextInput"
+import { AcademicIcon, ClipboardIcon, PencilIcon, PlusCircleIcon } from "../../assets/icons/outline"
 import HeaderTitle from "../../components/common/Header"
-import NavBar from "../../components/layouts/navigation/NavBar"
+import Layout from "../../components/layouts/Layout"
+import Modal1 from "../../components/layouts/modals/Modal1"
 
-const CreateQuizz = ({ navigation }: ICreateQuizzProps) => {
-	const [quizzName, setQuizzName] = useState("")
-	const [duration, setDuration] = useState("")
 
-	return (
-		<NavBar navigation={navigation} selected={"ProfessorHome"}>
-			<HeaderTitle title="Quizzes" />
-			<AuthForm
-				title="Create Quizz"
-				buttonTitle="Create"
-				onSubmit={() => {}}
-				navigation={navigation}
-				navigateTo="ProfessorHome"
-			>
-				<View style={s`h-4`} />
-				<FormTextInput
-					placeholder="Quizz Name"
-					autoCapitalize="words"
-					value={quizzName}
-					onChangeText={(text) => setQuizzName(text)}
-				/>
-				<View style={s`h-4`} />
-				<FormTextInput
-					placeholder="Duration"
-					keyboardType="number-pad"
-					value={duration}
-					onChangeText={(text) => setDuration(text)}
-				/>
-				<View style={s`h-4`} />
-			</AuthForm>
-		</NavBar>
-	)
-}
-
-interface ICreateQuizzProps {
+interface EditCourseProps {
 	navigation: any
 }
 
-export default CreateQuizz
+const EditCourse = ({ navigation }: EditCourseProps) => {
+	const [course, setCourse] = useState(dummyData)
+
+	// create section modal
+	const [sectionModalVisible, setSectionModalVisible] = useState(false)
+	const [sectionName, setSectionName] = useState('')
+	const [sectionSummary, setSectionSummary] = useState('')
+	const summaryRef = createRef<TextInput>()
+
+	const onPressNewSection = () => {
+		setSectionModalVisible(true)
+	}
+
+	const onPressSaveNewSection = () => {
+		if (sectionName.length === 0) return
+
+		const newSection = {
+			name: sectionName,
+			summary: sectionSummary,
+			quizzes: []
+		}
+
+		setCourse([
+			...course,
+			newSection
+		])
+		setSectionModalVisible(false)
+	}
+
+	// create quiz modal
+	const [quizModalVisible, setQuizModalVisible] = useState(false)
+	const [selectedType, setSelectedType] = useState<'task' | 'quiz' | 'exam' | ''>('')
+	const [quizName, setQuizName] = useState('')
+
+	const onPressNewQuiz = () => {
+		setQuizModalVisible(true)
+	}
+
+	const onPressSaveNewQuiz = () => {
+		if (quizName.length === 0) return
+		if (selectedType.length === 0) return
+
+		const newQuiz = {
+			name: quizName,
+			type: selectedType
+		}
+	}
+
+	return (
+		<Layout>
+			<Modal1 visible={sectionModalVisible} onRequestClose={() => setSectionModalVisible(false)}>
+				<View style={s`flex flex-col align-stretch`}>
+					<TextInput
+						style={s`py-2 px-3 w-64 border-b-2 border-indigo-300 my-2 text-white`}
+						autoCapitalize="words"
+						placeholderTextColor="gray"
+						placeholder="Section Name"
+						maxLength={50}
+						value={sectionName}
+						onChangeText={setSectionName}
+						onSubmitEditing={() => summaryRef.current?.focus()}
+					/>
+					<TextInput
+						style={s`py-2 px-3 w-full border-b-2 border-indigo-300 my-2 text-white`}
+						placeholderTextColor="gray"
+						placeholder="Section Summary"
+						multiline={true}
+						numberOfLines={4}
+						maxLength={200}
+						value={sectionSummary}
+						onChangeText={setSectionSummary}
+						ref={summaryRef}
+					/>
+
+					<Pressable style={s`rounded-xl py-2 px-4 flex flex-row justify-center w-full bg-indigo-300 mt-4`}
+						onPress={() => onPressSaveNewSection()}
+					>
+						<Text style={s`text-white font-bold text-xl`}>Save</Text>
+					</Pressable>
+				</View>
+			</Modal1>
+
+			<Modal1 visible={quizModalVisible} onRequestClose={() => setQuizModalVisible(false)}>
+				<View style={s`flex flex-col align-stretch`}>
+					<View style={s`flex flex-row justify-around my-2 `}>
+						<Pressable style={[selectedType == 'task' ? s`text-gray-900 bg-green-400` : s`bg-gray-900 text-green-400`, s`rounded-full py-3 px-3`]}
+							onPress={() => setSelectedType('task')}
+						>
+							<ClipboardIcon style={s`w-8 h-8`} />
+						</Pressable>
+						<Pressable style={[selectedType == 'quiz' ? s`text-gray-900 bg-orange-400` : s`bg-gray-900 text-orange-400`, s`rounded-full py-3 px-3`]}
+							onPress={() => setSelectedType('quiz')}
+						>
+							<PencilIcon style={s`w-8 h-8`} />
+						</Pressable>
+						<Pressable style={[selectedType == 'exam' ? s`text-gray-900 bg-red-400` : s`bg-gray-900 text-red-400`, s`rounded-full py-3 px-3`]}
+							onPress={() => setSelectedType('exam')}
+						>
+							<AcademicIcon style={s`w-8 h-8`} />
+						</Pressable>
+					</View>
+					<TextInput
+						style={s`py-2 px-3 w-64 border-b-2 border-indigo-300 my-2 text-white`}
+						autoCapitalize="words"
+						placeholderTextColor="gray"
+						placeholder="Quiz Name"
+						maxLength={50}
+						value={quizName}
+						onChangeText={setQuizName}
+					/>
+
+					<Pressable style={s`rounded-xl py-2 px-4 flex flex-row justify-center w-full bg-indigo-300 mt-4`}
+						onPress={() => onPressSaveNewSection()}
+					>
+						<Text style={s`text-white font-bold text-xl`}>Save</Text>
+					</Pressable>
+				</View>
+			</Modal1>
+
+			<HeaderTitle title="Course" />
+			<View style={s`px-4 py-2 flex-1`}>
+				<ScrollView style={s`flex flex-col`}>
+					{course.map((section, key) => (
+						<EditCourseSection key={key} {...section} />
+					))}
+					<Pressable style={s`rounded-xl py-2 px-4 flex flex-row items-center w-full bg-gray-700`}
+						onPress={onPressNewSection}
+					>
+						<PlusCircleIcon style={s`w-10 h-10 text-white`} />
+						<Text style={s`px-4 text-white font-bold text-xl`}>New Section</Text>
+					</Pressable>
+				</ScrollView>
+				<Pressable style={s`rounded-xl py-2 px-4 flex flex-row justify-center w-full bg-indigo-300 mb-4`}>
+					<Text style={s`text-white font-bold text-xl`}>Save</Text>
+				</Pressable>
+			</View>
+		</Layout >
+	)
+}
+
+export default EditCourse
+
+interface EditCourseSectionProps {
+	index: number
+	name: string
+	summary: string
+	quizzes: EditCourseQuizProps[]
+	onCreateQuiz: (index: number) => void
+}
+
+const EditCourseSection = ({ index, name, summary, quizzes, onCreateQuiz }: EditCourseSectionProps) => {
+	const [expanded, setExpanded] = useState(true)
+
+	return (
+		<View style={s`my-2 bg-gray-800 flex flex-col rounded-xl overflow-hidden`}>
+			<Pressable style={s`flex flex-col px-4 py-1 bg-gray-700`}
+				onPress={() => setExpanded(!expanded)}
+			>
+				<Text style={s`text-white font-bold text-xl`}>
+					{name}
+				</Text>
+				<Text style={s`text-white`}>
+					{summary}
+				</Text>
+			</Pressable>
+			{expanded && <View style={s`flex flex-col px-4 py-2`}>
+				{quizzes.map((quiz, key) => (
+					<EditCourseQuiz key={key} {...quiz} />
+				))}
+				<Pressable style={s`flex flex-row justify-center w-full`}
+					onPress={() => onCreateQuiz(index)}
+				>
+					<PlusCircleIcon style={s`w-10 h-10 text-white`} />
+				</Pressable>
+			</View>}
+		</View>
+	)
+}
+
+interface EditCourseQuizProps {
+	id: number
+	type: "task" | "quiz" | "exam"
+	name: string
+}
+
+const EditCourseQuiz = ({ id, type, name }: EditCourseQuizProps) => {
+	return (
+		<View style={s`flex flex-row items-center my-2`}>
+			{{
+				task: (<ClipboardIcon style={s`w-8 text-green-400`} />),
+				quiz: (<PencilIcon style={s`w-8 text-orange-400`} />),
+				exam: (<AcademicIcon style={s`w-8 text-red-400`} />),
+			}[type]}
+			<Text style={s`text-white font-bold text-xl px-2`}>
+				{name}
+			</Text>
+		</View>
+	)
+}
+
+const dummyData = [
+	{
+		name: "Section 1",
+		summary: "This is the summary of the section",
+		quizzes: [{
+			id: 1,
+			type: "task",
+			name: "Task 1"
+		}, {
+			id: 2,
+			type: "quiz",
+			name: "Quiz 1"
+		}, {
+			id: 3,
+			type: "exam",
+			name: "Exam 1"
+		}]
+	},
+	{
+		name: "Section 2",
+		summary: "This is the summary of the section",
+		quizzes: [{
+			id: 1,
+			type: "task",
+			name: "Task 1"
+		}, {
+			id: 2,
+			type: "quiz",
+			name: "Quiz 1"
+		}, {
+			id: 3,
+			type: "exam",
+			name: "Exam 1"
+		}]
+	}
+] as EditCourseSectionProps[]

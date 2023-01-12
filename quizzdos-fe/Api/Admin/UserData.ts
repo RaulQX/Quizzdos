@@ -1,4 +1,4 @@
-import { ApiEndpoints } from "../../Constants/Constants"
+import { ApiEndpoints } from "../../constants/Constants"
 
 export const getUserData = async (personId: string) => {
 	const response = await fetch(`${ApiEndpoints.people.personAll}${personId}`)

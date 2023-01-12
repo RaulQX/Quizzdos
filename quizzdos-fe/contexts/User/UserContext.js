@@ -1,6 +1,5 @@
 import { createContext, useReducer, useContext } from "react"
 import UserReducer, { initialState } from "./UserReducer"
-import { ApiEndpoints } from "../../Constants/Constants"
 
 const UserContext = createContext(initialState)
 

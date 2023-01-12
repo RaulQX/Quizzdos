@@ -3,7 +3,7 @@ import { View, Text } from "react-native"
 import { s } from "react-native-wind"
 import AuthForm from "../components/auth-form/AuthForm"
 import FormTextInput from "../components/common/FormTextInput"
-import { ApiEndpoints } from "../Constants/Constants"
+import { ApiEndpoints } from "../constants/Constants"
 import useUser from "../contexts/User/UserContext"
 import { SelectList } from "react-native-dropdown-select-list"
 
@@ -19,24 +19,15 @@ const handleUpdate = async (
 	navigation: any
 ) => {
 	try {
-		var result = await fetch(
-			ApiEndpoints.people.person +
-				personId +
-				"/" +
-				"?firstName=" +
-				firstName +
-				"&lastName=" +
-				lastName +
-				"&gender=" +
-				gender,
-			{
-				method: "PUT",
-				headers: {
-					"Content-Type": "application/json",
-				},
-			}
-		)
-		var data = await result.json()
+		const url = `${ApiEndpoints.people.person}${personId}/?firstName=${firstName}&lastName=${lastName}&gender=${gender}`
+		const result = await fetch(url, {
+			method: "PUT",
+			headers: {
+				"Content-Type": "application/json",
+			},
+		})
+
+		const data = await result.json()
 		if (data.error == true) {
 			navigation.navigate("Login")
 		}
@@ -88,7 +79,7 @@ const ProfileSetup = ({ navigation }: HomeProps) => {
 					onChangeText={(text) => setLastName(text)}
 				/>
 				<SelectList
-					onSelect={() => {}}
+					onSelect={() => { }}
 					setSelected={setGender}
 					data={genders}
 					search={false}
@@ -97,7 +88,7 @@ const ProfileSetup = ({ navigation }: HomeProps) => {
 					dropdownTextStyles={s`text-white`}
 					inputStyles={s`text-white`}
 					boxStyles={s`border-indigo-400`}
-					//arrowicon={}
+				//arrowicon={}
 				/>
 			</AuthForm>
 		</View>

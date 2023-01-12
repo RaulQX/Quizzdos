@@ -42,19 +42,19 @@ const People = ({ navigation }: any) => {
 	useEffect(() => {
 		requestedRole === 0
 			? usersFetch(
-					students,
-					setStudents,
-					currentPageStudents,
-					searchedName,
-					requestedRole
-			  )
+				students,
+				setStudents,
+				currentPageStudents,
+				searchedName,
+				requestedRole
+			)
 			: usersFetch(
-					professors,
-					setProfessors,
-					currentPageProfessors,
-					searchedName,
-					requestedRole
-			  )
+				professors,
+				setProfessors,
+				currentPageProfessors,
+				searchedName,
+				requestedRole
+			)
 	}, [
 		searchedName,
 		currentPageStudents,
@@ -68,15 +68,15 @@ const People = ({ navigation }: any) => {
 				data={
 					requestedRole === 0
 						? filteredData(
-								students,
-								requestedRole,
-								currentUser.username
-						  )
+							students,
+							requestedRole,
+							currentUser.username
+						)
 						: filteredData(
-								professors,
-								requestedRole,
-								currentUser.username
-						  )
+							professors,
+							requestedRole,
+							currentUser.username
+						)
 				}
 				extraData={[students, professors]}
 				renderItem={(user) => {
