@@ -3,7 +3,7 @@ import { View, Text } from "react-native"
 import { s } from "react-native-wind"
 import RoundedButton from "../../components/common/buttons/RoundedButton"
 import HeaderTitle from "../../components/common/Header"
-import NavBar from "../../components/layouts/NavLayout"
+import NavLayout from "../../components/layouts/NavLayout"
 import useUser from "../../contexts/User/UserContext"
 
 interface AdminHomeProps {
@@ -13,7 +13,7 @@ const AdminHome = ({ navigation }: AdminHomeProps) => {
 	const user = useUser()
 
 	return (
-		<NavBar navigation={navigation} selected="AdminHome">
+		<NavLayout navigation={navigation} selected="AdminHome">
 			<HeaderTitle title="Dash Board" />
 			<View style={styles.background}>
 				<View style={s`flex justify-around items-around w-11/12`}>
@@ -40,7 +40,7 @@ const AdminHome = ({ navigation }: AdminHomeProps) => {
 					</View>
 				</View>
 			</View>
-		</NavBar>
+		</NavLayout>
 	)
 }
 const styles = {

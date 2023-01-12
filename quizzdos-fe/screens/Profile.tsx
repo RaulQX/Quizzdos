@@ -1,7 +1,7 @@
 import { View } from "react-native"
 import { s } from "react-native-wind"
 import HeaderTitle from "../components/common/Header"
-import NavBar from "../components/layouts/NavLayout"
+import NavLayout from "../components/layouts/NavLayout"
 import { RemovePerson, EditUser } from "../components/profile/ProfileActions"
 import ProfileArea from "../components/profile/ProfileArea"
 
@@ -14,7 +14,7 @@ const Profile = ({ navigation, route }: ProfileProps) => {
 	const requestedPersonId = route.params.personId
 
 	return (
-		<NavBar navigation={navigation} selected="People">
+		<NavLayout navigation={navigation} selected="People">
 			<View style={s`flex items-center`}>
 				<HeaderTitle title="Profile" />
 				<ProfileArea
@@ -26,7 +26,7 @@ const Profile = ({ navigation, route }: ProfileProps) => {
 					editUser={() => EditUser(requestedPersonId, navigation)}
 				/>
 			</View>
-		</NavBar>
+		</NavLayout>
 	)
 }
 

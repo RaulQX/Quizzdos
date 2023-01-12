@@ -10,7 +10,7 @@ import {
 	XIcon,
 } from "../assets/icons/outline"
 import HeaderTitle from "../components/common/Header"
-import NavBar from "../components/layouts/NavLayout"
+import NavLayout from "../components/layouts/NavLayout"
 
 interface CourseProps {
 	route: RouteProp<{
@@ -30,7 +30,7 @@ const Course = ({ route: { params: { course } }, navigation }: CourseProps) => {
 	}
 
 	return (
-		<NavBar navigation={navigation} selected="Home">
+		<NavLayout navigation={navigation} selected="Home">
 			<HeaderTitle title={course.name} />
 			<ScrollView style={s`flex flex-col`}>
 				{course.sections.map((section, key) => {
@@ -39,7 +39,7 @@ const Course = ({ route: { params: { course } }, navigation }: CourseProps) => {
 					return <CourseSection key={key} {...section} phase={phase} />
 				})}
 			</ScrollView>
-		</NavBar>
+		</NavLayout>
 	)
 }
 

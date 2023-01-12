@@ -1,6 +1,6 @@
 import { Dimensions, View, Text, ScrollView } from "react-native"
 import HeaderTitle from "../../components/common/Header"
-import NavBar from "../../components/layouts/navigation/NavBar"
+import NavLayout from "../../components/layouts/NavLayout"
 import { s } from "react-native-wind"
 import { Colors } from "../../constants/Constants"
 import GradeChart, {
@@ -32,7 +32,7 @@ const subjects: SubjectStatistics[] = [
 
 const StudentStatistics = ({ navigation }: IStudentStatisticsProps) => {
 	return (
-		<NavBar navigation={navigation} selected="Account">
+		<NavLayout navigation={navigation} selected="Account">
 			<ScrollView style={s`bg-Coolgray-800`}>
 				<HeaderTitle title="Statistics" />
 
@@ -44,7 +44,7 @@ const StudentStatistics = ({ navigation }: IStudentStatisticsProps) => {
 				</View>
 				<GradesList subjects={subjects} />
 			</ScrollView>
-		</NavBar>
+		</NavLayout>
 	)
 }
 
