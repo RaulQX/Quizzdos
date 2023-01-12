@@ -5,7 +5,7 @@ import ButtonImportant from "../../components/common/buttons/ButtonImportant"
 import FormTextInput from "../../components/common/FormTextInput"
 import HeaderTitle from "../../components/common/Header"
 import Pagination from "../../components/common/Pagination"
-import NavBar from "../../components/layouts/NavLayout"
+import NavLayout from "../../components/layouts/NavLayout"
 
 const CustomizeQuizz = ({ navigation, route }: ICustomizeQuizzProps) => {
 	// const {quizzId, quizzName, duration} = route.params
@@ -16,7 +16,7 @@ const CustomizeQuizz = ({ navigation, route }: ICustomizeQuizzProps) => {
 	const [questionOptions, setQuestionOptions] = useState<string[]>([])
 
 	return (
-		<NavBar navigation={navigation} selected={"ProfessorHome"}>
+		<NavLayout navigation={navigation} selected={"ProfessorHome"}>
 			<HeaderTitle title="Quizz Name" />
 			<ScrollView style={s`flex flex-col px-4`}>
 				<View style={s`flex flex-col justify-between`}>
@@ -72,7 +72,7 @@ const CustomizeQuizz = ({ navigation, route }: ICustomizeQuizzProps) => {
 				</View>
 			</ScrollView>
 			<Pagination pages={9} index={1} setIndex={() => { }} />
-		</NavBar>
+		</NavLayout>
 	)
 }
 

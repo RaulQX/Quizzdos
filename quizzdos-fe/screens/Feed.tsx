@@ -2,7 +2,7 @@ import React from "react"
 import { View, Text } from "react-native"
 import { s } from "react-native-wind"
 import FeedSection from "../components/feed/FeedSection"
-import NavBar from "../components/layouts/NavLayout"
+import NavLayout from "../components/layouts/NavLayout"
 
 interface FeedProps {
     navigation: any
@@ -10,14 +10,14 @@ interface FeedProps {
 
 const Feed = ({ navigation }: FeedProps) => {
     return (
-        <NavBar navigation={navigation} selected='Feed'>
+        <NavLayout navigation={navigation} selected='Feed'>
             <View style={s`flex flex-col`}>
                 <FeedSection title='Today' notifs={dummyData.today} />
                 <FeedSection title='This Week' notifs={dummyData.thisWeek} />
                 <FeedSection title='Last Week' notifs={dummyData.lastWeek} />
                 <FeedSection title='Older' notifs={dummyData.older} />
             </View>
-        </NavBar>
+        </NavLayout>
     )
 }
 

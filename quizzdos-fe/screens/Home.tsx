@@ -5,7 +5,7 @@ import { ProgressChart } from "react-native-chart-kit"
 import { s } from "react-native-wind"
 import ButtonImportant from "../components/common/buttons/ButtonImportant"
 import HeaderTitle from "../components/common/Header"
-import NavBar from "../components/layouts/NavLayout"
+import NavLayout from "../components/layouts/NavLayout"
 
 interface HomeProps {
 	navigation: any
@@ -20,7 +20,7 @@ const Home = ({ navigation, isProfessor }: HomeProps) => {
 	}
 	const home = isProfessor ? "ProfessorHome" : "StudentHome"
 	return (
-		<NavBar navigation={navigation} selected={home}>
+		<NavLayout navigation={navigation} selected={home}>
 			<HeaderTitle title="Home" />
 			<ScrollView style={s`flex flex-col px-4`}>
 				{isProfessor && (
@@ -83,7 +83,7 @@ const Home = ({ navigation, isProfessor }: HomeProps) => {
 					)
 				)}
 			</ScrollView>
-		</NavBar>
+		</NavLayout>
 	)
 }
 

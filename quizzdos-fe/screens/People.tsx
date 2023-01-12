@@ -7,7 +7,7 @@ import {
 	renderHeader,
 } from "../components/common/flatlists/UsersFlatlistComponents"
 import usersFetch from "../Api/Admin/UsersFetch"
-import NavBar from "../components/layouts/navigation/NavBar"
+import NavLayout from "../components/layouts/NavLayout"
 import useUser from "../contexts/User/UserContext"
 
 interface AdminViewUser {
@@ -63,7 +63,7 @@ const People = ({ navigation }: any) => {
 	])
 
 	return (
-		<NavBar navigation={navigation} selected="People">
+		<NavLayout navigation={navigation} selected="People">
 			<FlatList
 				data={
 					requestedRole === 0
@@ -104,7 +104,7 @@ const People = ({ navigation }: any) => {
 				})}
 				ListFooterComponent={renderLoader()}
 			/>
-		</NavBar>
+		</NavLayout>
 	)
 }
 

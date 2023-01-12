@@ -8,7 +8,7 @@ import AuthForm from "../../components/auth-form/AuthForm"
 import OneButtonModal from "../../components/common/ErrorModal"
 import FormTextInput from "../../components/common/FormTextInput"
 import HeaderTitle from "../../components/common/Header"
-import NavBar from "../../components/layouts/NavLayout"
+import NavLayout from "../../components/layouts/NavLayout"
 import { KeyValueGenders, KeyValueRoles } from "../../constants/Constants"
 
 const AdminEditUser = ({ navigation, route }: IAdminEditUserProps) => {
@@ -43,7 +43,7 @@ const AdminEditUser = ({ navigation, route }: IAdminEditUserProps) => {
 		})
 	}, [requestedPersonId])
 	return (
-		<NavBar navigation={navigation} selected="Profile">
+		<NavLayout navigation={navigation} selected="Profile">
 			<HeaderTitle title="Edit user" />
 			<View style={s`flex flex-col justify-center py-1 px-2`}>
 				<AuthForm
@@ -135,7 +135,7 @@ const AdminEditUser = ({ navigation, route }: IAdminEditUserProps) => {
 					/>
 				</AuthForm>
 			</View>
-		</NavBar>
+		</NavLayout>
 	)
 }
 

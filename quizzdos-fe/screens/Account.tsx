@@ -2,7 +2,7 @@ import { View } from "react-native"
 import { s } from "react-native-wind"
 import ButtonImportant from "../components/common/buttons/ButtonImportant"
 import HeaderTitle from "../components/common/Header"
-import NavBar from "../components/layouts/navigation/NavBar"
+import NavLayout from "../components/layouts/NavLayout"
 import {
 	ProfileAdminSelfView,
 	ProfileProfessorSelfView,
@@ -18,7 +18,7 @@ const Account = ({ navigation }: AccountProps) => {
 	const professorRole = user.role === Roles.professor
 	const studentRole = user.role === Roles.student
 	return (
-		<NavBar navigation={navigation} selected="Account">
+		<NavLayout navigation={navigation} selected="Account">
 			<View>
 				<HeaderTitle title="Account" />
 				<View style={s`flex items-center`}>
@@ -48,7 +48,7 @@ const Account = ({ navigation }: AccountProps) => {
 					</View>
 				</View>
 			</View>
-		</NavBar>
+		</NavLayout>
 	)
 }
 
