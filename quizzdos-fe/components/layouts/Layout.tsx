@@ -8,11 +8,11 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
     return (
-        <View style={s`bg-gray-900 h-full`}>
+        <View style={s`bg-gray-900 h-full pb-4 pt-11`}>
             <StatusBar
                 style="light"
             />
-            <View style={[s`flex-1`, { marginTop: 44 }]}>
+            <View style={s`h-full`}>
                 {children}
             </View>
         </View >
